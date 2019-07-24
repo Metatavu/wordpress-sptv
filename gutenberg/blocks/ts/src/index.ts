@@ -1,0 +1,1 @@
+import './service-location-service-channel-block';

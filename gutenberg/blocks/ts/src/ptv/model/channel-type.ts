@@ -1,0 +1,1 @@
+export type ChannelType = "EChannel" | "WebPage" | "PrintableForm" | "Phone" | "ServiceLocation";
