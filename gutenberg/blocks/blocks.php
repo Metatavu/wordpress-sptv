@@ -51,6 +51,14 @@ if (!class_exists( 'Metatavu\SPTV\Wordpress\Gutenberg\Blocks\Blocks' ) ) {
           "name" => __("Addresses", "sptv")
         ],
         [
+          "slug" => "email",
+          "name" => __("Email", "sptv")
+        ],
+        [
+          "slug" => "webpage",
+          "name" => __("Website", "sptv")
+        ],
+        [
           "slug" => "phone-numbers",
           "name" => __("Phone numbers", "sptv")
         ],

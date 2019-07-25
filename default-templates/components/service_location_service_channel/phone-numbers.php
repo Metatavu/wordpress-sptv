@@ -23,7 +23,7 @@
     echo "<p>";
 
     if ($additionalInformation) {
-      echo "$additionalInformation<br/>";
+      echo "<b>$additionalInformation<br/></b>";
     }
 
     echo implode(" ", [$prefixNumber, $number, $chargeInfo]);

@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: SPTV 1.0.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/wordpress-sptv\n"
-"POT-Creation-Date: 2019-07-25 10:01:21+00:00\n"
+"POT-Creation-Date: 2019-07-25 11:32:32+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -12,32 +12,36 @@ msgstr ""
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 
-#: default-templates/components/common.php:31
+#: default-templates/components/common.php:63
 msgid "Monday"
 msgstr ""
 
-#: default-templates/components/common.php:33
+#: default-templates/components/common.php:65
 msgid "Tuesday"
 msgstr ""
 
-#: default-templates/components/common.php:35
+#: default-templates/components/common.php:67
 msgid "Wednesday"
 msgstr ""
 
-#: default-templates/components/common.php:37
+#: default-templates/components/common.php:69
 msgid "Thursday"
 msgstr ""
 
-#: default-templates/components/common.php:39
+#: default-templates/components/common.php:71
 msgid "Friday"
 msgstr ""
 
-#: default-templates/components/common.php:41
+#: default-templates/components/common.php:73
 msgid "Saturday"
 msgstr ""
 
-#: default-templates/components/common.php:43
+#: default-templates/components/common.php:75
 msgid "Sunday"
+msgstr ""
+
+#: default-templates/components/common.php:114
+msgid "Open 24 hours."
 msgstr ""
 
 #: default-templates/components/service_location_service_channel/default-all.php:5
@@ -46,6 +50,16 @@ msgstr ""
 
 #: default-templates/components/service_location_service_channel/default-all.php:10
 msgid "Other contact details"
+msgstr ""
+
+#: default-templates/components/service_location_service_channel/default-all.php:13
+#: gutenberg/blocks/blocks.php:55
+msgid "Email"
+msgstr ""
+
+#: default-templates/components/service_location_service_channel/default-all.php:20
+#: gutenberg/blocks/blocks.php:59
+msgid "Website"
 msgstr ""
 
 #: default-templates/components/service_location_service_channel/phone-numbers.php:20
@@ -68,15 +82,15 @@ msgstr ""
 msgid "Addresses"
 msgstr ""
 
-#: gutenberg/blocks/blocks.php:55
+#: gutenberg/blocks/blocks.php:63
 msgid "Phone numbers"
 msgstr ""
 
-#: gutenberg/blocks/blocks.php:59
+#: gutenberg/blocks/blocks.php:67
 msgid "Service Hours"
 msgstr ""
 
-#: gutenberg/blocks/blocks.php:129
+#: gutenberg/blocks/blocks.php:137
 msgid "Finnish Service Catalogue"
 msgstr ""
 

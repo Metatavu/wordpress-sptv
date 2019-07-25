@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: SPTV 1.0.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/wordpress-sptv\n"
-"POT-Creation-Date: 2019-07-25 10:01:21+00:00\n"
-"PO-Revision-Date: 2019-07-25 13:01+0300\n"
+"POT-Creation-Date: 2019-07-25 11:32:32+00:00\n"
+"PO-Revision-Date: 2019-07-25 14:32+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: fi\n"
@@ -15,33 +15,37 @@ msgstr ""
 "X-Generator: Poedit 2.1.1\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: default-templates/components/common.php:31
+#: default-templates/components/common.php:63
 msgid "Monday"
 msgstr "maanantai"
 
-#: default-templates/components/common.php:33
+#: default-templates/components/common.php:65
 msgid "Tuesday"
 msgstr "tiistai"
 
-#: default-templates/components/common.php:35
+#: default-templates/components/common.php:67
 msgid "Wednesday"
 msgstr "keskiviikko"
 
-#: default-templates/components/common.php:37
+#: default-templates/components/common.php:69
 msgid "Thursday"
 msgstr "torstai"
 
-#: default-templates/components/common.php:39
+#: default-templates/components/common.php:71
 msgid "Friday"
 msgstr "perjantai"
 
-#: default-templates/components/common.php:41
+#: default-templates/components/common.php:73
 msgid "Saturday"
 msgstr "lauantai"
 
-#: default-templates/components/common.php:43
+#: default-templates/components/common.php:75
 msgid "Sunday"
 msgstr "sunnuntai"
+
+#: default-templates/components/common.php:114
+msgid "Open 24 hours."
+msgstr "Avoinna ympäri vuorokauden."
 
 #: default-templates/components/service_location_service_channel/default-all.php:5
 msgid "Visiting information"
@@ -50,6 +54,16 @@ msgstr "Käyntitiedot"
 #: default-templates/components/service_location_service_channel/default-all.php:10
 msgid "Other contact details"
 msgstr "Muut yhteystiedot"
+
+#: default-templates/components/service_location_service_channel/default-all.php:13
+#: gutenberg/blocks/blocks.php:55
+msgid "Email"
+msgstr "Sähköposti"
+
+#: default-templates/components/service_location_service_channel/default-all.php:20
+#: gutenberg/blocks/blocks.php:59
+msgid "Website"
+msgstr "Verkkosivu"
 
 #: default-templates/components/service_location_service_channel/phone-numbers.php:20
 msgid "Chargeable"
@@ -71,15 +85,15 @@ msgstr "Kuvaus"
 msgid "Addresses"
 msgstr "Osoitteet"
 
-#: gutenberg/blocks/blocks.php:55
+#: gutenberg/blocks/blocks.php:63
 msgid "Phone numbers"
 msgstr "Puhelinnumerot"
 
-#: gutenberg/blocks/blocks.php:59
+#: gutenberg/blocks/blocks.php:67
 msgid "Service Hours"
 msgstr "Palveluajat"
 
-#: gutenberg/blocks/blocks.php:129
+#: gutenberg/blocks/blocks.php:137
 msgid "Finnish Service Catalogue"
 msgstr "Palvelutietovaranto"
 
@@ -109,8 +123,6 @@ msgid "Password"
 msgstr "Salasana"
 
 #: settings/settings-ui.php:31
-#, fuzzy
-#| msgid "SPTV Settings"
 msgid "PTV Settings"
 msgstr "SPTV Asetukset"
 
@@ -129,3 +141,6 @@ msgstr "Wordpress lisäosa searchable PTV palveluun "
 #. Author of the plugin/theme
 msgid "Metatavu Oy"
 msgstr "Metatavu Oy"
+
+#~ msgid "Emails"
+#~ msgstr "Sähkö"
