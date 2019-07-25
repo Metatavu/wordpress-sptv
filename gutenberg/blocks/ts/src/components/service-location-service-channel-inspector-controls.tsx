@@ -1,12 +1,12 @@
 import React from 'react';
 import { wp } from 'wp';
-import { ServiceLocationServiceChannelBlockOptions } from '../types';
+import { SptvOptions } from '../types';
 import { VmOpenApiLocalizedListItem, V10VmOpenApiServiceLocationChannel } from '../ptv/model/v10/api';
 import { SearchModal } from './search-modal';
 import PTV from '../ptv';
 
 declare var wp: wp;
-declare var serviceLocationServiceChannelBlock: ServiceLocationServiceChannelBlockOptions;
+declare var sptv: SptvOptions;
 const { __ } = wp.i18n;
 
 /**
@@ -16,7 +16,9 @@ interface Props {
   editing: boolean,
   channelId?: string,
   language: string,
+  component: string,
   onLanguageChange: (language: string) => void,
+  onComponentChange: (component: string) => void,
   onChannelIdChange: (channelId: string) => void
 }
 
@@ -120,7 +122,7 @@ class ServiceLocationServiceChannelInspectorControls extends React.Component<Pro
 
     const title = __("Component", "sptv");
     const hint = __("Select displayed component", "sptv");
-    const options = serviceLocationServiceChannelBlock.components.map((component) => {
+    const options = sptv.serviceLocationServiceChannelBlock.components.map((component) => {
       return {
         value: component.slug,
         label: component.name
@@ -132,7 +134,7 @@ class ServiceLocationServiceChannelInspectorControls extends React.Component<Pro
         <Tooltip text={ hint } >
           <label> { title } </label>
         </Tooltip>
-        <SelectControl value={ this.props.language } onChange={(value: string) => this.props.onLanguageChange(value) } options={ options }></SelectControl>
+        <SelectControl value={ this.props.component } onChange={(value: string) => this.props.onComponentChange(value) } options={ options }></SelectControl>
       </div>
     );
   }

@@ -1,9 +1,11 @@
-import config from "../config";
 import { V10VmOpenApiElectronicChannel, V10VmOpenApiServiceLocationChannel, V10VmOpenApiWebPageChannel, V10VmOpenApiPrintableFormChannel, V10VmOpenApiPhoneChannel } from "./model/v10/api";
 import { wp } from "wp";
 
 declare var wp: wp;
 type ServiceChannel = V10VmOpenApiElectronicChannel | V10VmOpenApiPhoneChannel | V10VmOpenApiPrintableFormChannel | V10VmOpenApiServiceLocationChannel | V10VmOpenApiWebPageChannel;
+const PTV_URL = "https://api.palvelutietovaranto.suomi.fi/api";
+const PTV_VERSION = "v10";
+
 /**
  * PTV client
  */
@@ -39,7 +41,7 @@ export default class PTV {
 
     const cacheMissIds = ids.filter(id => !this.channelCache.has(id));
     if (cacheMissIds.length > 0) {
-      const result = await fetch(`${config.ptv.url}/${config.ptv.version}/ServiceChannel/list?guids=${cacheMissIds.join(",")}`, {
+      const result = await fetch(`${PTV_URL}/${PTV_VERSION}/ServiceChannel/list?guids=${cacheMissIds.join(",")}`, {
         credentials: "omit"
       });
 

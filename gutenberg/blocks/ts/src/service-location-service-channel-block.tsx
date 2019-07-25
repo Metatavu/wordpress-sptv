@@ -23,7 +23,7 @@ registerBlockType('sptv/service-location-service-channel-block', {
     "component": {
       type: 'string'
     },
-    "lang": {
+    "language": {
       type: 'string'
     }
   },
@@ -34,19 +34,29 @@ registerBlockType('sptv/service-location-service-channel-block', {
   edit: ((params: WPBlockTypeEditParams) => {
     const { isSelected } = params;
 
+    const getAttribute = (attribute: string): string => {
+      return params.attributes[attribute];
+    }
+
+    const setAttribute = (attribute: string, value: string) => {
+      const attributes: { [key: string]: string } = { }; 
+      attributes[attribute] = value; 
+      params.setAttributes(attributes);
+    }
+
     return <ServiceLocationServiceChannelComponent 
       editing={ isSelected } 
-      channelId={ params.attributes.id } 
-      component={ params.attributes.component } 
-      lang={ params.attributes.lang }
+      channelId={ getAttribute("id") } 
+      component={ getAttribute("component") } 
+      language={ getAttribute("language") }
       onComponentChange={(component: string) => {
-        params.setAttributes({"component": component});
+        setAttribute("component", component);
       }}
-      onLangChange={(lang: string) => {
-        params.setAttributes({"lang": lang});
+      onLanguageChange={(language: string) => {
+        setAttribute("language", language);
       }}
       onChannelIdChange={(channelId: string) => {
-        params.setAttributes({"id": channelId});
+        setAttribute("id", channelId);
       }}
       />
   }),

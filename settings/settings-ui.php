@@ -28,6 +28,8 @@
         $this->addOption('elastic', 'url', 'elastic-url', __( "URL", 'sptv'));
         $this->addOption('elastic', 'text', 'elastic-username', __( "Username", 'sptv' ));
         $this->addOption('elastic', 'text', 'elastic-password', __( "Password", 'sptv' ));
+        add_settings_section('ptv', __( "PTV Settings", 'sptv' ), null, SPTV_SETTINGS_PAGE);
+        $this->addOption('ptv', 'text', 'ptv-organization-id', __( "Organization Id", 'sptv' ));
       }
 
       private function addOption($group, $type, $name, $title) {

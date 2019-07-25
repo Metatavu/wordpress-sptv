@@ -1,0 +1,55 @@
+{
+  "translation-revision-date": "2019-01-05 00:00:00+0000",
+  "domain": "sptv",
+  "locale_data": {
+    "messages": {
+      "": {
+        "domain": "sptv",
+        "plural-forms": "nplurals=2; plural=n != 1;",
+        "lang": "fi"
+      },
+
+      "Change service location": [
+        "Vaihda palvelupaikkaa"
+      ],
+
+      "Language": [
+        "Kieli"
+      ],
+
+      "Select language of displayed component": [
+        "Vaihda kieltä, jolla tiedot näytetään"
+      ],
+      
+      "Finnish": [
+        "Suomi"
+      ],
+
+      "Swedish": [
+        "Ruotsi"
+      ],
+
+      "English": [
+        "Englanti"
+      ],
+
+      "Component": [
+        "Komponentti"
+      ],
+
+      "Select displayed component": [
+        "Valitse näytettävä komponentti"
+      ],
+
+      "Search Services Locations": [
+        "Etsi palvelupaikkoja"
+      ],
+
+      "Enter some text to search service locations": [
+        "Kirjoita tekstiä etsiäksesi palvelupaikkoja"
+      ]
+    }
+  }
+}
+
+

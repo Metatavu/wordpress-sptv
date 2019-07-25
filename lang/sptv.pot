@@ -1,0 +1,127 @@
+# Copyright (C) 2019 SPTV
+# This file is distributed under the same license as the SPTV package.
+msgid ""
+msgstr ""
+"Project-Id-Version: SPTV 1.0.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/wordpress-sptv\n"
+"POT-Creation-Date: 2019-07-25 10:01:21+00:00\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2019-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+
+#: default-templates/components/common.php:31
+msgid "Monday"
+msgstr ""
+
+#: default-templates/components/common.php:33
+msgid "Tuesday"
+msgstr ""
+
+#: default-templates/components/common.php:35
+msgid "Wednesday"
+msgstr ""
+
+#: default-templates/components/common.php:37
+msgid "Thursday"
+msgstr ""
+
+#: default-templates/components/common.php:39
+msgid "Friday"
+msgstr ""
+
+#: default-templates/components/common.php:41
+msgid "Saturday"
+msgstr ""
+
+#: default-templates/components/common.php:43
+msgid "Sunday"
+msgstr ""
+
+#: default-templates/components/service_location_service_channel/default-all.php:5
+msgid "Visiting information"
+msgstr ""
+
+#: default-templates/components/service_location_service_channel/default-all.php:10
+msgid "Other contact details"
+msgstr ""
+
+#: default-templates/components/service_location_service_channel/phone-numbers.php:20
+msgid "Chargeable"
+msgstr ""
+
+#: gutenberg/blocks/blocks.php:39
+msgid "Default template"
+msgstr ""
+
+#: gutenberg/blocks/blocks.php:43
+msgid "Name"
+msgstr ""
+
+#: gutenberg/blocks/blocks.php:47
+msgid "Description"
+msgstr ""
+
+#: gutenberg/blocks/blocks.php:51
+msgid "Addresses"
+msgstr ""
+
+#: gutenberg/blocks/blocks.php:55
+msgid "Phone numbers"
+msgstr ""
+
+#: gutenberg/blocks/blocks.php:59
+msgid "Service Hours"
+msgstr ""
+
+#: gutenberg/blocks/blocks.php:129
+msgid "Finnish Service Catalogue"
+msgstr ""
+
+#: settings/settings-ui.php:22
+msgid "SPTV Settings"
+msgstr ""
+
+#. #-#-#-#-#  wordpress-sptv.pot (SPTV 1.0.0)  #-#-#-#-#
+#. Plugin Name of the plugin/theme
+#: settings/settings-ui.php:22 settings/settings-ui.php:55
+msgid "SPTV"
+msgstr ""
+
+#: settings/settings-ui.php:27
+msgid "Elasticsearch Settings"
+msgstr ""
+
+#: settings/settings-ui.php:28
+msgid "URL"
+msgstr ""
+
+#: settings/settings-ui.php:29
+msgid "Username"
+msgstr ""
+
+#: settings/settings-ui.php:30
+msgid "Password"
+msgstr ""
+
+#: settings/settings-ui.php:31
+msgid "PTV Settings"
+msgstr ""
+
+#: settings/settings-ui.php:32
+msgid "Organization Id"
+msgstr ""
+
+#: settings/settings-ui.php:51
+msgid "You do not have sufficient permissions to access this page."
+msgstr ""
+
+#. Description of the plugin/theme
+msgid "Wordpress plugin to searchable PTV service"
+msgstr ""
+
+#. Author of the plugin/theme
+msgid "Metatavu Oy"
+msgstr ""

@@ -12,9 +12,9 @@ interface Props {
   editing: boolean,
   channelId?: string,
   component?: string,
-  lang: string,
+  language: string,
   onComponentChange(component: string) : void,
-  onLangChange(lang: string) : void,
+  onLanguageChange(language: string) : void,
   onChannelIdChange(channelId: string): void
 }
 
@@ -62,8 +62,10 @@ class ServiceLocationServiceChannelComponent extends React.Component<Props, Stat
       <ServiceLocationServiceChannelInspectorControls
         editing={ this.props.editing } 
         channelId={ this.props.channelId }
-        language={ this.props.lang } 
-        onLanguageChange={ this.props.onLangChange }
+        language={ this.props.language } 
+        component={ this.props. component }
+        onComponentChange={ this.props.onComponentChange }
+        onLanguageChange={ this.props.onLanguageChange }
         onChannelIdChange={ this.props.onChannelIdChange }/>
     );
   }
@@ -74,12 +76,11 @@ class ServiceLocationServiceChannelComponent extends React.Component<Props, Stat
   private renderPreview = () => {
     return (
       <div>
-        <label>Preview</label>
         <wp.components.ServerSideRender 
           block="sptv/service-location-service-channel-block" 
           attributes={{
             id: this.props.channelId, 
-            lang: this.props.lang,
+            language: this.props.language,
             component: this.props.component
           }}/>
       </div>

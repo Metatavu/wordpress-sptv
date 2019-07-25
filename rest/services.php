@@ -1,0 +1,126 @@
+<?php
+  namespace Metatavu\SPTV\Wordpress\Rest;
+  
+  require_once( __DIR__ . '/../vendor/autoload.php');
+  require_once( __DIR__ . '/../rest/rest.php');
+
+  use Metatavu\SPTV\Wordpress\Settings\Settings;
+  use Elasticsearch\ClientBuilder;
+  
+  if (!defined('ABSPATH')) { 
+    exit;
+  }
+  
+  if (!class_exists( 'Metatavu\SPTV\Wordpress\Rest\Services' ) ) {
+    
+    /**
+     * REST services class
+     */
+    class Services {
+
+      private static $ALLOWED_TYPES = ["echannel", "webpage", "printableform","phone", "servicelocation"];
+
+      /**
+       * Constructor
+       */
+      public function __construct() {
+        register_rest_route('sptv', '/search-service-channels', [
+          [
+            'methods'  => \WP_REST_Server::READABLE,
+            'callback' => array($this, 'search')
+          ]
+        ]);
+      }
+      
+      /**
+       * REST endpoint for /sptv/search-service-channels
+       * 
+       * @param \WP_REST_Request $data
+       * @return WP_REST_Response | string[] response  
+       */
+      public function search($data) {
+        $ptvVersion = $data->get_query_params()["ptv"];
+        $query = $data->get_query_params()["q"];
+        $type = $data->get_query_params()["type"];
+        $lang = $data->get_query_params()["lang"];
+        
+        if (empty($query)) {
+          return new \WP_REST_Response("Missing query", 400);
+        }
+
+        if (empty($lang)) {
+          return new \WP_REST_Response("Missing lang", 400);
+        }
+
+        if (empty($ptvVersion)) {
+          return new \WP_REST_Response("Missing PTV version", 400);
+        }
+
+        if (!array_search($type, self::$ALLOWED_TYPES)) {
+          return new \WP_REST_Response("Invalid type", 400);
+        }
+
+        $organizationId = Settings::getValue("ptv-organization-id");
+        $nameQuery = [ 'match' => [ "serviceChannelNames_$lang" => [ "query" => $query ] ] ];
+        $organizationQuery = [ 'term' => [ "organizationId" => $organizationId ] ];
+
+        $query = [
+          'bool' => [
+            'must' => [ $nameQuery, $organizationQuery ]
+          ]
+        ];
+
+        $searchResult = $this->getClient()->search([
+          'index' => "$ptvVersion-$type-service-channel",
+          'body' => [ 
+            "_source" => false,
+            'query' => $query
+          ]
+        ]);
+
+        return $this->getResultIds($searchResult);
+      }
+
+      /**
+       * Returns ids from search result
+       * 
+       * @param object $searchResult search result
+       * @return string[] result ids
+       */
+      private function getResultIds($searchResult) {
+        $hits = [];
+        
+        if ($searchResult && $searchResult["hits"] && $searchResult["hits"]["hits"]) {
+          $hits = $searchResult["hits"]["hits"];
+        }
+
+        $resultIds = $hits ? array_map(function ($hit) {
+          return $hit["_id"];
+        }, $hits) : [];
+
+        return $resultIds;
+      }
+
+      /**
+       * Returns Elasticsearch client
+       * 
+       * @return \Elasticsearch\Client
+       */
+      private function getClient() {
+        $host = parse_url(Settings::getValue("elastic-url"));
+        $host['user'] = Settings::getValue("elastic-username");
+        $host['pass'] = Settings::getValue("elastic-password");
+        $builder = ClientBuilder::create();
+        $builder->setHosts([$host]);
+        return $builder->build();
+      }
+      
+    }
+  
+  }
+  
+  add_action('rest_api_init', function () {
+    new Services();
+  });
+  
+?>
