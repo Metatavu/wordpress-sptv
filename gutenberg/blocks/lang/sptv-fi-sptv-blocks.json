@@ -47,6 +47,10 @@
 
       "Enter some text to search service locations": [
         "Kirjoita tekstiä etsiäksesi palvelupaikkoja"
+      ],
+
+      "Service location service channel": [
+        "Palvelupaikka"
       ]
     }
   }
