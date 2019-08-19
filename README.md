@@ -1,2 +1,1 @@
-# wordpress-sptv
-# wordpress-sptv
+# Wordpress plugin for searchable PTV 
