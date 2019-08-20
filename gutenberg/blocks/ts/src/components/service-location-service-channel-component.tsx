@@ -36,10 +36,7 @@ class ServiceLocationServiceChannelComponent extends React.Component<Props, Stat
    */
   constructor(props: Props) {
     super(props);
-    this.state = {
-      version: 0,
-      searchOpen: false
-    };
+    this.state = { };
   }
 
   /**

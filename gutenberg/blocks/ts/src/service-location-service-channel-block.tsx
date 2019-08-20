@@ -2,8 +2,10 @@ import React from 'react';
 import { wp, WPBlockTypeEditParams } from 'wp';
 import Icon from "./service-location-service-channel-icon";
 import ServiceLocationServiceChannelComponent from './components/service-location-service-channel-component';
+import { SptvOptions } from './types';
 
 declare var wp: wp;
+declare var sptv: SptvOptions;
 const { __ } = wp.i18n;
 
 const { registerBlockType } = wp.blocks;
@@ -42,6 +44,14 @@ registerBlockType('sptv/service-location-service-channel-block', {
       const attributes: { [key: string]: string } = { }; 
       attributes[attribute] = value; 
       params.setAttributes(attributes);
+    }
+
+    if (!getAttribute("component")) {
+      setAttribute("component", sptv.serviceLocationServiceChannelBlock.components ? sptv.serviceLocationServiceChannelBlock.components[0].slug : null);
+    }
+
+    if (!getAttribute("language")) {
+      setAttribute("language", "fi");
     }
 
     return <ServiceLocationServiceChannelComponent 
