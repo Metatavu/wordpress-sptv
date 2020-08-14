@@ -65,6 +65,10 @@ if (!class_exists( 'Metatavu\SPTV\Wordpress\Gutenberg\Blocks\Blocks' ) ) {
         [
           "slug" => "service-hours",
           "name" => __("Service Hours", "sptv")
+        ],
+        [
+          "slug" => "accessibility",
+          "name" => __("Accessibility information", "sptv")
         ]
       ]);
 

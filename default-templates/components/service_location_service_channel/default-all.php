@@ -21,4 +21,7 @@
     include "webpage.php";
   }
 
+  echo "<h3>" . __("Accessibility information", "sptv") . "</h3>";
+
+  include "accessibility.php";
 ?>
