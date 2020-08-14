@@ -55,6 +55,10 @@ msgstr "Käyntitiedot"
 msgid "Other contact details"
 msgstr "Muut yhteystiedot"
 
+#: default-templates/components/service_location_service_channel/default-all.php:24
+msgid "Accessibility information"
+msgstr "Esteettömyys tiedot"
+
 #: default-templates/components/service_location_service_channel/default-all.php:13
 #: gutenberg/blocks/blocks.php:55
 msgid "Email"
