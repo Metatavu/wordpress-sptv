@@ -57,7 +57,7 @@ msgstr "Muut yhteystiedot"
 
 #: default-templates/components/service_location_service_channel/default-all.php:24
 msgid "Accessibility information"
-msgstr "Esteettömyys tiedot"
+msgstr "Esteettömyystiedot"
 
 #: default-templates/components/service_location_service_channel/default-all.php:13
 #: gutenberg/blocks/blocks.php:55
