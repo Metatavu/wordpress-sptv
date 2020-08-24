@@ -13,7 +13,7 @@ const { registerBlockType } = wp.blocks;
 /**
  * Registers block type
  */
-registerBlockType('sptv/service--block', {
+registerBlockType('sptv/service-block', {
   title: __( 'Service', 'sptv' ),
   icon: Icon,
   category: 'sptv',

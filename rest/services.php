@@ -127,8 +127,6 @@
           ]
         ]);
 
-        error_log(print_r($searchResult, true));
-
         return $this->getResultIds($searchResult);
       }
 

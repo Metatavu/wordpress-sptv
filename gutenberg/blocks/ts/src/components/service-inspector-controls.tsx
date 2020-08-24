@@ -32,7 +32,7 @@ interface State {
 /**
  * Service inspector controls
  */
-class ServiceLocationServiceChannelInspectorControls extends React.Component<Props, State> {
+class ServiceInspectorControls extends React.Component<Props, State> {
 
   private ptv = new PTV();
 
@@ -231,4 +231,4 @@ class ServiceLocationServiceChannelInspectorControls extends React.Component<Pro
 
 }
 
-export default ServiceLocationServiceChannelInspectorControls;
+export default ServiceInspectorControls;

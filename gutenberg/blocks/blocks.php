@@ -33,7 +33,7 @@ if (!class_exists( 'Metatavu\SPTV\Wordpress\Gutenberg\Blocks\Blocks' ) ) {
       wp_set_script_translations("sptv-blocks", "sptv", dirname(__FILE__) . '/lang/');
       add_filter("block_categories", [ $this, "blockCategoriesFilter"], 10, 2);
 
-      $service_channel_components = apply_filters("sptv_service_location_service_channel_components", [
+      $serviceChannelComponents = apply_filters("sptv_service_location_service_channel_components", [
         [
           "slug" => "default-all",
           "name" => __("Default template", "sptv")
@@ -68,7 +68,7 @@ if (!class_exists( 'Metatavu\SPTV\Wordpress\Gutenberg\Blocks\Blocks' ) ) {
         ]
       ]);
 
-      $service_components = apply_filters("sptv_service_components", [
+      $serviceComponents = apply_filters("sptv_service_components", [
         [
           "slug" => "default-all",
           "name" => __("Default (no service channels)", "sptv")
@@ -101,10 +101,10 @@ if (!class_exists( 'Metatavu\SPTV\Wordpress\Gutenberg\Blocks\Blocks' ) ) {
 
       wp_localize_script('sptv-blocks', 'sptv', [ 
         "serviceLocationServiceChannelBlock" => [
-          "components" => $service_channel_components
+          "components" => $serviceChannelComponents
         ],
         "serviceBlock" => [
-          "components" => $service_components
+          "components" => $serviceComponents
         ]
       ]);
 
@@ -176,9 +176,9 @@ if (!class_exists( 'Metatavu\SPTV\Wordpress\Gutenberg\Blocks\Blocks' ) ) {
     }
 
     /**
-     * Renders a list block
+     * Renders a service component block
      *
-     * Return a HTML representation of events
+     * Return a HTML representation of a service component
      *
      * @property array $attributes {
      *   block attributes

@@ -66,7 +66,7 @@ export default class PTV {
   }
 
   /**
-   * Finds a services by ids
+   * Finds services by ids
    * 
    * @param ids service id
    * @returns found service or null if not found
