@@ -33,7 +33,7 @@ if (!class_exists( 'Metatavu\SPTV\Wordpress\Gutenberg\Blocks\Blocks' ) ) {
       wp_set_script_translations("sptv-blocks", "sptv", dirname(__FILE__) . '/lang/');
       add_filter("block_categories", [ $this, "blockCategoriesFilter"], 10, 2);
 
-      $components = apply_filters("sptv_service_location_service_channel_components", [
+      $service_channel_components = apply_filters("sptv_service_location_service_channel_components", [
         [
           "slug" => "default-all",
           "name" => __("Default template", "sptv")
@@ -65,16 +65,46 @@ if (!class_exists( 'Metatavu\SPTV\Wordpress\Gutenberg\Blocks\Blocks' ) ) {
         [
           "slug" => "service-hours",
           "name" => __("Service Hours", "sptv")
+        ]
+      ]);
+
+      $service_components = apply_filters("sptv_service_components", [
+        [
+          "slug" => "default-all",
+          "name" => __("Default (no service channels)", "sptv")
         ],
         [
-          "slug" => "accessibility",
-          "name" => __("Accessibility information", "sptv")
-        ]
+          "slug" => "name",
+          "name" => __("Name", "sptv")
+        ],
+        [
+          "slug" => "summary",
+          "name" => __("Summary", "sptv")
+        ],
+        [
+          "slug" => "description",
+          "name" => __("Description", "sptv")
+        ],
+        [
+          "slug" => "user-instruction",
+          "name" => __("User instruction", "sptv")
+        ],
+        [
+          "slug" => "requirements",
+          "name" => __("Requirements", "sptv")
+        ],
+        [
+          "slug" => "service-channels",
+          "name" => __("Service channels", "sptv")
+        ],
       ]);
 
       wp_localize_script('sptv-blocks', 'sptv', [ 
         "serviceLocationServiceChannelBlock" => [
-          "components" => $components
+          "components" => $service_channel_components
+        ],
+        "serviceBlock" => [
+          "components" => $service_components
         ]
       ]);
 
@@ -92,6 +122,22 @@ if (!class_exists( 'Metatavu\SPTV\Wordpress\Gutenberg\Blocks\Blocks' ) ) {
         ],
         'editor_script' => 'sptv-blocks',
         'render_callback' => [ $this, "renderServiceLocationServiceChannelBlock" ]
+      ]);
+
+      register_block_type('sptv/service-block', [
+        'attributes' => [ 
+          "id" => [
+            'type' => 'string'
+          ],
+          "component" => [
+            'type' => 'string'
+          ],
+          "language" => [
+            'type' => 'string'
+          ]
+        ],
+        'editor_script' => 'sptv-blocks',
+        'render_callback' => [ $this, "renderServiceBlock" ]
       ]);
     }
     
@@ -123,6 +169,40 @@ if (!class_exists( 'Metatavu\SPTV\Wordpress\Gutenberg\Blocks\Blocks' ) ) {
       ob_start();
       $templateLoader = new \Metatavu\SPTV\TemplateLoader();
       $templateLoader->set_template_data($templateData)->get_template_part("components/service_location_service_channel/$component");
+      $result = ob_get_contents();
+      ob_end_clean();
+
+      return $result; 
+    }
+
+    /**
+     * Renders a list block
+     *
+     * Return a HTML representation of events
+     *
+     * @property array $attributes {
+     *   block attributes
+     * 
+     *   @type string $id service block
+     * }
+     */
+    public function renderServiceBlock($attributes) {
+      $result = ''; 
+
+      $id = $attributes["id"];
+      $component = $attributes["component"];
+      $language = $attributes["language"];
+
+      $service = $this->ptv->findService($id);
+
+      $templateData = [
+        "service" => $service,
+        "language" => $language
+      ];
+
+      ob_start();
+      $templateLoader = new \Metatavu\SPTV\TemplateLoader();
+      $templateLoader->set_template_data($templateData)->get_template_part("components/service/$component");
       $result = ob_get_contents();
       ob_end_clean();
 

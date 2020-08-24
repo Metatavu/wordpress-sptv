@@ -27,7 +27,13 @@
         register_rest_route('sptv', '/search-service-channels', [
           [
             'methods'  => \WP_REST_Server::READABLE,
-            'callback' => array($this, 'search')
+            'callback' => array($this, 'searchServiceChannels')
+          ]
+        ]);
+        register_rest_route('sptv', '/search-services', [
+          [
+            'methods'  => \WP_REST_Server::READABLE,
+            'callback' => array($this, 'searchServices')
           ]
         ]);
       }
@@ -38,7 +44,7 @@
        * @param \WP_REST_Request $data
        * @return WP_REST_Response | string[] response  
        */
-      public function search($data) {
+      public function searchServiceChannels($data) {
         $ptvVersion = $data->get_query_params()["ptv"];
         $query = $data->get_query_params()["q"];
         $type = $data->get_query_params()["type"];
@@ -77,6 +83,51 @@
             'query' => $query
           ]
         ]);
+
+        return $this->getResultIds($searchResult);
+      }
+
+      /**
+       * REST endpoint for /sptv/search-services
+       * 
+       * @param \WP_REST_Request $data
+       * @return WP_REST_Response | string[] response  
+       */
+      public function searchServices($data) {
+        $ptvVersion = $data->get_query_params()["ptv"];
+        $query = $data->get_query_params()["q"];
+        $lang = $data->get_query_params()["lang"];
+        
+        if (empty($query)) {
+          return new \WP_REST_Response("Missing query", 400);
+        }
+
+        if (empty($lang)) {
+          return new \WP_REST_Response("Missing lang", 400);
+        }
+
+        if (empty($ptvVersion)) {
+          return new \WP_REST_Response("Missing PTV version", 400);
+        }
+
+        $organizationId = Settings::getValue("ptv-organization-id");
+        $nameQuery = [ 'match' => [ "serviceNames_$lang" => [ "query" => $query ] ] ];
+        
+        $query = [
+          'bool' => [
+            'must' => [ $nameQuery ]
+          ]
+        ];
+
+        $searchResult = $this->getClient()->search([
+          'index' => "$ptvVersion-service",
+          'body' => [ 
+            "_source" => false,
+            'query' => $query
+          ]
+        ]);
+
+        error_log(print_r($searchResult, true));
 
         return $this->getResultIds($searchResult);
       }
