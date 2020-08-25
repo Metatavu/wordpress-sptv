@@ -14,8 +14,24 @@ export interface ServiceLocationServiceChannelBlockOptions {
 }
 
 /**
+ * Interface describing SPTV ServiceBlock component option
+ */
+export interface ServiceBlockOptionComponent {
+  slug: string,
+  name: string
+}
+
+/**
+ * Interface describing SPTV ServiceBlock options
+ */
+export interface ServiceBlockOptions {
+  components: ServiceBlockOptionComponent[]
+}
+
+/**
  * Interface describing SPTV options
  */
 export interface SptvOptions {
-  serviceLocationServiceChannelBlock: ServiceLocationServiceChannelBlockOptions
+  serviceLocationServiceChannelBlock: ServiceLocationServiceChannelBlockOptions,
+  serviceBlock: ServiceBlockOptions
 }

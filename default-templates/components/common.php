@@ -88,21 +88,22 @@
    */
   function formatServiceHours($serviceHours) {
     $result = '';
+    if (is_array($serviceHours)) {
+      foreach ($serviceHours as $serviceHour) {
+        if ($serviceHour["serviceHourType"] == "DaysOfTheWeek") {
+          $additionalInformation = getLocalizedValue($serviceHour["additionalInformation"], $data->language);
+          $openingHours = $serviceHour["openingHour"];
+          $result .= "<p>$additionalInformation</p>";
+          
+          $result .= "<p>";
+          if (!$serviceHour["isClosed"] && count($openingHours) == 0) {
+            $result .= __("Open 24 hours.", "sptv");
+          } else {
+            $result .= formatOpeningHours($openingHours);
+          }
+          $result .= "</p>";
 
-    foreach ($serviceHours as $serviceHour) {
-      if ($serviceHour["serviceHourType"] == "DaysOfTheWeek") {
-        $additionalInformation = getLocalizedValue($serviceHour["additionalInformation"], $data->language);
-        $openingHours = $serviceHour["openingHour"];
-        $result .= "<p>$additionalInformation</p>";
-        
-        $result .= "<p>";
-        if (!$serviceHour["isClosed"] && count($openingHours) == 0) {
-          $result .= __("Open 24 hours.", "sptv");
-        } else {
-          $result .= formatOpeningHours($openingHours);
         }
-        $result .= "</p>";
-
       }
     }
 

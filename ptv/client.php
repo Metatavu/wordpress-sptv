@@ -15,6 +15,7 @@
     class Client {
 
       private $serviceChannelCache = [];
+      private $serviceCache = [];
 
       /**
        * Finds a service channel by id
@@ -28,6 +29,20 @@
         }
 
         return $this->serviceChannelCache[$id];
+      }
+
+      /**
+       * Finds a service by id
+       * 
+       * @param id id
+       * @returns found service or null if not found
+       */
+      public function findService($id) {
+        if (!$this->serviceCache[$id]) {
+          $this->serviceCache[$id] = json_decode($this->doGetRequest("https://api.palvelutietovaranto.suomi.fi/api/v10/Service/$id"), true);
+        }
+
+        return $this->serviceCache[$id];
       }
 
       /**
