@@ -14,12 +14,12 @@ const { __ } = wp.i18n;
  */
 interface Props {
   editing: boolean,
-  channelId?: string,
+  serviceId?: string,
   language: string,
   component: string,
   onLanguageChange: (language: string) => void,
   onComponentChange: (component: string) => void,
-  onChannelIdChange: (channelId: string) => void
+  onServiceIdChange: (serviceId: string) => void
 }
 
 /**
@@ -44,7 +44,7 @@ class ServiceInspectorControls extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
     this.state = {
-      searchOpen: props.editing && !props.channelId
+      searchOpen: props.editing && !props.serviceId
     };
   }
 
@@ -210,7 +210,7 @@ class ServiceInspectorControls extends React.Component<Props, State> {
    */
   private onSearchModalSelect = (data: V10VmOpenApiService) => {
     this.setState( { searchOpen: false } ); 
-    this.props.onChannelIdChange(data.id);
+    this.props.onServiceIdChange(data.id);
   }
 
   /**

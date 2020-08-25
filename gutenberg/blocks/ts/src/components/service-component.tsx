@@ -10,12 +10,12 @@ const { __ } = wp.i18n;
  */
 interface Props {
   editing: boolean,
-  channelId?: string,
+  serviceId?: string,
   component?: string,
   language: string,
   onComponentChange(component: string) : void,
   onLanguageChange(language: string) : void,
-  onChannelIdChange(channelId: string): void
+  onServiceIdChange(serviceId: string): void
 }
 
 /**
@@ -58,12 +58,12 @@ class ServiceComponent extends React.Component<Props, State> {
     return (
       <ServiceInspectorControls
         editing={ this.props.editing } 
-        channelId={ this.props.channelId }
+        serviceId={ this.props.serviceId }
         language={ this.props.language } 
         component={ this.props.component }
         onComponentChange={ this.props.onComponentChange }
         onLanguageChange={ this.props.onLanguageChange }
-        onChannelIdChange={ this.props.onChannelIdChange }/>
+        onServiceIdChange={ this.props.onServiceIdChange }/>
     );
   }
 
@@ -76,7 +76,7 @@ class ServiceComponent extends React.Component<Props, State> {
         <wp.components.ServerSideRender 
           block="sptv/service-block" 
           attributes={{
-            id: this.props.channelId, 
+            id: this.props.serviceId, 
             language: this.props.language,
             component: this.props.component
           }}/>

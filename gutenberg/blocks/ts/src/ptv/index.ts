@@ -13,9 +13,11 @@ const PTV_VERSION = "v10";
 export default class PTV {
 
   private channelCache: Map<string, ServiceChannel>;
+  private serviceCache: Map<string, ServiceChannel>;
 
   constructor() {
     this.channelCache = new Map();
+    this.serviceCache = new Map();
   }
 
   /**
@@ -36,8 +38,8 @@ export default class PTV {
    * @returns found service or null if not found
    */
   public findService = async (id: string): Promise<Service | null> => {
-    const channels = await this.findServices([id]);
-    return channels[0] || null;
+    const services = await this.findServices([id]);
+    return services[0] || null;
   }
 
   /**
@@ -76,18 +78,18 @@ export default class PTV {
       return [];
     }
 
-    const cacheMissIds = ids.filter(id => !this.channelCache.has(id));
+    const cacheMissIds = ids.filter(id => !this.serviceCache.has(id));
     if (cacheMissIds.length > 0) {
       const result = await fetch(`${PTV_URL}/${PTV_VERSION}/Service/list?guids=${cacheMissIds.join(",")}`, {
         credentials: "omit"
       });
 
-      const channels = await result.json();
+      const services = await result.json();
       
-      channels.forEach((channel: ServiceChannel) => this.channelCache.set(channel.id, channel));
+      services.forEach((service: Service) => this.serviceCache.set(service.id, service));
     }
 
-    return ids.map(id => this.channelCache.get(id));
+    return ids.map(id => this.serviceCache.get(id));
   }
 
 }

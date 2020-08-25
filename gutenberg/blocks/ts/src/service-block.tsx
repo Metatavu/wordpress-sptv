@@ -1,6 +1,6 @@
 import React from 'react';
 import { wp, WPBlockTypeEditParams } from 'wp';
-import Icon from "./service-location-service-channel-icon";
+import Icon from "./service-icon";
 import ServiceComponent from './components/service-component';
 import { SptvOptions } from './types';
 
@@ -56,7 +56,7 @@ registerBlockType('sptv/service-block', {
 
     return <ServiceComponent 
       editing={ isSelected } 
-      channelId={ getAttribute("id") } 
+      serviceId={ getAttribute("id") } 
       component={ getAttribute("component") } 
       language={ getAttribute("language") }
       onComponentChange={(component: string) => {
@@ -65,8 +65,8 @@ registerBlockType('sptv/service-block', {
       onLanguageChange={(language: string) => {
         setAttribute("language", language);
       }}
-      onChannelIdChange={(channelId: string) => {
-        setAttribute("id", channelId);
+      onServiceIdChange={(serviceId: string) => {
+        setAttribute("id", serviceId);
       }}
       />
   }),

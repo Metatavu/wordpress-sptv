@@ -112,10 +112,11 @@
 
         $organizationId = Settings::getValue("ptv-organization-id");
         $nameQuery = [ 'match' => [ "serviceNames_$lang" => [ "query" => $query ] ] ];
+        $organizationQuery = [ 'term' => [ "organizationIds" => $organizationId ] ];
         
         $query = [
           'bool' => [
-            'must' => [ $nameQuery ]
+            'must' => [ $nameQuery, $organizationQuery ]
           ]
         ];
 
