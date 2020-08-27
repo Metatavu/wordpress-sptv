@@ -58,7 +58,7 @@
       ],
 
       "Enter the first word to search services": [
-        "Kirjoita sana etsiäksesi palveluita"
+        "Kirjoita hakusana etsiäksesi palveluita"
       ],
 
       "Service": [
@@ -70,7 +70,7 @@
       ],
 
       "Enter the first word to search service webpages": [
-        "Kirjoita sana etsiäksesi verkkosivu asiointikanavia"
+        "Kirjoita hakusana etsiäksesi verkkosivu asiointikanavia"
       ],
 
       "Webpage service channel": [
@@ -82,7 +82,7 @@
       ],
 
       "Enter the first word to search electronic channel": [
-        "Kirjoita sana etsiäksesi verkkoasiointikanavia"
+        "Kirjoita hakusana etsiäksesi verkkoasiointikanavia"
       ],
 
       "Electronic service channel": [
@@ -94,7 +94,7 @@
       ],
 
       "Enter the first word to search phone services": [
-        "Kirjoita sana etsiäksesi puhelinasiointikanavia"
+        "Kirjoita hakusana etsiäksesi puhelinasiointikanavia"
       ],
 
       "Phone service channel": [
@@ -106,7 +106,7 @@
       ],
 
       "Enter the first word to search printable form services": [
-        "Kirjoita sana etsiäksesi tulostettava lomake asiointikanavia"
+        "Kirjoita hakusana etsiäksesi tulostettava lomake asiointikanavia"
       ],
 
       "Printable form service channel": [
@@ -114,11 +114,11 @@
       ],
 
       "Change service": [
-        "Vaihdda palvelu"
+        "Vaihda palvelu"
       ],
 
       "Change webpage service": [
-        "Vaida verkkosivu asiointikanava"
+        "Vaihda verkkosivu asiointikanava"
       ],
 
       "Change electronic service": [
