@@ -2,7 +2,7 @@
   require_once(__DIR__ . '/../common.php');
 
   $serviceChannel = $data->serviceChannel;
-  $phoneNumbers = $serviceChannel ["phoneNumbers"];
+  $phoneNumbers = $serviceChannel["phoneNumbers"];
 
 
   if (!$phoneNumbers) {
