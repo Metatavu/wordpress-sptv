@@ -1,7 +1,7 @@
 /**
  * Interface describing SPTV ServiceLocationServiceChannelBlock component option
  */
-export interface ServiceLocationServiceChannelBlockOptionComponent {
+export interface ServiceChannelBlockOptionComponent {
   slug: string,
   name: string
 }
@@ -9,8 +9,8 @@ export interface ServiceLocationServiceChannelBlockOptionComponent {
 /**
  * Interface describing SPTV ServiceLocationServiceChannelBlock options
  */
-export interface ServiceLocationServiceChannelBlockOptions {
-  components: ServiceLocationServiceChannelBlockOptionComponent[]
+export interface ServiceChannelBlockOptions {
+  components: ServiceChannelBlockOptionComponent[]
 }
 
 /**
@@ -32,6 +32,10 @@ export interface ServiceBlockOptions {
  * Interface describing SPTV options
  */
 export interface SptvOptions {
-  serviceLocationServiceChannelBlock: ServiceLocationServiceChannelBlockOptions,
+  serviceLocationServiceChannelBlock: ServiceChannelBlockOptions,
+  electronicServiceChannelBlock: ServiceChannelBlockOptions,
+  webpageServiceChannelBlock: ServiceChannelBlockOptions,
+  printableFormServiceChannelBlock: ServiceChannelBlockOptions,
+  phoneServiceChannelBlock: ServiceChannelBlockOptions,
   serviceBlock: ServiceBlockOptions
 }

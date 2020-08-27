@@ -33,6 +33,86 @@ if (!class_exists( 'Metatavu\SPTV\Wordpress\Gutenberg\Blocks\Blocks' ) ) {
       wp_set_script_translations("sptv-blocks", "sptv", dirname(__FILE__) . '/lang/');
       add_filter("block_categories", [ $this, "blockCategoriesFilter"], 10, 2);
 
+      $electronicServiceChannelComponents = apply_filters("sptv_electronic_service_channel_components", [
+        [
+          "slug" => "default-all",
+          "name" => __("Default template", "sptv")
+        ],
+        [
+          "slug" => "name",
+          "name" => __("Name", "sptv")
+        ],
+        [
+          "slug" => "description",
+          "name" => __("Description", "sptv")
+        ],
+        [
+          "slug" => "webpages",
+          "name" => __("Url", "sptv")
+        ]
+      ]);
+
+      $webpageServiceChannelComponents = apply_filters("sptv_webpage_service_channel_components", [
+        [
+          "slug" => "default-all",
+          "name" => __("Default template", "sptv")
+        ],
+        [
+          "slug" => "name",
+          "name" => __("Name", "sptv")
+        ],
+        [
+          "slug" => "description",
+          "name" => __("Description", "sptv")
+        ],
+        [
+          "slug" => "webpages",
+          "name" => __("Web pages", "sptv")
+        ]
+      ]);
+
+      $printableFormServiceChannelComponents = apply_filters("sptv_printable_form_service_channel_components", [
+        [
+          "slug" => "default-all",
+          "name" => __("Default template", "sptv")
+        ],
+        [
+          "slug" => "name",
+          "name" => __("Name", "sptv")
+        ],
+        [
+          "slug" => "description",
+          "name" => __("Description", "sptv")
+        ],
+        [
+          "slug" => "channelurls",
+          "name" => __("Channel urls", "sptv")
+        ],
+        [
+          "slug" => "attachmenturls",
+          "name" => __("Attachment urls", "sptv")
+        ]
+      ]);
+
+      $phoneServiceChannelComponents = apply_filters("sptv_phone_service_channel_components", [
+        [
+          "slug" => "default-all",
+          "name" => __("Default template", "sptv")
+        ],
+        [
+          "slug" => "name",
+          "name" => __("Name", "sptv")
+        ],
+        [
+          "slug" => "description",
+          "name" => __("Description", "sptv")
+        ],
+        [
+          "slug" => "phone-numbers",
+          "name" => __("Phone numbers", "sptv")
+        ]
+      ]);
+
       $serviceChannelComponents = apply_filters("sptv_service_location_service_channel_components", [
         [
           "slug" => "default-all",
@@ -103,6 +183,18 @@ if (!class_exists( 'Metatavu\SPTV\Wordpress\Gutenberg\Blocks\Blocks' ) ) {
         "serviceLocationServiceChannelBlock" => [
           "components" => $serviceChannelComponents
         ],
+        "electronicServiceChannelBlock" => [
+          "components" => $electronicServiceChannelComponents
+        ],
+        "webpageServiceChannelBlock" => [
+          "components" => $webpageServiceChannelComponents
+        ],
+        "printableFormServiceChannelBlock" => [
+          "components" => $printableFormServiceChannelComponents
+        ],
+        "phoneServiceChannelBlock" => [
+          "components" => $phoneServiceChannelComponents
+        ],
         "serviceBlock" => [
           "components" => $serviceComponents
         ]
@@ -122,6 +214,70 @@ if (!class_exists( 'Metatavu\SPTV\Wordpress\Gutenberg\Blocks\Blocks' ) ) {
         ],
         'editor_script' => 'sptv-blocks',
         'render_callback' => [ $this, "renderServiceLocationServiceChannelBlock" ]
+      ]);
+
+      register_block_type('sptv/electronic-service-channel-block', [
+        'attributes' => [ 
+          "id" => [
+            'type' => 'string'
+          ],
+          "component" => [
+            'type' => 'string'
+          ],
+          "language" => [
+            'type' => 'string'
+          ]
+        ],
+        'editor_script' => 'sptv-blocks',
+        'render_callback' => [ $this, "renderElectronicServiceChannelBlock" ]
+      ]);
+
+      register_block_type('sptv/webpage-service-channel-block', [
+        'attributes' => [ 
+          "id" => [
+            'type' => 'string'
+          ],
+          "component" => [
+            'type' => 'string'
+          ],
+          "language" => [
+            'type' => 'string'
+          ]
+        ],
+        'editor_script' => 'sptv-blocks',
+        'render_callback' => [ $this, "renderWebpageServiceChannelBlock" ]
+      ]);
+
+      register_block_type('sptv/printable-form-service-channel-block', [
+        'attributes' => [ 
+          "id" => [
+            'type' => 'string'
+          ],
+          "component" => [
+            'type' => 'string'
+          ],
+          "language" => [
+            'type' => 'string'
+          ]
+        ],
+        'editor_script' => 'sptv-blocks',
+        'render_callback' => [ $this, "renderPrintableFormServiceChannelBlock" ]
+      ]);
+
+      register_block_type('sptv/phone-service-channel-block', [
+        'attributes' => [ 
+          "id" => [
+            'type' => 'string'
+          ],
+          "component" => [
+            'type' => 'string'
+          ],
+          "language" => [
+            'type' => 'string'
+          ]
+        ],
+        'editor_script' => 'sptv-blocks',
+        'render_callback' => [ $this, "renderPhoneServiceChannelBlock" ]
       ]);
 
       register_block_type('sptv/service-block', [
@@ -169,6 +325,142 @@ if (!class_exists( 'Metatavu\SPTV\Wordpress\Gutenberg\Blocks\Blocks' ) ) {
       ob_start();
       $templateLoader = new \Metatavu\SPTV\TemplateLoader();
       $templateLoader->set_template_data($templateData)->get_template_part("components/service_location_service_channel/$component");
+      $result = ob_get_contents();
+      ob_end_clean();
+
+      return $result; 
+    }
+
+    /**
+     * Renders a list block
+     *
+     * Return a HTML representation of events
+     *
+     * @property array $attributes {
+     *   block attributes
+     * 
+     *   @type string $id service location service channel block
+     * }
+     */
+    public function renderElectronicServiceChannelBlock($attributes) {
+      $result = ''; 
+
+      $id = $attributes["id"];
+      $component = $attributes["component"];
+      $language = $attributes["language"];
+
+      $serviceChannel = $this->ptv->findServiceChannel($id);
+
+      $templateData = [
+        "serviceChannel" => $serviceChannel,
+        "language" => $language
+      ];
+
+      ob_start();
+      $templateLoader = new \Metatavu\SPTV\TemplateLoader();
+      $templateLoader->set_template_data($templateData)->get_template_part("components/electronic_service_channel/$component");
+      $result = ob_get_contents();
+      ob_end_clean();
+
+      return $result; 
+    }
+
+    /**
+     * Renders a list block
+     *
+     * Return a HTML representation of events
+     *
+     * @property array $attributes {
+     *   block attributes
+     * 
+     *   @type string $id service location service channel block
+     * }
+     */
+    public function renderWebpageServiceChannelBlock($attributes) {
+      $result = ''; 
+
+      $id = $attributes["id"];
+      $component = $attributes["component"];
+      $language = $attributes["language"];
+
+      $serviceChannel = $this->ptv->findServiceChannel($id);
+
+      $templateData = [
+        "serviceChannel" => $serviceChannel,
+        "language" => $language
+      ];
+
+      ob_start();
+      $templateLoader = new \Metatavu\SPTV\TemplateLoader();
+      $templateLoader->set_template_data($templateData)->get_template_part("components/webpage_service_channel/$component");
+      $result = ob_get_contents();
+      ob_end_clean();
+
+      return $result; 
+    }
+
+    /**
+     * Renders a list block
+     *
+     * Return a HTML representation of events
+     *
+     * @property array $attributes {
+     *   block attributes
+     * 
+     *   @type string $id service location service channel block
+     * }
+     */
+    public function renderPrintableFormServiceChannelBlock($attributes) {
+      $result = ''; 
+
+      $id = $attributes["id"];
+      $component = $attributes["component"];
+      $language = $attributes["language"];
+
+      $serviceChannel = $this->ptv->findServiceChannel($id);
+
+      $templateData = [
+        "serviceChannel" => $serviceChannel,
+        "language" => $language
+      ];
+
+      ob_start();
+      $templateLoader = new \Metatavu\SPTV\TemplateLoader();
+      $templateLoader->set_template_data($templateData)->get_template_part("components/printable_form_service_channel/$component");
+      $result = ob_get_contents();
+      ob_end_clean();
+
+      return $result; 
+    }
+
+    /**
+     * Renders a list block
+     *
+     * Return a HTML representation of events
+     *
+     * @property array $attributes {
+     *   block attributes
+     * 
+     *   @type string $id service location service channel block
+     * }
+     */
+    public function renderPhoneServiceChannelBlock($attributes) {
+      $result = ''; 
+
+      $id = $attributes["id"];
+      $component = $attributes["component"];
+      $language = $attributes["language"];
+
+      $serviceChannel = $this->ptv->findServiceChannel($id);
+
+      $templateData = [
+        "serviceChannel" => $serviceChannel,
+        "language" => $language
+      ];
+
+      ob_start();
+      $templateLoader = new \Metatavu\SPTV\TemplateLoader();
+      $templateLoader->set_template_data($templateData)->get_template_part("components/phone_service_channel/$component");
       $result = ob_get_contents();
       ob_end_clean();
 

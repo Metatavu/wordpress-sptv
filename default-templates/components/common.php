@@ -37,6 +37,29 @@
     return $item ? $item["value"] : "";
   }
 
+  /** 
+   * Returns localized URL from an array
+   * 
+   * @param object[] $values array of localized values
+   * @param string $language preferred language
+   * @param string $type filter results by type. optional
+   */
+  function getLocalizedUrl($values, $language) {
+    if (!$values) {
+      return null;
+    }
+    
+    $filtered = array_filter($values, function($value) {
+      return !empty($value["url"]);
+    });
+
+    usort($filtered, function ($a, $b) {
+      return $a["language"] == $language ? -1 : 1;
+    });
+
+    return $filtered[0] ? $filtered[0] : null;
+  }
+
   /**
    * Returns localized day name
    * 

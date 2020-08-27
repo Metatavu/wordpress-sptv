@@ -1,9 +1,7 @@
 <?php
   require_once(__DIR__ . '/../common.php');
-
   $serviceChannel = $data->serviceChannel;
-
-  $webPages = $serviceChannel ["webPages"];
+  $webPages = $serviceChannel["webPages"];
 
   if (!$webPages) {
     return;
@@ -17,5 +15,4 @@
     echo "<a target=\"_blank\" href=\"$url\">$text</a>";
     echo "</p>";
   }
-
 ?>
