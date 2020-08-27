@@ -51,7 +51,88 @@
 
       "Service location service channel": [
         "Palvelupaikka"
+      ],
+
+      "Search Services": [
+        "Hae palveluita"
+      ],
+
+      "Enter the first word to search services": [
+        "Kirjoita hakusana etsiäksesi palveluita"
+      ],
+
+      "Service": [
+        "Palvelu"
+      ],
+
+      "Search Service Webpages": [
+        "Etsi verkkosivu asiointikanavia"
+      ],
+
+      "Enter the first word to search service webpages": [
+        "Kirjoita hakusana etsiäksesi verkkosivu asiointikanavia"
+      ],
+
+      "Webpage service channel": [
+        "Verkkosivu asiointikanava"
+      ],
+
+      "Search Electronic Channel": [
+        "Etsi verkkoasiointikanavia"
+      ],
+
+      "Enter the first word to search electronic channel": [
+        "Kirjoita hakusana etsiäksesi verkkoasiointikanavia"
+      ],
+
+      "Electronic service channel": [
+        "Verkkoasiointikanava"
+      ],
+
+      "Search Phone Services": [
+        "Etsi puhelinasiointikanavia"
+      ],
+
+      "Enter the first word to search phone services": [
+        "Kirjoita hakusana etsiäksesi puhelinasiointikanavia"
+      ],
+
+      "Phone service channel": [
+        "Puhelinasiointikanava"
+      ],
+
+      "Search Printable Form Services": [
+        "Etsi tulostettava lomake asiointikanavia"
+      ],
+
+      "Enter the first word to search printable form services": [
+        "Kirjoita hakusana etsiäksesi tulostettava lomake asiointikanavia"
+      ],
+
+      "Printable form service channel": [
+        "Tulostettava lomake asiointikanava"
+      ],
+
+      "Change service": [
+        "Vaihda palvelu"
+      ],
+
+      "Change webpage service": [
+        "Vaihda verkkosivu asiointikanava"
+      ],
+
+      "Change electronic service": [
+        "Vaihda verkkoasiointikanava"
+      ],
+
+      "Change phone service": [
+        "Vaihda puhelinasiointikanava"
+      ],
+
+      "Change printable form service": [
+        "Vaihda tulostettava lomake asiointikanava"
       ]
+      
     }
   }
 }

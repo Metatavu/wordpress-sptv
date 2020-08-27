@@ -1,7 +1,7 @@
 import React from 'react';
 import { wp } from 'wp';
 import { SptvOptions } from '../types';
-import { VmOpenApiLocalizedListItem, V10VmOpenApiService } from '../ptv/model/v10/api';
+import { VmOpenApiLocalizedListItem, V10VmOpenApiPhoneChannel } from '../ptv/model/v10/api';
 import { SearchModal } from './search-modal';
 import PTV from '../ptv';
 
@@ -14,12 +14,12 @@ const { __ } = wp.i18n;
  */
 interface Props {
   editing: boolean,
-  serviceId?: string,
+  channelId?: string,
   language: string,
   component: string,
   onLanguageChange: (language: string) => void,
   onComponentChange: (component: string) => void,
-  onServiceIdChange: (serviceId: string) => void
+  onChannelIdChange: (channelId: string) => void
 }
 
 /**
@@ -30,9 +30,9 @@ interface State {
 }
 
 /**
- * Service inspector controls
+ * Phone service channel inspector controls
  */
-class ServiceInspectorControls extends React.Component<Props, State> {
+class PhoneServiceChannelInspectorControls extends React.Component<Props, State> {
 
   private ptv = new PTV();
 
@@ -44,7 +44,7 @@ class ServiceInspectorControls extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
     this.state = {
-      searchOpen: props.editing && !props.serviceId
+      searchOpen: props.editing && !props.channelId
     };
   }
 
@@ -80,7 +80,7 @@ class ServiceInspectorControls extends React.Component<Props, State> {
   private renderChangeButton() {
     return (
       <div>
-        <wp.components.Button isPrimary onClick={ this.onChangeButtonClick }>{__( 'Change service', 'sptv' )}</wp.components.Button>
+        <wp.components.Button isPrimary onClick={ this.onChangeButtonClick }>{__( 'Change phone service', 'sptv' )}</wp.components.Button>
       </div> 
     );
   }
@@ -122,7 +122,7 @@ class ServiceInspectorControls extends React.Component<Props, State> {
 
     const title = __("Component", "sptv");
     const hint = __("Select displayed component", "sptv");
-    const options = sptv.serviceBlock.components.map((component) => {
+    const options = sptv.phoneServiceChannelBlock.components.map((component) => {
       return {
         value: component.slug,
         label: component.name
@@ -145,9 +145,9 @@ class ServiceInspectorControls extends React.Component<Props, State> {
   private renderSearchModal = () => {
     return (
       <SearchModal 
-        modalTitle={ __("Search Services", 'sptv') }
-        inputLabel={ __("Search Services", "sptv") }
-        inputHelp={ __("Enter the first word to search services", "sptv") }
+        modalTitle={ __("Search Phone Services", 'sptv') }
+        inputLabel={ __("Search Phone Services", "sptv") }
+        inputHelp={ __("Enter the first word to search phone services", "sptv") }
         open={ this.state.searchOpen }
         getDisplayName={ this.getSearchResultDisplayName }
         doSearch={ this.doSearch }
@@ -160,15 +160,16 @@ class ServiceInspectorControls extends React.Component<Props, State> {
    * Executes a search
    * 
    * @param text search string
-   * @returns array of services
+   * @returns array of phone service channels
    */
-  private doSearch = async (text: string): Promise<V10VmOpenApiService[]> => {
+  private doSearch = async (text: string): Promise<V10VmOpenApiPhoneChannel[]> => {
     const lang = "fi";
+    const type = "phone";
     const ptv = "v10";
     const apiFetch = wp.apiFetch;
-    const responseIds = await apiFetch( { path: `/sptv/search-services?q=${text}&lang=${lang}&ptv=${ptv}` });
-    const services = await this.ptv.findServices(responseIds);
-    return services;
+    const responseIds = await apiFetch( { path: `/sptv/search-service-channels?q=${text}&type=${type}&lang=${lang}&ptv=${ptv}` });
+    const serviceChannels = await this.ptv.findServiceChannels(responseIds);
+    return serviceChannels;
   }
 
   /**
@@ -177,8 +178,8 @@ class ServiceInspectorControls extends React.Component<Props, State> {
    * @param entity search result entity
    * @return display name for a search result
    */
-  private getSearchResultDisplayName = (entity: V10VmOpenApiService) => {
-    return this.getLocalizedValue(entity.serviceNames, "fi", "Name");
+  private getSearchResultDisplayName = (entity: V10VmOpenApiPhoneChannel) => {
+    return this.getLocalizedValue(entity.serviceChannelNames, "fi", "Name");
   }
 
   /**
@@ -208,9 +209,9 @@ class ServiceInspectorControls extends React.Component<Props, State> {
    * 
    * @param data selected entity
    */
-  private onSearchModalSelect = (data: V10VmOpenApiService) => {
+  private onSearchModalSelect = (data: V10VmOpenApiPhoneChannel) => {
     this.setState( { searchOpen: false } ); 
-    this.props.onServiceIdChange(data.id);
+    this.props.onChannelIdChange(data.id);
   }
 
   /**
@@ -231,4 +232,4 @@ class ServiceInspectorControls extends React.Component<Props, State> {
 
 }
 
-export default ServiceInspectorControls;
+export default PhoneServiceChannelInspectorControls;

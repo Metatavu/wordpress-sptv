@@ -18,7 +18,7 @@
      */
     class Services {
 
-      private static $ALLOWED_TYPES = ["echannel", "webpage", "printableform","phone", "servicelocation"];
+      private static $ALLOWED_TYPES = ["echannel", "webpage", "printableform", "phone", "servicelocation"];
 
       /**
        * Constructor
@@ -62,7 +62,7 @@
           return new \WP_REST_Response("Missing PTV version", 400);
         }
 
-        if (!array_search($type, self::$ALLOWED_TYPES)) {
+        if (!in_array($type, self::$ALLOWED_TYPES)) {
           return new \WP_REST_Response("Invalid type", 400);
         }
 
