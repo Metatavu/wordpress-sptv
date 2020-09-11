@@ -169,7 +169,8 @@ class WebpageServiceChannelInspectorControls extends React.Component<Props, Stat
     const apiFetch = wp.apiFetch;
     const responseIds = await apiFetch( { path: `/sptv/search-service-channels?q=${text}&type=${type}&lang=${lang}&ptv=${ptv}` });
     const serviceChannels = await this.ptv.findServiceChannels(responseIds);
-    return serviceChannels;
+    const foundChannels = serviceChannels.filter(channel => channel !== undefined);
+    return foundChannels;
   }
 
   /**
