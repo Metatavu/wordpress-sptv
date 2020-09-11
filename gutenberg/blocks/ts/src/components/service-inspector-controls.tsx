@@ -168,7 +168,8 @@ class ServiceInspectorControls extends React.Component<Props, State> {
     const apiFetch = wp.apiFetch;
     const responseIds = await apiFetch( { path: `/sptv/search-services?q=${text}&lang=${lang}&ptv=${ptv}` });
     const services = await this.ptv.findServices(responseIds);
-    return services;
+    const foundServices = services.filter(service => service !== undefined);
+    return foundServices;
   }
 
   /**
