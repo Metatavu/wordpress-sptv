@@ -13,8 +13,8 @@ const PTV_VERSION = "v10";
 export default class PTV {
 
   private channelCache: Map<string, ServiceChannel>;
-  private serviceCache: Map<string, ServiceChannel>;
-
+  private serviceCache: Map<string, Service>;
+  
   constructor() {
     this.channelCache = new Map();
     this.serviceCache = new Map();
@@ -79,7 +79,8 @@ export default class PTV {
     }
 
     const cacheMissIds = ids.filter(id => !this.serviceCache.has(id));
-    if (cacheMissIds.length > 0) {
+    const filterOutIds = ids.filter(id => !(cacheMissIds.indexOf(id) > -1));
+    if (cacheMissIds.length > 0 && filterOutIds.length == 0) {
       const result = await fetch(`${PTV_URL}/${PTV_VERSION}/Service/list?guids=${cacheMissIds.join(",")}`, {
         credentials: "omit"
       });
