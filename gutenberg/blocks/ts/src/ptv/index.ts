@@ -60,11 +60,15 @@ export default class PTV {
       });
 
       const channels = await result.json();
-      
-      channels.forEach((channel: ServiceChannel) => this.channelCache.set(channel.id, channel));
+
+      if (channels && Array.isArray(channels) && channels.length > 0) {
+        channels.forEach((channel: ServiceChannel) => this.channelCache.set(channel.id, channel));
+      }
     }
 
-    return ids.map(id => this.channelCache.get(id));
+    return ids.length > 0 ?
+      ids.map(id => this.channelCache.get(id)) :
+      [];
   }
 
   /**
