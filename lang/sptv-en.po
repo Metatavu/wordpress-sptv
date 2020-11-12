@@ -4,58 +4,178 @@ msgid ""
 msgstr ""
 "Project-Id-Version: SPTV 1.0.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/wordpress-sptv\n"
-"POT-Creation-Date: 2019-07-25 08:42:45+00:00\n"
+"POT-Creation-Date: 2020-11-12 10:31+0200\n"
+"PO-Revision-Date: 2020-11-12 10:46+0200\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: en_US\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2019-07-25 11:48+0300\n"
-"Language-Team: \n"
-"X-Generator: Poedit 2.1.1\n"
-"Last-Translator: \n"
+"X-Generator: Poedit 2.4.1\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"Language: en_US\n"
 
+#: default-templates/components/common.php:72
+msgid "Monday"
+msgstr "Monday"
+
+#: default-templates/components/common.php:74
+msgid "Tuesday"
+msgstr "Tuesday"
+
+#: default-templates/components/common.php:76
+msgid "Wednesday"
+msgstr "Wednesday"
+
+#: default-templates/components/common.php:78
+msgid "Thursday"
+msgstr "Thursday"
+
+#: default-templates/components/common.php:80
+msgid "Friday"
+msgstr "Friday"
+
+#: default-templates/components/common.php:82
+msgid "Saturday"
+msgstr "Saturday"
+
+#: default-templates/components/common.php:84
+msgid "Sunday"
+msgstr "Sunday"
+
+#: default-templates/components/common.php:123
+msgid "Open 24 hours."
+msgstr "Open 24 hours."
+
+#: default-templates/components/phone_service_channel/phone-numbers.php:20
 #: default-templates/components/service_location_service_channel/phone-numbers.php:20
 msgid "Chargeable"
-msgstr "local/mobile network fee"
+msgstr "Local/mobile network fee"
 
-#: gutenberg/blocks/blocks.php:111
+#: default-templates/components/service_location_service_channel/default-all.php:5
+msgid "Visiting information"
+msgstr "Visiting information"
+
+#: default-templates/components/service_location_service_channel/default-all.php:10
+msgid "Other contact details"
+msgstr "Other contact details"
+
+#: default-templates/components/service_location_service_channel/default-all.php:13
+#: gutenberg/blocks/blocks.php:135
+msgid "Email"
+msgstr "Email"
+
+#: default-templates/components/service_location_service_channel/default-all.php:20
+#: gutenberg/blocks/blocks.php:139
+msgid "Website"
+msgstr "Website"
+
+#: default-templates/components/service_location_service_channel/default-all.php:24
+msgid "Accessibility information"
+msgstr "Accessibility information"
+
+#: gutenberg/blocks/blocks.php:39 gutenberg/blocks/blocks.php:58
+#: gutenberg/blocks/blocks.php:77 gutenberg/blocks/blocks.php:100
+#: gutenberg/blocks/blocks.php:119
+msgid "Default template"
+msgstr "Default template"
+
+#: gutenberg/blocks/blocks.php:43 gutenberg/blocks/blocks.php:62
+#: gutenberg/blocks/blocks.php:81 gutenberg/blocks/blocks.php:104
+#: gutenberg/blocks/blocks.php:123 gutenberg/blocks/blocks.php:158
+msgid "Name"
+msgstr "Name"
+
+#: gutenberg/blocks/blocks.php:47 gutenberg/blocks/blocks.php:66
+#: gutenberg/blocks/blocks.php:85 gutenberg/blocks/blocks.php:108
+#: gutenberg/blocks/blocks.php:127 gutenberg/blocks/blocks.php:166
+msgid "Description"
+msgstr "Description"
+
+#: gutenberg/blocks/blocks.php:51
+msgid "Url"
+msgstr "Url"
+
+#: gutenberg/blocks/blocks.php:70
+msgid "Web pages"
+msgstr "Web pages"
+
+#: gutenberg/blocks/blocks.php:89
+msgid "Channel urls"
+msgstr "Channel urls"
+
+#: gutenberg/blocks/blocks.php:93
+msgid "Attachment urls"
+msgstr "Attachment urls"
+
+#: gutenberg/blocks/blocks.php:112 gutenberg/blocks/blocks.php:143
+msgid "Phone numbers"
+msgstr "Phone numbers"
+
+#: gutenberg/blocks/blocks.php:131
+msgid "Addresses"
+msgstr "Addresses"
+
+#: gutenberg/blocks/blocks.php:147
+msgid "Service Hours"
+msgstr "Service Hours"
+
+#: gutenberg/blocks/blocks.php:154
+msgid "Default (no service channels)"
+msgstr "Default (no service channels)"
+
+#: gutenberg/blocks/blocks.php:162
+msgid "Summary"
+msgstr "Summary"
+
+#: gutenberg/blocks/blocks.php:170
+msgid "User instruction"
+msgstr "User instruction"
+
+#: gutenberg/blocks/blocks.php:174
+msgid "Requirements"
+msgstr "Requirements"
+
+#: gutenberg/blocks/blocks.php:178
+msgid "Service channels"
+msgstr "Service channels"
+
+#: gutenberg/blocks/blocks.php:513
 msgid "Finnish Service Catalogue"
-msgstr ""
+msgstr "Finnish Service Catalogue"
 
 #: settings/settings-ui.php:22
 msgid "SPTV Settings"
-msgstr ""
+msgstr "SPTV Settings"
 
-#. Plugin Name of the plugin/theme
-#: settings/settings-ui.php:22 settings/settings-ui.php:53
+#: settings/settings-ui.php:22 settings/settings-ui.php:55
 msgid "SPTV"
-msgstr ""
+msgstr "SPTV"
 
 #: settings/settings-ui.php:27
 msgid "Elasticsearch Settings"
-msgstr ""
+msgstr "Elasticsearch Settings"
 
 #: settings/settings-ui.php:28
 msgid "URL"
-msgstr ""
+msgstr "URL"
 
 #: settings/settings-ui.php:29
 msgid "Username"
-msgstr ""
+msgstr "Username"
 
 #: settings/settings-ui.php:30
 msgid "Password"
-msgstr ""
+msgstr "Password"
 
-#: settings/settings-ui.php:49
+#: settings/settings-ui.php:31
+msgid "PTV Settings"
+msgstr "PTV Settings"
+
+#: settings/settings-ui.php:32
+msgid "Organization Id"
+msgstr "Organization Id"
+
+#: settings/settings-ui.php:51
 msgid "You do not have sufficient permissions to access this page."
-msgstr ""
-
-#. Description of the plugin/theme
-msgid "Wordpress plugin to searchable PTV service"
-msgstr ""
-
-#. Author of the plugin/theme
-msgid "Metatavu Oy"
-msgstr ""
+msgstr "You do not have sufficient permissions to access this page."
