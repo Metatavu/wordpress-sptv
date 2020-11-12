@@ -4,48 +4,53 @@ msgid ""
 msgstr ""
 "Project-Id-Version: SPTV 1.0.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/wordpress-sptv\n"
-"POT-Creation-Date: 2019-07-25 11:32:32+00:00\n"
-"PO-Revision-Date: 2019-07-25 14:32+0300\n"
+"POT-Creation-Date: 2020-11-12 10:31+0200\n"
+"PO-Revision-Date: 2020-11-12 10:47+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: fi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.1.1\n"
+"X-Generator: Poedit 2.4.1\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: default-templates/components/common.php:63
+#: default-templates/components/common.php:72
 msgid "Monday"
-msgstr "maanantai"
+msgstr "Maanantai"
 
-#: default-templates/components/common.php:65
+#: default-templates/components/common.php:74
 msgid "Tuesday"
-msgstr "tiistai"
+msgstr "Tiistai"
 
-#: default-templates/components/common.php:67
+#: default-templates/components/common.php:76
 msgid "Wednesday"
-msgstr "keskiviikko"
+msgstr "Keskiviikko"
 
-#: default-templates/components/common.php:69
+#: default-templates/components/common.php:78
 msgid "Thursday"
-msgstr "torstai"
+msgstr "Torstai"
 
-#: default-templates/components/common.php:71
+#: default-templates/components/common.php:80
 msgid "Friday"
-msgstr "perjantai"
+msgstr "Perjantai"
 
-#: default-templates/components/common.php:73
+#: default-templates/components/common.php:82
 msgid "Saturday"
-msgstr "lauantai"
+msgstr "Lauantai"
 
-#: default-templates/components/common.php:75
+#: default-templates/components/common.php:84
 msgid "Sunday"
-msgstr "sunnuntai"
+msgstr "Sunnuntai"
 
-#: default-templates/components/common.php:114
+#: default-templates/components/common.php:123
 msgid "Open 24 hours."
 msgstr "Avoinna ympäri vuorokauden."
+
+#: default-templates/components/phone_service_channel/phone-numbers.php:20
+#: default-templates/components/service_location_service_channel/phone-numbers.php:20
+msgid "Chargeable"
+msgstr "(pvm/mpm)"
 
 #: default-templates/components/service_location_service_channel/default-all.php:5
 msgid "Visiting information"
@@ -55,49 +60,87 @@ msgstr "Käyntitiedot"
 msgid "Other contact details"
 msgstr "Muut yhteystiedot"
 
+#: default-templates/components/service_location_service_channel/default-all.php:13
+#: gutenberg/blocks/blocks.php:135
+msgid "Email"
+msgstr "Sähköpostiosoite"
+
+#: default-templates/components/service_location_service_channel/default-all.php:20
+#: gutenberg/blocks/blocks.php:139
+msgid "Website"
+msgstr "Verkkosivu"
+
 #: default-templates/components/service_location_service_channel/default-all.php:24
 msgid "Accessibility information"
 msgstr "Esteettömyystiedot"
 
-#: default-templates/components/service_location_service_channel/default-all.php:13
-#: gutenberg/blocks/blocks.php:55
-msgid "Email"
-msgstr "Sähköposti"
-
-#: default-templates/components/service_location_service_channel/default-all.php:20
-#: gutenberg/blocks/blocks.php:59
-msgid "Website"
-msgstr "Verkkosivu"
-
-#: default-templates/components/service_location_service_channel/phone-numbers.php:20
-msgid "Chargeable"
-msgstr "(pvm/mpm) "
-
-#: gutenberg/blocks/blocks.php:39
+#: gutenberg/blocks/blocks.php:39 gutenberg/blocks/blocks.php:58
+#: gutenberg/blocks/blocks.php:77 gutenberg/blocks/blocks.php:100
+#: gutenberg/blocks/blocks.php:119
 msgid "Default template"
 msgstr "Oletusasettelu"
 
-#: gutenberg/blocks/blocks.php:43
+#: gutenberg/blocks/blocks.php:43 gutenberg/blocks/blocks.php:62
+#: gutenberg/blocks/blocks.php:81 gutenberg/blocks/blocks.php:104
+#: gutenberg/blocks/blocks.php:123 gutenberg/blocks/blocks.php:158
 msgid "Name"
 msgstr "Nimi"
 
-#: gutenberg/blocks/blocks.php:47
+#: gutenberg/blocks/blocks.php:47 gutenberg/blocks/blocks.php:66
+#: gutenberg/blocks/blocks.php:85 gutenberg/blocks/blocks.php:108
+#: gutenberg/blocks/blocks.php:127 gutenberg/blocks/blocks.php:166
 msgid "Description"
 msgstr "Kuvaus"
 
 #: gutenberg/blocks/blocks.php:51
-msgid "Addresses"
-msgstr "Osoitteet"
+msgid "Url"
+msgstr "Url"
 
-#: gutenberg/blocks/blocks.php:63
+#: gutenberg/blocks/blocks.php:70
+msgid "Web pages"
+msgstr "Verkkosivut"
+
+#: gutenberg/blocks/blocks.php:89
+msgid "Channel urls"
+msgstr "Kanavan url"
+
+#: gutenberg/blocks/blocks.php:93
+msgid "Attachment urls"
+msgstr "Liitteen url"
+
+#: gutenberg/blocks/blocks.php:112 gutenberg/blocks/blocks.php:143
 msgid "Phone numbers"
 msgstr "Puhelinnumerot"
 
-#: gutenberg/blocks/blocks.php:67
+#: gutenberg/blocks/blocks.php:131
+msgid "Addresses"
+msgstr "Sijainti"
+
+#: gutenberg/blocks/blocks.php:147
 msgid "Service Hours"
 msgstr "Palveluajat"
 
-#: gutenberg/blocks/blocks.php:137
+#: gutenberg/blocks/blocks.php:154
+msgid "Default (no service channels)"
+msgstr "Oletus (ei palvelukanavia)"
+
+#: gutenberg/blocks/blocks.php:162
+msgid "Summary"
+msgstr "Tiivistelmä"
+
+#: gutenberg/blocks/blocks.php:170
+msgid "User instruction"
+msgstr "Toimintaohjeet"
+
+#: gutenberg/blocks/blocks.php:174
+msgid "Requirements"
+msgstr "Ehdot ja kriteerit"
+
+#: gutenberg/blocks/blocks.php:178
+msgid "Service channels"
+msgstr "Liitetyt asiointikanavat"
+
+#: gutenberg/blocks/blocks.php:513
 msgid "Finnish Service Catalogue"
 msgstr "Palvelutietovaranto"
 
@@ -105,7 +148,6 @@ msgstr "Palvelutietovaranto"
 msgid "SPTV Settings"
 msgstr "SPTV Asetukset"
 
-#. Plugin Name of the plugin/theme
 #: settings/settings-ui.php:22 settings/settings-ui.php:55
 msgid "SPTV"
 msgstr "SPTV"
@@ -136,15 +178,13 @@ msgstr "Organisaation ID"
 
 #: settings/settings-ui.php:51
 msgid "You do not have sufficient permissions to access this page."
-msgstr "Sinulla ei ole riittäviä oikeuksia tähän sivuun"
+msgstr "Sinulla ei ole riittäviä oikeuksia tähän sivuun."
 
-#. Description of the plugin/theme
-msgid "Wordpress plugin to searchable PTV service"
-msgstr "Wordpress lisäosa searchable PTV palveluun "
+#~ msgid "Wordpress plugin to searchable PTV service"
+#~ msgstr "Wordpress lisäosa searchable PTV palveluun "
 
-#. Author of the plugin/theme
-msgid "Metatavu Oy"
-msgstr "Metatavu Oy"
+#~ msgid "Metatavu Oy"
+#~ msgstr "Metatavu Oy"
 
 #~ msgid "Emails"
 #~ msgstr "Sähkö"
