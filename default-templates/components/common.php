@@ -98,9 +98,26 @@
       return "";
     }
 
-    return implode("", array_map(function ($line) {
-      return "<p>$line</p>";
-    }, explode("\n", $text)));
+    $lines = explode("\n", $text);
+    $array = array();
+
+    for ($i = 0; $i < count($lines); $i++) {
+      $line = $lines[$i];
+      switch (true) {
+        case !$line:
+          break;
+        case preg_match("/^•/", $line) > 0:
+          $content = mb_substr($line, 1);
+          $before = ($i - 2 <= 0) || (preg_match("/^•/", $lines[$i - 2]) == 0) ? "<ul>" : "";
+          $after = ($i + 2 >= count($lines)) || (preg_match("/^•/", $lines[$i + 2]) == 0) ? "</ul>" : "";
+          array_push($array ,"$before<li>$content</li>$after");
+          break;
+        default:
+          array_push($array , "<p>$line</p>");
+      }
+    }
+
+    return implode("", $array);
   }
 
   /**
