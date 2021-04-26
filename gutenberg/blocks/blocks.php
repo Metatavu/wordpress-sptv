@@ -29,7 +29,7 @@ if (!class_exists( 'Metatavu\SPTV\Wordpress\Gutenberg\Blocks\Blocks' ) ) {
      * Action executed on init
      */
     public function onInit() {
-      wp_register_script('sptv-blocks', plugins_url( 'js/sptv-blocks.js', __FILE__ ), ['wp-blocks', 'wp-element', 'wp-i18n']);      
+      wp_register_script('sptv-blocks', plugins_url( 'js/sptv-blocks.js', __FILE__ ), ['wp-blocks', 'wp-element', 'wp-i18n']);   
       wp_set_script_translations("sptv-blocks", "sptv", dirname(__FILE__) . '/lang/');
       add_filter("block_categories", [ $this, "blockCategoriesFilter"], 10, 2);
 
@@ -177,6 +177,26 @@ if (!class_exists( 'Metatavu\SPTV\Wordpress\Gutenberg\Blocks\Blocks' ) ) {
           "slug" => "service-channels",
           "name" => __("Service channels", "sptv")
         ],
+        [
+          "slug" => "electronic-service-list",
+          "name" => __("Electronic service list", "sptv")
+        ],
+        [
+          "slug" => "service-location-list",
+          "name" => __("Service location list", "sptv")
+        ],
+        [
+          "slug" => "phone-service-list",
+          "name" => __("Phone service list", "sptv")
+        ],
+        [
+          "slug" => "webpage-service-list",
+          "name" => __("Webpage service list", "sptv")
+        ],
+        [
+          "slug" => "printable-form-list",
+          "name" => __("Printable form list", "sptv")
+        ]
       ]);
 
       wp_localize_script('sptv-blocks', 'sptv', [ 
@@ -479,17 +499,37 @@ if (!class_exists( 'Metatavu\SPTV\Wordpress\Gutenberg\Blocks\Blocks' ) ) {
      * }
      */
     public function renderServiceBlock($attributes) {
-      $result = ''; 
+      $result = '';
 
       $id = $attributes["id"];
       $component = $attributes["component"];
       $language = $attributes["language"];
-
       $service = $this->ptv->findService($id);
+      $serviceChannels = [];
+    
+      switch ($component) {
+        case "electronic-service-list":
+          $serviceChannels = $this->getAttachedServiceChannels($service, "EChannel");
+        break;
+        case "service-location-list":
+          $serviceChannels = $this->getAttachedServiceChannels($service, "ServiceLocation");
+        break;
+        case "phone-service-list":
+          $serviceChannels = $this->getAttachedServiceChannels($service, "Phone");
+        break;
+        case "webpage-service-list":
+          $serviceChannels = $this->getAttachedServiceChannels($service, "WebPage");
+        break;
+        case "printable-form-list":
+          $serviceChannels = $this->getAttachedServiceChannels($service, "PrintableForm");
+        break;
+        default:
+      }
 
       $templateData = [
         "service" => $service,
-        "language" => $language
+        "language" => $language,
+        "serviceChannels" => $serviceChannels
       ];
 
       ob_start();
@@ -522,6 +562,29 @@ if (!class_exists( 'Metatavu\SPTV\Wordpress\Gutenberg\Blocks\Blocks' ) ) {
     private function getCurrentLanguage() {
       $locale = get_locale();
       return substr($locale, 0, 2);
+    }
+
+    /**
+     * Gets attached service channels
+     *
+     * @param array $service service channel
+     * @param string $type service channel type
+     */
+    private function getAttachedServiceChannels($service, $type) {
+      $serviceChannels = array_map(function ($serviceChannel) {
+        $channelId = $serviceChannel["serviceChannel"]["id"];
+        $channel = $this->ptv->findServiceChannel($channelId);
+        return $channel;
+      }, $service["serviceChannels"]);
+
+      $serviceChannels = array_filter(
+        $serviceChannels,
+        function ($channel) use ($type) {
+          return $channel["serviceChannelType"] == $type;
+        }
+      );
+
+      return $serviceChannels;
     }
 
   }
