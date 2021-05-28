@@ -4,7 +4,7 @@
   if (!defined('ABSPATH')) { 
     exit;
   }
-  
+
   define("SPTV_SETTINGS_OPTION", 'sptv');
   define("SPTV_SETTINGS_GROUP", 'sptv');
   define("SPTV_SETTINGS_PAGE", 'sptv');
@@ -13,6 +13,7 @@
 
     class SettingsUI {
 
+      
       public function __construct() {
         add_action('admin_init', array($this, 'adminInit'));
         add_action('admin_menu', array($this, 'adminMenu'));
@@ -23,13 +24,33 @@
       }
 
       public function adminInit() {
+
+        $options = get_option(SPTV_SETTINGS_OPTION);
+
+        $numberOfIds = $options["numberOfIds"] - 1;
+  
+        $mSearch='ptv';
+        $allowed=array_filter(
+            array_keys($options),
+            function($key) use ($mSearch){
+                return stristr($key,$mSearch);
+            });
+        $mResult=array_intersect_key($options,array_flip($allowed));
+
+        if(array_key_exists('button1', $_POST)) {
+  
+        }
+        
         register_setting(SPTV_SETTINGS_GROUP, SPTV_SETTINGS_PAGE);
         add_settings_section('elastic', __( "Elasticsearch Settings", 'sptv' ), null, SPTV_SETTINGS_PAGE);
         $this->addOption('elastic', 'url', 'elastic-url', __( "URL", 'sptv'));
         $this->addOption('elastic', 'text', 'elastic-username', __( "Username", 'sptv' ));
         $this->addOption('elastic', 'text', 'elastic-password', __( "Password", 'sptv' ));
         add_settings_section('ptv', __( "PTV Settings", 'sptv' ), null, SPTV_SETTINGS_PAGE);
-        $this->addOption('ptv', 'text', 'ptv-organization-id', __( "Organization Id", 'sptv' ));
+        for ($x = 0; $x <= $numberOfIds; $x++) {
+          $this->addOption('ptv', 'text', "ptv-organization-id:$x", __( "Organization Id", 'sptv' ));
+        }
+        $this->addOption('ptv', 'text', 'numberOfIds', __( "Number of ids", 'sptv' ));
       }
 
       private function addOption($group, $type, $name, $title) {
@@ -61,7 +82,7 @@
         echo "</div>";
       }
     }
-
+    
   }
   
   if (is_admin()) {

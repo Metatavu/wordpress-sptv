@@ -49,7 +49,9 @@
         $query = $data->get_query_params()["q"];
         $type = $data->get_query_params()["type"];
         $lang = $data->get_query_params()["lang"];
-        
+
+        $options = get_option(SPTV_SETTINGS_OPTION);
+
         if (empty($query)) {
           return new \WP_REST_Response("Missing query", 400);
         }
@@ -66,15 +68,29 @@
           return new \WP_REST_Response("Invalid type", 400);
         }
 
-        $organizationId = Settings::getValue("ptv-organization-id");
         $nameQuery = [ 'match' => [ "serviceChannelNames_$lang" => [ "query" => $query ] ] ];
-        $organizationQuery = [ 'term' => [ "organizationId" => $organizationId ] ];
+
+        /**
+         * Parses options by organizationIds
+         */
+        $searchValue = 'ptv';
+        $allowed=array_filter(
+            array_keys($options),
+            function($key) use ($searchValue){
+                return stristr($key,$searchValue);
+            });
+
+        $parsedArray=array_intersect_key($options,array_flip($allowed));
+
+        $organizationIds = array_values($parsedArray);
+
+        $organizationQuery = [ 'terms' => [ "organizationId" =>  $organizationIds ] ];
 
         $query = [
           'bool' => [
             'must' => [ $nameQuery, $organizationQuery ]
-          ]
-        ];
+            ]
+          ];        
 
         $searchResult = $this->getClient()->search([
           'index' => "$ptvVersion-$type-service-channel",
@@ -112,13 +128,29 @@
 
         $organizationId = Settings::getValue("ptv-organization-id");
         $nameQuery = [ 'match' => [ "serviceNames_$lang" => [ "query" => $query ] ] ];
-        $organizationQuery = [ 'term' => [ "organizationIds" => $organizationId ] ];
-        
+
+        /**
+         * Parses options by organizationIds
+         */
+        $searchValue = 'ptv';
+        $allowed=array_filter(
+            array_keys($options),
+            function($key) use ($searchValue){
+                return stristr($key,$searchValue);
+            });
+
+        $parsedArray=array_intersect_key($options,array_flip($allowed));
+
+        $organizationIds = array_values($parsedArray);
+
+        $organizationQuery = [ 'terms' => [ "organizationId" =>  $organizationIds ] ];
+
+
         $query = [
           'bool' => [
             'must' => [ $nameQuery, $organizationQuery ]
-          ]
-        ];
+            ]
+          ];     
 
         $searchResult = $this->getClient()->search([
           'index' => "$ptvVersion-service",
