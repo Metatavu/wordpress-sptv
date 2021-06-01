@@ -71,18 +71,17 @@
         $nameQuery = [ 'match' => [ "serviceChannelNames_$lang" => [ "query" => $query ] ] ];
 
         /**
-         * Parses options by organizationIds
+         * parse organization ids from options
          */
         $searchValue = 'ptv';
         $allowed=array_filter(
-            array_keys($options),
-            function($key) use ($searchValue){
-                return stristr($key,$searchValue);
-            });
+          array_keys($options), function($key) use ($searchValue ) {
+            return stristr($key, $searchValue ) ;
+          });
 
-        $parsedArray=array_intersect_key($options,array_flip($allowed));
+        $organizationIdArray = array_intersect_key($options,array_flip($allowed));
 
-        $organizationIds = array_values($parsedArray);
+        $organizationIds = array_values($organizationIdArray);
 
         $organizationQuery = [ 'terms' => [ "organizationId" =>  $organizationIds ] ];
 
@@ -130,18 +129,17 @@
         $nameQuery = [ 'match' => [ "serviceNames_$lang" => [ "query" => $query ] ] ];
 
         /**
-         * Parses options by organizationIds
+         * parse organization ids from options
          */
         $searchValue = 'ptv';
         $allowed=array_filter(
-            array_keys($options),
-            function($key) use ($searchValue){
-                return stristr($key,$searchValue);
-            });
+          array_keys($options), function($key) use ($searchValue ) {
+            return stristr($key, $searchValue ) ;
+          });
 
-        $parsedArray=array_intersect_key($options,array_flip($allowed));
+        $organizationIdArray = array_intersect_key($options,array_flip($allowed));
 
-        $organizationIds = array_values($parsedArray);
+        $organizationIds = array_values($organizationIdArray);
 
         $organizationQuery = [ 'terms' => [ "organizationId" =>  $organizationIds ] ];
 
