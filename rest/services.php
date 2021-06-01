@@ -49,7 +49,6 @@
         $query = $data->get_query_params()["q"];
         $type = $data->get_query_params()["type"];
         $lang = $data->get_query_params()["lang"];
-
         $options = get_option(SPTV_SETTINGS_OPTION);
 
         if (empty($query)) {
@@ -80,9 +79,7 @@
           });
 
         $organizationIdArray = array_intersect_key($options,array_flip($allowed));
-
         $organizationIds = array_values($organizationIdArray);
-
         $organizationQuery = [ 'terms' => [ "organizationId" =>  $organizationIds ] ];
 
         $query = [
@@ -138,9 +135,7 @@
           });
 
         $organizationIdArray = array_intersect_key($options,array_flip($allowed));
-
         $organizationIds = array_values($organizationIdArray);
-
         $organizationQuery = [ 'terms' => [ "organizationId" =>  $organizationIds ] ];
 
 

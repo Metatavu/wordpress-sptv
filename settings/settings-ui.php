@@ -4,7 +4,6 @@
   if (!defined('ABSPATH')) { 
     exit;
   }
-
   define("SPTV_SETTINGS_OPTION", 'sptv');
   define("SPTV_SETTINGS_GROUP", 'sptv');
   define("SPTV_SETTINGS_PAGE", 'sptv');
@@ -12,6 +11,7 @@
   if (!class_exists( 'Metatavu\SPTV\Wordpress\SettingsUI' ) ) {
 
     class SettingsUI {
+      
       public function __construct() {
         add_action('admin_init', array($this, 'adminInit'));
         add_action('admin_menu', array($this, 'adminMenu'));
