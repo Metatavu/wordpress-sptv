@@ -36,9 +36,9 @@
 
           $organizationIds = array_intersect_key($options,array_flip($allowed));
         } else {
-          $id = uniqid();
-          $organizationIds["ptv-organization-id:$id"] = "";
-        }
+            $id = uniqid();
+            $organizationIds["ptv-organization-id:$id"] = "";
+          }
 
 
         if(array_key_exists('button2', $_POST)) {
