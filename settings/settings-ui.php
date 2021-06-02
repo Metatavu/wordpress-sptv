@@ -24,16 +24,22 @@
       public function adminInit() {
         $options = get_option(SPTV_SETTINGS_OPTION);
   
-        /**
-         * parse organization ids from options
-         */
-        $searchValue = 'ptv';
-        $allowed=array_filter(
-          array_keys($options), function($key) use ($searchValue ) {
-            return stristr($key, $searchValue ) ;
-          });
+        if($options) {
+          /**
+           * parse organization ids from options
+           */
+          $searchValue = 'ptv';
+          $allowed=array_filter(
+            array_keys($options), function($key) use ($searchValue ) {
+              return stristr($key, $searchValue ) ;
+            });
 
-        $organizationIds = array_intersect_key($options,array_flip($allowed));
+          $organizationIds = array_intersect_key($options,array_flip($allowed));
+        } else {
+          $id = uniqid();
+          $organizationIds["ptv-organization-id:$id"] = "";
+        }
+
 
         if(array_key_exists('button2', $_POST)) {
           $id=$_POST["button2"];
