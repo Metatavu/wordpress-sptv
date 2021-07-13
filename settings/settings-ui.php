@@ -37,7 +37,6 @@
 
         if(array_key_exists('button2', $_POST)) {
           $id=$_POST["button2"];
-          error_log(print_r($id, true));
           unset($organizationIds[$id]);
         }
 

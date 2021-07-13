@@ -29,6 +29,23 @@ export interface ServiceBlockOptions {
 }
 
 /**
+ * Interface describing SPTV OrganizationBlock component option
+ */
+export interface OrganizationBlockOptionComponent {
+  slug: string,
+  name: string
+}
+
+/**
+ * Interface describing SPTV OrganizationBlock options
+ */
+export interface OrganizationBlockOptions {
+  components: OrganizationBlockOptionComponent[],
+  organizationIds: string[]
+}
+
+
+/**
  * Interface describing SPTV options
  */
 export interface SptvOptions {
@@ -37,5 +54,6 @@ export interface SptvOptions {
   webpageServiceChannelBlock: ServiceChannelBlockOptions,
   printableFormServiceChannelBlock: ServiceChannelBlockOptions,
   phoneServiceChannelBlock: ServiceChannelBlockOptions,
-  serviceBlock: ServiceBlockOptions
+  serviceBlock: ServiceBlockOptions,
+  organizationBlock: OrganizationBlockOptions
 }

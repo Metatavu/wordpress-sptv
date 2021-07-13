@@ -109,6 +109,7 @@
         $ptvVersion = $data->get_query_params()["ptv"];
         $query = $data->get_query_params()["q"];
         $lang = $data->get_query_params()["lang"];
+        $options = get_option(SPTV_SETTINGS_OPTION);
         
         if (empty($query)) {
           return new \WP_REST_Response("Missing query", 400);
@@ -122,7 +123,6 @@
           return new \WP_REST_Response("Missing PTV version", 400);
         }
 
-        $organizationId = Settings::getValue("ptv-organization-id");
         $nameQuery = [ 'match' => [ "serviceNames_$lang" => [ "query" => $query ] ] ];
 
         /**
@@ -136,7 +136,7 @@
 
         $organizationIdArray = array_intersect_key($options,array_flip($allowed));
         $organizationIds = array_values($organizationIdArray);
-        $organizationQuery = [ 'terms' => [ "organizationId" =>  $organizationIds ] ];
+        $organizationQuery = [ 'terms' => [ "organizationIds" =>  $organizationIds ] ];
 
 
         $query = [
@@ -152,6 +152,8 @@
             'query' => $query
           ]
         ]);
+
+        error_log(print_r($query, true));
 
         return $this->getResultIds($searchResult);
       }

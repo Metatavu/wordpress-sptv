@@ -5,6 +5,8 @@ use GuzzleHttp\Client;
 
 require_once(__DIR__ . '/../../templates/template-loader.php');
 require_once(__DIR__ . '/../../ptv/ptv.php');
+require_once(__DIR__ . '/../../settings/settings.php');
+
 
 defined ( 'ABSPATH' ) || die ( 'No script kiddies please!' );
 
@@ -199,6 +201,21 @@ if (!class_exists( 'Metatavu\SPTV\Wordpress\Gutenberg\Blocks\Blocks' ) ) {
         ]
       ]);
 
+      $organizationComponents = apply_filters("sptv_organization_components", [
+        [
+          "slug" => "default-all",
+          "name" => __("Default", "sptv")
+        ],
+        [
+          "slug" => "name",
+          "name" => __("Name", "sptv")
+        ],
+        [
+          "slug" => "description",
+          "name" => __("Description", "sptv")
+        ]
+      ]);
+
       wp_localize_script('sptv-blocks', 'sptv', [ 
         "serviceLocationServiceChannelBlock" => [
           "components" => $serviceChannelComponents
@@ -217,6 +234,10 @@ if (!class_exists( 'Metatavu\SPTV\Wordpress\Gutenberg\Blocks\Blocks' ) ) {
         ],
         "serviceBlock" => [
           "components" => $serviceComponents
+        ],
+        "organizationBlock" => [
+          "components" => $organizationComponents,
+          //"organizationIds" => Settings::getOrganizationIds()
         ]
       ]);
 
@@ -314,6 +335,22 @@ if (!class_exists( 'Metatavu\SPTV\Wordpress\Gutenberg\Blocks\Blocks' ) ) {
         ],
         'editor_script' => 'sptv-blocks',
         'render_callback' => [ $this, "renderServiceBlock" ]
+      ]);
+
+      register_block_type('sptv/organization-block', [
+        'attributes' => [ 
+          "id" => [
+            'type' => 'string'
+          ],
+          "component" => [
+            'type' => 'string'
+          ],
+          "language" => [
+            'type' => 'string'
+          ]
+        ],
+        'editor_script' => 'sptv-blocks',
+        'render_callback' => [ $this, "renderOrganizationBlock" ]
       ]);
     }
     
@@ -535,6 +572,39 @@ if (!class_exists( 'Metatavu\SPTV\Wordpress\Gutenberg\Blocks\Blocks' ) ) {
       ob_start();
       $templateLoader = new \Metatavu\SPTV\TemplateLoader();
       $templateLoader->set_template_data($templateData)->get_template_part("components/service/$component");
+      $result = ob_get_contents();
+      ob_end_clean();
+
+      return $result; 
+    }
+
+    /**
+     * Renders a organization component block
+     *
+     * Return a HTML representation of a organization component
+     *
+     * @property array $attributes {
+     *   block attributes
+     * 
+     *   @type string $id organization block
+     * }
+     */
+    public function renderOrganizationBlock($attributes) {
+      $result = '';
+
+      $id = $attributes["id"];
+      $component = $attributes["component"];
+      $language = $attributes["language"];
+      $organization = $this->ptv->findOrganization($id);
+    
+      $templateData = [
+        "organization" => $organization,
+        "language" => $language,
+      ];
+
+      ob_start();
+      $templateLoader = new \Metatavu\SPTV\TemplateLoader();
+      $templateLoader->set_template_data($templateData)->get_template_part("components/organization/$component");
       $result = ob_get_contents();
       ob_end_clean();
 
