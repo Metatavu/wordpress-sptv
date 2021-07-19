@@ -56,6 +56,7 @@
         $this->addOption('elastic', 'url', 'elastic-url', __( "URL", 'sptv'));
         $this->addOption('elastic', 'text', 'elastic-username', __( "Username", 'sptv' ));
         $this->addOption('elastic', 'text', 'elastic-password', __( "Password", 'sptv' ));
+        $this->addDropDownOption('elastic', 'text', 'version', __( "PTV-versio", 'sptv' ));
         add_settings_section('ptv', __( "PTV Settings", 'sptv' ), null, SPTV_SETTINGS_PAGE);
         foreach($organizationIds as $key => $value) {
           $this->addOrganizationOption('ptv', 'text', $key, __( "Organization Id", 'sptv' ), $key);
@@ -69,6 +70,23 @@
         ]);
       }
 
+      private function addDropDownOption($group, $type, $name, $title) {
+        add_settings_field($name, $title, [$this, 'createDropDownUI'], SPTV_SETTINGS_PAGE, $group, [
+          'name' => $name, 
+          'type' => $type
+        ]);
+      }
+      public function createDropDownUI($opts) {
+        $name = $opts['name'];
+        $type = $opts['type'];
+        $value = Settings::getValue($name);
+        echo "<select id='$name' name='" . SPTV_SETTINGS_PAGE . "[$name]' type='$type' value='$value' >";
+        echo '<option value="v11" '.(($value=='v11')?'selected="selected"':"").'>v11</option>';
+        echo '<option value="v10" '.(($value=='v10')?'selected="selected"':"").'>v10</option>';
+        echo "</select >";
+      }
+
+      
       public function createFieldUI($opts) {
         $name = $opts['name'];
         $type = $opts['type'];

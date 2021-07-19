@@ -45,7 +45,7 @@
        * @return WP_REST_Response | string[] response  
        */
       public function searchServiceChannels($data) {
-        $ptvVersion = $data->get_query_params()["ptv"];
+        $ptvVersion = Settings::getValue("version");
         $query = $data->get_query_params()["q"];
         $type = $data->get_query_params()["type"];
         $lang = $data->get_query_params()["lang"];
@@ -106,7 +106,7 @@
        * @return WP_REST_Response | string[] response  
        */
       public function searchServices($data) {
-        $ptvVersion = $data->get_query_params()["ptv"];
+        $ptvVersion = Settings::getValue("version");
         $query = $data->get_query_params()["q"];
         $lang = $data->get_query_params()["lang"];
         $options = get_option(SPTV_SETTINGS_OPTION);
