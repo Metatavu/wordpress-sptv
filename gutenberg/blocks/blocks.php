@@ -52,6 +52,10 @@ if (!class_exists( 'Metatavu\SPTV\Wordpress\Gutenberg\Blocks\Blocks' ) ) {
         [
           "slug" => "webpages",
           "name" => __("Url", "sptv")
+        ],
+        [
+          "slug" => "description-and-url",
+          "name" => __("Description and url", "sptv")
         ]
       ]);
 
@@ -94,6 +98,10 @@ if (!class_exists( 'Metatavu\SPTV\Wordpress\Gutenberg\Blocks\Blocks' ) ) {
         [
           "slug" => "attachmenturls",
           "name" => __("Attachment urls", "sptv")
+        ],    
+        [
+          "slug" => "description-and-url",
+          "name" => __("Description and url", "sptv")
         ]
       ]);
 

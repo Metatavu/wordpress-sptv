@@ -24,16 +24,22 @@
       public function adminInit() {
         $options = get_option(SPTV_SETTINGS_OPTION);
   
-        /**
-         * parse organization ids from options
-         */
-        $searchValue = 'ptv';
-        $allowed=array_filter(
-          array_keys($options), function($key) use ($searchValue ) {
-            return stristr($key, $searchValue ) ;
-          });
+        if($options) {
+          /**
+           * parse organization ids from options
+           */
+          $searchValue = 'ptv';
+          $allowed=array_filter(
+            array_keys($options), function($key) use ($searchValue ) {
+              return stristr($key, $searchValue ) ;
+            });
 
-        $organizationIds = array_intersect_key($options,array_flip($allowed));
+          $organizationIds = array_intersect_key($options,array_flip($allowed));
+        } else {
+            $id = uniqid();
+            $organizationIds["ptv-organization-id:$id"] = "";
+          }
+
 
         if(array_key_exists('button2', $_POST)) {
           $id=$_POST["button2"];
@@ -50,6 +56,7 @@
         $this->addOption('elastic', 'url', 'elastic-url', __( "URL", 'sptv'));
         $this->addOption('elastic', 'text', 'elastic-username', __( "Username", 'sptv' ));
         $this->addOption('elastic', 'text', 'elastic-password', __( "Password", 'sptv' ));
+        $this->addDropDownOption('elastic', 'text', 'version', __( "PTV-versio", 'sptv' ));
         add_settings_section('ptv', __( "PTV Settings", 'sptv' ), null, SPTV_SETTINGS_PAGE);
         foreach($organizationIds as $key => $value) {
           $this->addOrganizationOption('ptv', 'text', $key, __( "Organization Id", 'sptv' ), $key);
@@ -63,6 +70,23 @@
         ]);
       }
 
+      private function addDropDownOption($group, $type, $name, $title) {
+        add_settings_field($name, $title, [$this, 'createDropDownUI'], SPTV_SETTINGS_PAGE, $group, [
+          'name' => $name, 
+          'type' => $type
+        ]);
+      }
+      public function createDropDownUI($opts) {
+        $name = $opts['name'];
+        $type = $opts['type'];
+        $value = Settings::getValue($name);
+        echo "<select id='$name' name='" . SPTV_SETTINGS_PAGE . "[$name]' type='$type' value='$value' >";
+        echo '<option value="v11" '.(($value=='v11')?'selected="selected"':"").'>v11</option>';
+        echo '<option value="v10" '.(($value=='v10')?'selected="selected"':"").'>v10</option>';
+        echo "</select >";
+      }
+
+      
       public function createFieldUI($opts) {
         $name = $opts['name'];
         $type = $opts['type'];
