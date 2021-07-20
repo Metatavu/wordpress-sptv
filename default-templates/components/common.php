@@ -108,8 +108,8 @@
           break;
         case preg_match("/^•/", $line) > 0:
           $content = mb_substr($line, 1);
-          $before = ($i - 2 <= 0) || (preg_match("/^•/", $lines[$i - 2]) == 0) ? "<ul>" : "";
-          $after = ($i + 2 >= count($lines)) || (preg_match("/^•/", $lines[$i + 2]) == 0) ? "</ul>" : "";
+          $before = ($i - 1 <= 0) || (preg_match("/^•/", $lines[$i - 1]) == 0) ? "<ul>" : "";
+          $after = ($i + 1 >= count($lines)) || (preg_match("/^•/", $lines[$i + 1]) == 0) ? "</ul>" : "";
           array_push($array ,"$before<li>$content</li>$after");
           break;
         default:
