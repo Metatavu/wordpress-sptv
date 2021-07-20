@@ -25,7 +25,7 @@ interface State {
 }
 
 /**
- * Service block
+ * Organization block
  */
 class OrganizationComponent extends React.Component<Props, State> {
 
