@@ -1,6 +1,7 @@
 <?php
 namespace Metatavu\SPTV\Wordpress\Gutenberg\Blocks;
 
+use Metatavu\SPTV\Wordpress\Settings\Settings;
 use GuzzleHttp\Client;
 
 require_once(__DIR__ . '/../../templates/template-loader.php');
@@ -237,7 +238,7 @@ if (!class_exists( 'Metatavu\SPTV\Wordpress\Gutenberg\Blocks\Blocks' ) ) {
         ],
         "organizationBlock" => [
           "components" => $organizationComponents,
-          //"organizationIds" => Settings::getOrganizationIds()
+          "organizationIds" => Settings::getOrganizationIds()
         ]
       ]);
 

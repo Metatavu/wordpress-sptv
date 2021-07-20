@@ -153,8 +153,6 @@
           ]
         ]);
 
-        error_log(print_r($query, true));
-
         return $this->getResultIds($searchResult);
       }
 

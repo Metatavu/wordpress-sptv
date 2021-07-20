@@ -4,6 +4,7 @@ import { wp } from "wp";
 declare var wp: wp;
 type ServiceChannel = V10VmOpenApiElectronicChannel | V10VmOpenApiPhoneChannel | V10VmOpenApiPrintableFormChannel | V10VmOpenApiServiceLocationChannel | V10VmOpenApiWebPageChannel;
 type Service = V10VmOpenApiService;
+type Organization = V10VmOpenApiService;
 const PTV_URL = "https://api.palvelutietovaranto.suomi.fi/api";
 const PTV_VERSION = "v10";
 
@@ -14,10 +15,12 @@ export default class PTV {
 
   private channelCache: Map<string, ServiceChannel>;
   private serviceCache: Map<string, Service>;
+  private organizationCache: Map<string, Organization>
   
   constructor() {
     this.channelCache = new Map();
     this.serviceCache = new Map();
+    this.organizationCache = new Map();
   }
 
   /**
@@ -97,4 +100,29 @@ export default class PTV {
     return ids.map(id => this.serviceCache.get(id));
   }
 
+  /**
+   * Finds organizations by ids
+   * 
+   * @param ids organization ids
+   * @returns found organization or null if not found
+   */
+  public findOrganizations = async (ids: string[]): Promise<Service[]> => {
+    if (!ids || ids.length == 0) {
+      return [];
+    }
+
+    const cacheMissIds = ids.filter(id => !this.organizationCache.has(id));
+    const filterOutIds = ids.filter(id => !(cacheMissIds.indexOf(id) > -1));
+    if (cacheMissIds.length > 0 && filterOutIds.length == 0) {
+      const result = await fetch(`${PTV_URL}/${PTV_VERSION}/Organization/list?guids=${cacheMissIds.join(",")}`, {
+        credentials: "omit"
+      });
+
+      const organizations = await result.json();
+      
+      organizations.forEach((organization: Organization) => this.organizationCache.set(organization.id, organization));
+    }
+  
+      return ids.map(id => this.organizationCache.get(id));
+    }
 }
