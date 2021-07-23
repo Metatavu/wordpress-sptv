@@ -16,6 +16,7 @@
 
       private $serviceChannelCache = [];
       private $serviceCache = [];
+      private $organizationCache = [];
 
       /**
        * Finds a service channel by id
@@ -43,6 +44,20 @@
         }
 
         return $this->serviceCache[$id];
+      }
+
+      /**
+       * Finds a organization by id
+       * 
+       * @param id id
+       * @returns found organization or null if not found
+       */
+      public function findOrganization($id) {
+        if (!$this->organizationCache[$id]) {
+          $this->organizationCache[$id] = json_decode($this->doGetRequest("https://api.palvelutietovaranto.suomi.fi/api/v10/Organization/$id"), true);
+        }
+
+        return $this->organizationCache[$id];
       }
 
       /**

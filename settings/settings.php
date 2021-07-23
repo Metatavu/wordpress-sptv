@@ -28,6 +28,24 @@
         return null;
       }
       
+
+      /**
+       * Returns organization IDs
+       */
+      public static function getOrganizationIds() {
+        $options = get_option(SPTV_SETTINGS_OPTION);
+        if ($options) {
+          $searchValue = 'ptv';
+          $allowed=array_filter(
+            array_keys($options), function($key) use ($searchValue ) {
+              return stristr($key, $searchValue ) ;
+            });
+  
+          return array_intersect_key($options,array_flip($allowed));
+        }
+        return [];
+      }
+      
       /**
        * Sets a value for settings
        * 

@@ -4,3 +4,4 @@ import './webpage-service-channel-block';
 import './printable-form-service-channel-block';
 import './phone-service-channel-block';
 import './service-block';
+import './organization-block';

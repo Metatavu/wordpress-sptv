@@ -123,7 +123,6 @@
           return new \WP_REST_Response("Missing PTV version", 400);
         }
 
-        $organizationId = Settings::getValue("ptv-organization-id");
         $nameQuery = [ 'match' => [ "serviceNames_$lang" => [ "query" => $query ] ] ];
 
         /**
