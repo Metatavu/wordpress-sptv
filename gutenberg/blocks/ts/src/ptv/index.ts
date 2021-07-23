@@ -106,7 +106,7 @@ export default class PTV {
    * @param ids organization ids
    * @returns found organization or null if not found
    */
-  public findOrganizations = async (ids: string[]): Promise<Service[]> => {
+  public findOrganizations = async (ids: string[]): Promise<Organization[]> => {
     if (!ids || ids.length == 0) {
       return [];
     }

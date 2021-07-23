@@ -30,7 +30,7 @@
       
 
       /**
-       * 
+       * Returns organization IDs
        */
       public static function getOrganizationIds() {
         $options = get_option(SPTV_SETTINGS_OPTION);
