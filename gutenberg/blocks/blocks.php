@@ -207,6 +207,10 @@ if (!class_exists( 'Metatavu\SPTV\Wordpress\Gutenberg\Blocks\Blocks' ) ) {
         [
           "slug" => "printable-form-list",
           "name" => __("Printable form list", "sptv")
+        ],
+        [
+          "slug" => "languages",
+          "name" => __("Languages", "sptv")
         ]
       ]);
 
