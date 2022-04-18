@@ -96,9 +96,9 @@
   function getLocalizedLanguageName($languageShorthand) {
     switch ($languageShorthand) {
       case "fi":
-        return __("fi", "sptv");
+        return __("Fi", "sptv");
       case "en":
-        return __("en", "sptv");
+        return __("En", "sptv");
     }
   }
 

@@ -3,6 +3,7 @@
   $languages = $data->service["languages"];
   echo "<h3>Kielet, joilla palvelu on saatavilla</h3>";
   foreach ($languages as $language) {
-    echo "<span>$language</span><br/>";
+    $localizedLanguage = getLocalizedLanguageName($language);
+    echo "<span>$localizedLanguage</span><br/>";
   }
 ?>
