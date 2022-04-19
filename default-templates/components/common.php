@@ -88,6 +88,21 @@
   }
 
   /**
+   * Returns localized language name
+   * 
+   * @param languageShorthand language shorthand
+   * @return localized language name
+   */
+  function getLocalizedLanguageName($languageShorthand) {
+    switch ($languageShorthand) {
+      case "fi":
+        return __("Fi", "sptv");
+      case "en":
+        return __("En", "sptv");
+    }
+  }
+
+  /**
    * Converts wraps text into html paragraphs by line breaks
    * 
    * @param string $text text
