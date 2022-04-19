@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: SPTV 1.0.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/wordpress-sptv\n"
-"POT-Creation-Date: 2022-04-18 20:33+0300\n"
-"PO-Revision-Date: 2022-04-18 20:34+0300\n"
+"POT-Creation-Date: 2022-04-19 07:48+0300\n"
+"PO-Revision-Date: 2022-04-19 07:50+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: fi\n"
@@ -62,6 +62,10 @@ msgstr "Avoinna ympäri vuorokauden."
 #: default-templates/components/service_location_service_channel/phone-numbers.php:20
 msgid "Chargeable"
 msgstr "(pvm/mpm)"
+
+#: default-templates/components/service/languages.php:4
+msgid "AvailableLanguages"
+msgstr "Kielet, joilla palvelu on saatavilla"
 
 #: default-templates/components/service_location_service_channel/default-all.php:5
 msgid "Visiting information"

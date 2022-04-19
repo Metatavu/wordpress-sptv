@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: SPTV 1.0.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/wordpress-sptv\n"
-"POT-Creation-Date: 2022-04-18 20:22+0300\n"
+"POT-Creation-Date: 2022-04-19 07:48+0300\n"
 "PO-Revision-Date: 2019-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -60,6 +60,10 @@ msgstr ""
 #: default-templates/components/phone_service_channel/phone-numbers.php:20
 #: default-templates/components/service_location_service_channel/phone-numbers.php:20
 msgid "Chargeable"
+msgstr ""
+
+#: default-templates/components/service/languages.php:4
+msgid "AvailableLanguages"
 msgstr ""
 
 #: default-templates/components/service_location_service_channel/default-all.php:5
