@@ -56,11 +56,19 @@
         $this->addOption('elastic', 'url', 'elastic-url', __( "URL", 'sptv'));
         $this->addOption('elastic', 'text', 'elastic-username', __( "Username", 'sptv' ));
         $this->addOption('elastic', 'text', 'elastic-password', __( "Password", 'sptv' ));
-        $this->addDropDownOption('elastic', 'text', 'version', __( "PTV-versio", 'sptv' ));
+        $this->addVersionDropDown();
         add_settings_section('ptv', __( "PTV Settings", 'sptv' ), null, SPTV_SETTINGS_PAGE);
         foreach($organizationIds as $key => $value) {
           $this->addOrganizationOption('ptv', 'text', $key, __( "Organization Id", 'sptv' ), $key);
         }
+
+        $args = [
+          'post_type' => 'wp_block'
+        ];
+
+        $page_templates = get_posts($args);
+        $this->addTemplateDropdown('serviceTemplate', __( "Service template", 'sptv' ), $page_templates);
+        $this->addTemplateDropdown('serviceLocationTemplate', __( "Service location template", 'sptv' ), $page_templates);
       }
 
       private function addOption($group, $type, $name, $title) {
@@ -70,13 +78,31 @@
         ]);
       }
 
-      private function addDropDownOption($group, $type, $name, $title) {
-        add_settings_field($name, $title, [$this, 'createDropDownUI'], SPTV_SETTINGS_PAGE, $group, [
-          'name' => $name, 
-          'type' => $type
+      private function addVersionDropdown() {
+        add_settings_field('version', __( "PTV-versio", 'sptv' ), [$this, 'createVersionDropdownUI'], SPTV_SETTINGS_PAGE, 'elastic', [
+          'name' => 'version', 
+          'type' => 'text'
         ]);
       }
-      public function createDropDownUI($opts) {
+
+      private function addTemplateDropdown($name, $title, $templates) {
+        add_settings_field($name, $title, function ($opts) use($templates) {
+          $name = $opts['name'];
+          $value = Settings::getValue($name);
+          echo "<select id='$name' name='" . SPTV_SETTINGS_PAGE . "[$name]' type='text' value='$value' >";
+          foreach ($templates as $template) {
+            $template_id = $template->ID;
+            $template_name = $template->post_name;
+            echo '<option value="' . $template_id . '" '.(($value==$template_id)?'selected="selected"':"").'> ' . $template_name . '</option>';
+          }
+          echo "</select >";
+        }, SPTV_SETTINGS_PAGE, 'ptv', [
+          'name' => $name, 
+          'type' => 'text'
+        ]);
+      }
+
+      public function createVersionDropDownUI($opts) {
         $name = $opts['name'];
         $type = $opts['type'];
         $value = Settings::getValue($name);
@@ -86,7 +112,6 @@
         echo "</select >";
       }
 
-      
       public function createFieldUI($opts) {
         $name = $opts['name'];
         $type = $opts['type'];
