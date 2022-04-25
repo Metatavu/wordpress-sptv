@@ -67,8 +67,8 @@
         ];
 
         $page_templates = get_posts($args);
-        $this->addTemplateDropdown('serviceTemplate', __( "Service template", 'sptv' ), $page_templates);
-        $this->addTemplateDropdown('serviceLocationTemplate', __( "Service location template", 'sptv' ), $page_templates);
+        $this->addTemplateDropdown('service-template', __( "Service template", 'sptv' ), $page_templates);
+        $this->addTemplateDropdown('service-location-template', __( "Service location template", 'sptv' ), $page_templates);
       }
 
       private function addOption($group, $type, $name, $title) {
@@ -89,15 +89,17 @@
         add_settings_field($name, $title, function ($opts) use($templates) {
           $name = $opts['name'];
           $value = Settings::getValue($name);
+          $noTemplate = __( "No template", 'sptv' );
+
           echo "<select id='$name' name='" . SPTV_SETTINGS_PAGE . "[$name]' type='text' value='$value' >";
+          echo '<option value="" '.(($value=="")?'selected="selected"':"").'> ' . $noTemplate . '</option>';
+
           foreach ($templates as $template) {
             $template_id = $template->ID;
             $template_name = $template->post_name;
             echo '<option value="' . $template_id . '" '.(($value==$template_id)?'selected="selected"':"").'> ' . $template_name . '</option>';
           }
 
-          $noTemplate = __( "No template", 'sptv' );
-          echo '<option value="" '.(($value=="")?'selected="selected"':"").'> ' . $noTemplate . '</option>';
           echo "</select >";
         }, SPTV_SETTINGS_PAGE, 'ptv', [
           'name' => $name, 

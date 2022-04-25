@@ -16,6 +16,7 @@
   require_once( __DIR__ . '/settings/settings.php');
   require_once( __DIR__ . '/gutenberg/gutenberg.php');
   require_once( __DIR__ . '/rest/rest.php');
+  require_once( __DIR__ . '/page-drafts/page-drafts.php');
   
   add_action('plugins_loaded', function() {
     load_plugin_textdomain('sptv', false, dirname( plugin_basename(__FILE__) ) . '/lang/' );
