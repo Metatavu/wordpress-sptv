@@ -10,6 +10,7 @@
   $services = $serviceChannel["services"];
   $serviceId = !empty($services) ? $services[0]["service"]["id"] : null;
   $serviceChannelId = $serviceChannel["id"];
+  $blockHeader = __("Accessibility information", "sptv");
 
   foreach ($addresses as $address) {
     if ($address["type"] == "Location") {
@@ -18,6 +19,7 @@
        * PTV accessibility information
        */
       if ($address['entrances']) {
+        echo "<h2>$blockHeader</h2>";
         foreach ($address['entrances'] as $entrance) {
           foreach ($entrance['accessibilitySentences'] as $accessibilitySentence) {
             $sentenceGroups = $accessibilitySentence['sentenceGroup'];
