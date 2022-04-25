@@ -95,6 +95,9 @@
             $template_name = $template->post_name;
             echo '<option value="' . $template_id . '" '.(($value==$template_id)?'selected="selected"':"").'> ' . $template_name . '</option>';
           }
+
+          $noTemplate = __( "No template", 'sptv' );
+          echo '<option value="" '.(($value=="")?'selected="selected"':"").'> ' . $noTemplate . '</option>';
           echo "</select >";
         }, SPTV_SETTINGS_PAGE, 'ptv', [
           'name' => $name, 
