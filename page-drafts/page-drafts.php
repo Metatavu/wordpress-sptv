@@ -7,8 +7,6 @@
   }
 
   add_action('init', function () {
-    var_dump(getNewIndexItems('v11-service'));
-    die();
     scheduleDraftHook('draft_hook', 'service-template');
   });
 
@@ -21,6 +19,7 @@
 
   add_action('draft_hook', function () {
     $new_index_items = getNewIndexItems('v11-service');
+    syncDrafts($new_index_items, 'service-template');
   });
 
   add_action('location_draft_hook', function () {});
@@ -30,7 +29,7 @@
   
     $hook_scheduled = wp_next_scheduled($hook);
 
-    if ($template == '') {
+    if (empty($template)) {
       wp_clear_scheduled_hook($hook);
     } else if (!$draft_hook_scheduled) {
       wp_schedule_event(time(), 'template_interval', $hook);
@@ -68,8 +67,7 @@
     $login = $username . ':'. $password;
     $base64_login = base64_encode($login);
     $request_body = [
-      'size' => 10000,
-      '_source' => false
+      'size' => 10000
     ];
 
     $result = wp_remote_get($address, [
@@ -82,5 +80,66 @@
     ]);
 
     return json_decode(wp_remote_retrieve_body($result))->hits->hits;
+  }
+
+  function syncDrafts($new_index_items, $template_type) {
+    $template = Settings::getValue($template_type);
+    if (!empty($template)) {
+      $post = get_post($template);
+      if ($post) {
+        $post_html = $post->post_content;
+        foreach ($new_index_items as $item) {
+          $meta_id_key = resolve_meta_id_key($template_type);
+          $name_field = resolve_name_field($template_type);
+          syncDraft($post_html, $item->_id, $meta_id_key, $item->_source->{$name_field});
+        }
+      }
+    }
+  }
+
+  function resolve_meta_id_key($template_type) {
+    if ($template_type == 'service-template') {
+      return 'service_id';
+    } else if ($template_type == 'service-location-template') {
+      return 'service_location_id';
+    } else {
+      return null;
+    }
+  }
+
+  function resolve_name_field ($template_type) {
+    if ($template_type == 'service-template') {
+      return 'serviceNames_fi';
+    } else if ($template_type == 'service-location-template') {
+      return 'serviceChannelNames_fi';
+    } else {
+      return null;
+    }
+  }
+
+  function syncDraft($template_html, $item_id, $meta_id_key, $post_title) {
+    $args = [
+      'post_type'=> 'page',
+      'meta_key'=> $meta_id_key,
+      'meta_value'=> $item_id,
+      'post_status' => 'any'
+    ];
+    $posts = get_posts($args);
+    $post_count = count($posts);
+    error_log($post_count);
+    if ($post_count == 0) {
+      $draft_html = preg_replace('/"id":"[a-f0-9]{8}\-[a-f0-9]{4}\-4[a-f0-9]{3}\-(8|9|a|b)[a-f0-9]{3}\-[a-f0-9]{12}/', '"id":"' . $item_id, $template_html);
+      $draft_data = [
+        'post_content' => $draft_html,
+        'post_type' => 'page',
+        'post_title' => $post_title
+      ];
+
+      $result = wp_insert_post($draft_data);
+      if ($result != 0) {
+        add_post_meta($result, $meta_id_key, $item_id);
+      }
+    }
+   
   }
 ?>
