@@ -105,30 +105,6 @@
   }
 
   /**
-   * Creates new drafts from new index items
-   * 
-   * @param new_index_items new index items to use
-   * @param template_type template type to use
-   */
-  function createDrafts($new_index_items, $template_type) {
-    $template = Settings::getValue($template_type);
-    if (!empty($template)) {
-      $post = get_post($template);
-      if ($post) {
-        $post_html = $post->post_content;
-        foreach ($new_index_items as $item) {
-          $ptv_type = resolve_ptv_type($template_type);
-          $name_field = resolve_post_title_field($template_type);
-
-          if ($name_field && $ptv_type) {
-            createDraft($post_html, $item->_id, $ptv_type, $item->_source->{$name_field});
-          }
-        }
-      }
-    }
-  }
-
-  /**
    * Resolves a PTV-type from a template type
    * @param template_type template type
    */
@@ -154,6 +130,31 @@
       return 'serviceChannelNames_fi';
     } else {
       return null;
+    }
+  }
+
+
+  /**
+   * Creates new drafts from new index items
+   * 
+   * @param new_index_items new index items to use
+   * @param template_type template type to use
+   */
+  function createDrafts($new_index_items, $template_type) {
+    $template = Settings::getValue($template_type);
+    if (!empty($template)) {
+      $post = get_post($template);
+      if ($post) {
+        $post_html = $post->post_content;
+        foreach ($new_index_items as $item) {
+          $ptv_type = resolve_ptv_type($template_type);
+          $name_field = resolve_post_title_field($template_type);
+
+          if ($name_field && $ptv_type) {
+            createDraft($post_html, $item->_id, $ptv_type, $item->_source->{$name_field});
+          }
+        }
+      }
     }
   }
 
