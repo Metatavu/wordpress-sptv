@@ -20,14 +20,19 @@
 
   add_action('draft_hook', function () {
     $new_index_items = getNewIndexItems('v11-service', 'organizationIds');
-    syncDrafts($new_index_items, 'service-template');
+    createDrafts($new_index_items, 'service-template');
   });
 
   add_action('location_draft_hook', function () {
     $new_index_items = getNewIndexItems('v11-servicelocation-service-channel', 'organizationId');
-    syncDrafts($new_index_items, 'service-location-template');
+    createDrafts($new_index_items, 'service-location-template');
   });
 
+  /**
+   * Schedules a draft hook
+   * @param hook hook
+   * @param template_type template type 
+   */
   function scheduleDraftHook($hook, $template_type) {
     $template = Settings::getValue($template_type);
   
@@ -40,6 +45,9 @@
     }
   }
 
+  /**
+   * Returns organization ids from the settings
+   */
   function getOrganizationIds() {
     $options = get_option(SPTV_SETTINGS_OPTION);
   
@@ -63,6 +71,12 @@
     }
   }
 
+  /**
+   * Returns new items from the Elastic Search index
+   * 
+   * @param index_name index name
+   * @param organization_field_name organization field name
+   */
   function getNewIndexItems($index_name, $organization_field_name) {
     $address = Settings::getValue('elastic-url') . '/' . $index_name . '/_search';
     $username = Settings::getValue('elastic-username');
@@ -90,25 +104,35 @@
     return json_decode(wp_remote_retrieve_body($result))->hits->hits;
   }
 
-  function syncDrafts($new_index_items, $template_type) {
+  /**
+   * Creates new drafts from new index items
+   * 
+   * @param new_index_items new index items to use
+   * @param template_type template type to use
+   */
+  function createDrafts($new_index_items, $template_type) {
     $template = Settings::getValue($template_type);
     if (!empty($template)) {
       $post = get_post($template);
       if ($post) {
         $post_html = $post->post_content;
         foreach ($new_index_items as $item) {
-          $meta_type = resolve_meta_type($template_type);
-          $name_field = resolve_name_field($template_type);
+          $ptv_type = resolve_ptv_type($template_type);
+          $name_field = resolve_post_title_field($template_type);
 
-          if ($name_field && $meta_type) {
-            syncDraft($post_html, $item->_id, $meta_type, $item->_source->{$name_field});
+          if ($name_field && $ptv_type) {
+            createDraft($post_html, $item->_id, $ptv_type, $item->_source->{$name_field});
           }
         }
       }
     }
   }
 
-  function resolve_meta_type($template_type) {
+  /**
+   * Resolves a PTV-type from a template type
+   * @param template_type template type
+   */
+  function resolve_ptv_type($template_type) {
     if ($template_type == 'service-template') {
       return 'service';
     } else if ($template_type == 'service-location-template') {
@@ -118,7 +142,12 @@
     }
   }
 
-  function resolve_name_field ($template_type) {
+  /**
+   * Resolves the post title field name from a template type
+   * 
+   * @param template_type template type resolve from
+   */
+  function resolve_post_title_field ($template_type) {
     if ($template_type == 'service-template') {
       return 'serviceNames_fi';
     } else if ($template_type == 'service-location-template') {
@@ -128,7 +157,15 @@
     }
   }
 
-  function syncDraft($template_html, $item_id, $meta_type, $post_title) {
+  /**
+   * Creates a draft from a template
+   * 
+   * @param template_html template html
+   * @param item_id item id
+   * @param ptv_type ptv type
+   * @param post_title post title
+   */
+  function createDraft($template_html, $item_id, $ptv_type, $post_title) {
     $args = [
       'post_type'=> 'page',
       'meta_key'=> 'ptv_id',
@@ -150,7 +187,7 @@
       $result = wp_insert_post($draft_data);
       if ($result != 0) {
         add_post_meta($result, 'ptv_id', $item_id);
-        add_post_meta($result, 'ptv_type', $meta_type);
+        add_post_meta($result, 'ptv_type', $ptv_type);
       }
     }
    
