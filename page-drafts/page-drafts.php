@@ -19,13 +19,17 @@
   });
 
   add_action('draft_hook', function () {
-    $new_index_items = getNewIndexItems('v11-service', 'organizationIds');
-    createDrafts($new_index_items, 'service-template');
+    $last_sync_time = Settings::getValue('last-template-sync-time');
+    $new_sync_time = gmdate("Y-m-d\TH:i:s\Z");
+    $new_index_items = getNewIndexItems('v11-service', 'organizationIds', $last_sync_time);
+    createDrafts($new_index_items, 'service-template', $new_sync_time);
   });
 
   add_action('location_draft_hook', function () {
-    $new_index_items = getNewIndexItems('v11-servicelocation-service-channel', 'organizationId');
-    createDrafts($new_index_items, 'service-location-template');
+    $last_sync_time = Settings::getValue('last-location-template-sync-time');
+    $new_sync_time = gmdate("Y-m-d\TH:i:s\Z");
+    $new_index_items = getNewIndexItems('v11-servicelocation-service-channel', 'organizationId', $last_sync_time);
+    createDrafts($new_index_items, 'service-location-template', $new_sync_time);
   });
 
   /**
@@ -76,8 +80,9 @@
    * 
    * @param index_name index name
    * @param organization_field_name organization field name
+   * @param last_sync_time last sync time
    */
-  function getNewIndexItems($index_name, $organization_field_name) {
+  function getNewIndexItems($index_name, $organization_field_name, $last_sync_time) {
     $address = Settings::getValue('elastic-url') . '/' . $index_name . '/_search';
     $username = Settings::getValue('elastic-username');
     $password = Settings::getValue('elastic-password');
@@ -87,9 +92,22 @@
     $request_body = [
       'size' => 10000,
       'query' => [
-        'terms' => [
-          $organization_field_name => getOrganizationIds()
-        ]
+        'bool' => [
+          'must' => [
+            [
+              'term' => [
+                $organization_field_name => getOrganizationIds()[0]
+              ]
+            ], 
+            [
+              'range' => [
+                'creationDate'=> [
+                  'gte' => $last_sync_time
+                ]
+              ]
+            ]
+          ]
+        ]     
       ]
     ];
 
@@ -100,7 +118,8 @@
       ],
       'body' => json_encode($request_body)
     ]);
-
+    // error_log($last_sync_time);
+    // error_log(wp_remote_retrieve_body($result));
     return json_decode(wp_remote_retrieve_body($result))->hits->hits;
   }
 
@@ -173,8 +192,9 @@
    * 
    * @param new_index_items new index items to use
    * @param template_type template type to use
+   * @param new_sync_time new sync time
    */
-  function createDrafts($new_index_items, $template_type) {
+  function createDrafts($new_index_items, $template_type, $new_sync_time) {
     $template = Settings::getValue($template_type);
     if (!empty($template)) {
       $post = get_post($template);
@@ -187,6 +207,14 @@
           if ($name_field && $ptv_type) {
             createDraft($post_html, $item->_id, $ptv_type, $item->_source->{$name_field});
           }
+        }
+
+        if ($template_type == 'service-template') {
+          Settings::setValue('last-template-sync-time', $new_sync_time);
+        } 
+        
+        if ($template_type == 'service-location-template') {
+          Settings::setValue('last-location-template-sync-time', $new_sync_time);
         }
       }
     }

@@ -88,11 +88,12 @@
       private function addTemplateDropdown($name, $title, $templates) {
         add_settings_field($name, $title, function ($opts) use($templates) {
           $name = $opts['name'];
+          $type = $opts['type'];
           $value = Settings::getValue($name);
           $noTemplate = __( "No template", 'sptv' );
 
-          echo "<select id='$name' name='" . SPTV_SETTINGS_PAGE . "[$name]' type='text' value='$value' >";
-          echo '<option value="" '.(($value=="")?'selected="selected"':"").'> ' . $noTemplate . '</option>';
+          echo "<select id='$name' name='" . SPTV_SETTINGS_PAGE . "[$name]' type='$type' value='$value' >";
+          echo '<option value="" '.((empty($value))?'selected="selected"':"").'> ' . $noTemplate . '</option>';
 
           foreach ($templates as $template) {
             $template_id = $template->ID;
