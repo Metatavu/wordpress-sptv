@@ -19,7 +19,7 @@
 
   add_action('draft_hook', function () {
     $new_index_items = getNewIndexItems('v11-service');
-    syncDrafts($new_index_items, 'service-template');
+    //syncDrafts($new_index_items, 'service-template');
   });
 
   add_action('location_draft_hook', function () {});
@@ -89,19 +89,21 @@
       if ($post) {
         $post_html = $post->post_content;
         foreach ($new_index_items as $item) {
-          $meta_id_key = resolve_meta_id_key($template_type);
+          $meta_type = resolve_meta_type($template_type);
           $name_field = resolve_name_field($template_type);
-          syncDraft($post_html, $item->_id, $meta_id_key, $item->_source->{$name_field});
+          if ($name_field && $meta_type) {
+            syncDraft($post_html, $item->_id, $meta_type, $item->_source->{$name_field});
+          }
         }
       }
     }
   }
 
-  function resolve_meta_id_key($template_type) {
+  function resolve_type($template_type) {
     if ($template_type == 'service-template') {
-      return 'service_id';
+      return 'service';
     } else if ($template_type == 'service-location-template') {
-      return 'service_location_id';
+      return 'service_location';
     } else {
       return null;
     }
@@ -117,10 +119,10 @@
     }
   }
 
-  function syncDraft($template_html, $item_id, $meta_id_key, $post_title) {
+  function syncDraft($template_html, $item_id, $meta_type, $post_title) {
     $args = [
       'post_type'=> 'page',
-      'meta_key'=> $meta_id_key,
+      'meta_key'=> 'ptv_id',
       'meta_value'=> $item_id,
       'post_status' => 'any'
     ];
@@ -137,7 +139,8 @@
 
       $result = wp_insert_post($draft_data);
       if ($result != 0) {
-        add_post_meta($result, $meta_id_key, $item_id);
+        add_post_meta($result, 'ptv_id', $item_id);
+        add_post_meta($result, 'ptv_type', $meta_type);
       }
     }
    
