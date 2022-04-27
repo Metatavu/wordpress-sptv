@@ -8,6 +8,7 @@
 
   add_action('init', function () {
     scheduleDraftHook('draft_hook', 'service-template');
+    scheduleDraftHook('draft_hook', 'service-location-template');
   });
 
   add_filter('cron_schedules', function ($schedules) {
@@ -18,11 +19,14 @@
   });
 
   add_action('draft_hook', function () {
-    $new_index_items = getNewIndexItems('v11-service');
-    //syncDrafts($new_index_items, 'service-template');
+    $new_index_items = getNewIndexItems('v11-service', 'organizationIds');
+    syncDrafts($new_index_items, 'service-template');
   });
 
-  add_action('location_draft_hook', function () {});
+  add_action('location_draft_hook', function () {
+    $new_index_items = getNewIndexItems('v11-servicelocation-service-channel', 'organizationId');
+    syncDrafts($new_index_items, 'service-location-template');
+  });
 
   function scheduleDraftHook($hook, $template_type) {
     $template = Settings::getValue($template_type);
@@ -59,7 +63,7 @@
     }
   }
 
-  function getNewIndexItems($index_name) {
+  function getNewIndexItems($index_name, $organization_field_name) {
     $address = Settings::getValue('elastic-url') . '/' . $index_name . '/_search';
     $username = Settings::getValue('elastic-username');
     $password = Settings::getValue('elastic-password');
@@ -67,16 +71,20 @@
     $login = $username . ':'. $password;
     $base64_login = base64_encode($login);
     $request_body = [
-      'size' => 10000
+      'size' => 10000,
+      'query' => [
+        'terms' => [
+          $organization_field_name => getOrganizationIds()
+        ]
+      ]
     ];
 
-    $result = wp_remote_get($address, [
+    $result = wp_remote_post($address, [
       'headers' => [
         'Authorization' => 'Basic ' . $base64_login,
         'Content-Type' => 'application/json'
       ],
-      'body' => $request_body
-
+      'body' => json_encode($request_body)
     ]);
 
     return json_decode(wp_remote_retrieve_body($result))->hits->hits;
@@ -91,6 +99,7 @@
         foreach ($new_index_items as $item) {
           $meta_type = resolve_meta_type($template_type);
           $name_field = resolve_name_field($template_type);
+
           if ($name_field && $meta_type) {
             syncDraft($post_html, $item->_id, $meta_type, $item->_source->{$name_field});
           }
@@ -99,7 +108,7 @@
     }
   }
 
-  function resolve_type($template_type) {
+  function resolve_meta_type($template_type) {
     if ($template_type == 'service-template') {
       return 'service';
     } else if ($template_type == 'service-location-template') {
@@ -128,9 +137,10 @@
     ];
     $posts = get_posts($args);
     $post_count = count($posts);
-    error_log($post_count);
+
     if ($post_count == 0) {
-      $draft_html = preg_replace('/"id":"[a-f0-9]{8}\-[a-f0-9]{4}\-4[a-f0-9]{3}\-(8|9|a|b)[a-f0-9]{3}\-[a-f0-9]{12}/', '"id":"' . $item_id, $template_html);
+      $reg_exp = '/"id":"[a-f0-9]{8}\-[a-f0-9]{4}\-4[a-f0-9]{3}\-(8|9|a|b)[a-f0-9]{3}\-[a-f0-9]{12}/';
+      $draft_html = preg_replace($reg_exp, '"id":"' . $item_id, $template_html);
       $draft_data = [
         'post_content' => $draft_html,
         'post_type' => 'page',
