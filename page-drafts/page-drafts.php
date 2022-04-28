@@ -8,7 +8,7 @@
 
   add_action('init', function () {
     scheduleDraftHook('draft_hook', 'service-template');
-    scheduleDraftHook('draft_hook', 'service-location-template');
+    scheduleDraftHook('location_draft_hook', 'service-location-template');
   });
 
   add_filter('cron_schedules', function ($schedules) {
@@ -22,6 +22,8 @@
     $last_sync_time = Settings::getValue('last-template-sync-time');
     $new_sync_time = gmdate("Y-m-d\TH:i:s\Z");
     $new_index_items = getNewIndexItems('v11-service', 'organizationIds', $last_sync_time);
+    // error_log($last_sync_time);
+    // error_log(count($new_index_items));
     createDrafts($new_index_items, 'service-template', $new_sync_time);
   });
 
@@ -118,8 +120,7 @@
       ],
       'body' => json_encode($request_body)
     ]);
-    // error_log($last_sync_time);
-    // error_log(wp_remote_retrieve_body($result));
+
     return json_decode(wp_remote_retrieve_body($result))->hits->hits;
   }
 
