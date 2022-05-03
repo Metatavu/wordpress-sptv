@@ -78,6 +78,9 @@
         ]);
       }
 
+      /**
+       * Adds a version dropdown
+       */
       private function addVersionDropdown() {
         add_settings_field('version', __( "PTV-versio", 'sptv' ), [$this, 'createVersionDropdownUI'], SPTV_SETTINGS_PAGE, 'elastic', [
           'name' => 'version', 
@@ -85,6 +88,13 @@
         ]);
       }
 
+      /**
+       * Adds a template dropdown
+       * 
+       * @param name setting name
+       * @param title setting title
+       * @param templates template options to render
+       */
       private function addTemplateDropdown($name, $title, $templates) {
         add_settings_field($name, $title, function ($opts) use($templates) {
           $name = $opts['name'];
