@@ -23,8 +23,6 @@
     $new_sync_time = gmdate("Y-m-d\TH:i:s\Z");
     $new_index_items = getNewIndexItems('v11-service', 'organizationIds', $last_sync_time);
     if (is_array($new_index_items)) {
-      error_log($last_sync_time);
-      error_log(count($new_index_items));
       createDrafts($new_index_items, 'service-template', $new_sync_time);
     }
 
