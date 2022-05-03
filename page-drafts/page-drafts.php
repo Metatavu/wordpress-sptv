@@ -19,19 +19,24 @@
   });
 
   add_action('draft_hook', function () {
-    $last_sync_time = Settings::getValue('last-template-sync-time');
+    $last_sync_time = get_option('sptv-last-template-sync-time');
     $new_sync_time = gmdate("Y-m-d\TH:i:s\Z");
     $new_index_items = getNewIndexItems('v11-service', 'organizationIds', $last_sync_time);
-    // error_log($last_sync_time);
-    // error_log(count($new_index_items));
-    createDrafts($new_index_items, 'service-template', $new_sync_time);
+    if (is_array($new_index_items)) {
+      error_log($last_sync_time);
+      error_log(count($new_index_items));
+      createDrafts($new_index_items, 'service-template', $new_sync_time);
+    }
+
   });
 
   add_action('location_draft_hook', function () {
-    $last_sync_time = Settings::getValue('last-location-template-sync-time');
+    $last_sync_time = get_option('sptv-last-location-template-sync-time');
     $new_sync_time = gmdate("Y-m-d\TH:i:s\Z");
     $new_index_items = getNewIndexItems('v11-servicelocation-service-channel', 'organizationId', $last_sync_time);
-    createDrafts($new_index_items, 'service-location-template', $new_sync_time);
+    if (is_array($new_index_items)) {
+      createDrafts($new_index_items, 'service-location-template', $new_sync_time);
+    }
   });
 
   /**
@@ -104,7 +109,7 @@
             [
               'range' => [
                 'creationDate'=> [
-                  'gte' => $last_sync_time
+                  'gte' => empty($last_sync_time) ? null : $last_sync_time
                 ]
               ]
             ]
@@ -201,6 +206,7 @@
       $post = get_post($template);
       if ($post) {
         $post_html = $post->post_content;
+
         foreach ($new_index_items as $item) {
           $ptv_type = resolve_ptv_type($template_type);
           $name_field = resolve_post_title_field($template_type);
@@ -211,11 +217,11 @@
         }
 
         if ($template_type == 'service-template') {
-          Settings::setValue('last-template-sync-time', $new_sync_time);
+          update_option('sptv-last-template-sync-time', $new_sync_time);
         } 
         
         if ($template_type == 'service-location-template') {
-          Settings::setValue('last-location-template-sync-time', $new_sync_time);
+          update_option('sptv-last-location-template-sync-time', $new_sync_time);
         }
       }
     }
