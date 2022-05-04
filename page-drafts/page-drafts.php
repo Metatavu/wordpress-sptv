@@ -80,7 +80,7 @@
               'must' => [
                 [
                   'term' => [
-                    $organizationFieldName => Settings::getOrganizationIds()[0]
+                    $organizationFieldName => array_values(Settings::getOrganizationIds())[0]
                   ]
                 ], 
                 [
