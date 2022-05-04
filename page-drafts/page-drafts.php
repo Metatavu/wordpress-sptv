@@ -138,34 +138,34 @@
       /**
        * Creates a draft from a template
        * 
-       * @param template_html template html
-       * @param item_id item id
-       * @param ptv_type ptv type
-       * @param post_title post title
+       * @param templateHtml template html
+       * @param itemId item id
+       * @param ptvType ptv type
+       * @param postTitle post title
        */
-      function createDraft($template_html, $item_id, $ptv_type, $post_title) {
+      function createDraft($templateHtml, $itemId, $ptvType, $postTitle) {
         $posts = get_posts([
           'post_type'=> 'page',
           'meta_key'=> 'ptv_id',
-          'meta_value'=> $item_id,
+          'meta_value'=> $itemId,
           'post_status' => 'any'
         ]);
 
-        $post_count = count($posts);
+        $postCount = count($posts);
 
-        if ($post_count == 0) {
-          $reg_exp = '/"id":"[a-f0-9]{8}\-[a-f0-9]{4}\-4[a-f0-9]{3}\-(8|9|a|b)[a-f0-9]{3}\-[a-f0-9]{12}/';
-          $draft_html = preg_replace($reg_exp, '"id":"' . $item_id, $template_html);
-          $draft_data = [
-            'post_content' => $draft_html,
+        if ($postCount == 0) {
+          $regExp = '/"id":"[a-f0-9]{8}\-[a-f0-9]{4}\-4[a-f0-9]{3}\-(8|9|a|b)[a-f0-9]{3}\-[a-f0-9]{12}/';
+          $draftHtml = preg_replace($regExp, '"id":"' . $itemId, $templateHtml);
+          $draftData = [
+            'post_content' => $draftHtml,
             'post_type' => 'page',
-            'post_title' => $post_title
+            'post_title' => $postTitle
           ];
 
-          $result = wp_insert_post($draft_data);
+          $result = wp_insert_post($draftData);
           if ($result != 0) {
-            add_post_meta($result, 'ptv_id', $item_id);
-            add_post_meta($result, 'ptv_type', $ptv_type);
+            add_post_meta($result, 'ptv_id', $itemId);
+            add_post_meta($result, 'ptv_type', $ptvType);
           }
         }
       }
@@ -173,32 +173,32 @@
       /**
        * Creates new drafts from new index items
        * 
-       * @param new_index_items new index items to use
-       * @param template_type template type to use
-       * @param new_sync_time new sync time
+       * @param newIndexItems new index items to use
+       * @param templateType template type to use
+       * @param newSyncTime new sync time
        */
-      function createDrafts($new_index_items, $template_type, $new_sync_time) {
-        $template = Settings::getValue($template_type);
+      function createDrafts($newIndexItems, $templateType, $newSyncTime) {
+        $template = Settings::getValue($templateType);
         if (!empty($template)) {
           $post = get_post($template);
           if ($post) {
-            $post_html = $post->post_content;
+            $postHtml = $post->post_content;
 
-            foreach ($new_index_items as $item) {
-              $ptv_type = $this->resolvePtvType($template_type);
-              $name_field = $this->resolvePostTitleField($template_type);
+            foreach ($newIndexItems as $item) {
+              $ptvType = $this->resolvePtvType($templateType);
+              $nameField = $this->resolvePostTitleField($templateType);
 
-              if ($name_field && $ptv_type) {
-                $this->createDraft($post_html, $item->_id, $ptv_type, $item->_source->{$name_field});
+              if ($nameField && $ptvType) {
+                $this->createDraft($postHtml, $item->_id, $ptvType, $item->_source->{$nameField});
               }
             }
 
-            if ($template_type == 'service-template') {
-              update_option('sptv-last-template-sync-time', $new_sync_time);
+            if ($templateType == 'service-template') {
+              update_option('sptv-last-template-sync-time', $newSyncTime);
             } 
             
-            if ($template_type == 'service-location-template') {
-              update_option('sptv-last-location-template-sync-time', $new_sync_time);
+            if ($templateType == 'service-location-template') {
+              update_option('sptv-last-location-template-sync-time', $newSyncTime);
             }
           }
         }
