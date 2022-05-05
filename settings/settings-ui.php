@@ -118,6 +118,11 @@
         ]);
       }
 
+      /**
+       * Creates a dropdown for version
+       * 
+       * @param opts dropdown parameters
+       */
       public function createVersionDropDownUI($opts) {
         $name = $opts['name'];
         $type = $opts['type'];

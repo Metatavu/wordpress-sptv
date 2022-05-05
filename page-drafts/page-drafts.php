@@ -23,9 +23,10 @@
         });
       
         add_action('draft_hook', function () {
+          $version = Settings::getValue('version');
           $lastSyncTime = get_option('sptv-last-template-sync-time');
           $newSyncTime = gmdate("Y-m-d\TH:i:s\Z");
-          $newIndexItems = $this->getNewIndexItems('v11-service', 'organizationIds', $lastSyncTime);
+          $newIndexItems = $this->getNewIndexItems("$version-service", 'organizationIds', $lastSyncTime);
           if (is_array($newIndexItems)) {
             $this->createDrafts($newIndexItems, 'service-template', $newSyncTime);
           }
@@ -33,9 +34,10 @@
         });
       
         add_action('location_draft_hook', function () {
+          $version = Settings::getValue('version');
           $lastSyncTime = get_option('sptv-last-location-template-sync-time');
           $newSyncTime = gmdate("Y-m-d\TH:i:s\Z");
-          $newIndexItems = $this->getNewIndexItems('v11-servicelocation-service-channel', 'organizationId', $lastSyncTime);
+          $newIndexItems = $this->getNewIndexItems("$version-servicelocation-service-channel", 'organizationId', $lastSyncTime);
           if (is_array($newIndexItems)) {
             $this->createDrafts($newIndexItems, 'service-location-template', $newSyncTime);
           }
@@ -79,8 +81,8 @@
             'bool' => [
               'must' => [
                 [
-                  'term' => [
-                    $organizationFieldName => array_values(Settings::getOrganizationIds())[0]
+                  'terms' => [
+                    $organizationFieldName => array_values(Settings::getOrganizationIds())
                   ]
                 ], 
                 [
