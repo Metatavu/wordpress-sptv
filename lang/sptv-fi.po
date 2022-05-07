@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: SPTV 1.0.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/wordpress-sptv\n"
-"POT-Creation-Date: 2022-04-19 07:48+0300\n"
-"PO-Revision-Date: 2022-04-19 07:50+0300\n"
+"POT-Creation-Date: 2022-04-25 13:11+0300\n"
+"PO-Revision-Date: 2022-04-25 13:12+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: fi\n"
@@ -67,6 +67,12 @@ msgstr "(pvm/mpm)"
 msgid "AvailableLanguages"
 msgstr "Kielet, joilla palvelu on saatavilla"
 
+#: default-templates/components/service_location_service_channel/accessibility.php:13
+#: default-templates/components/service_location_service_channel/default-all.php:24
+#: gutenberg/blocks/blocks.php:162
+msgid "Accessibility information"
+msgstr "Esteettömyystiedot"
+
 #: default-templates/components/service_location_service_channel/default-all.php:5
 msgid "Visiting information"
 msgstr "Käyntitiedot"
@@ -85,10 +91,6 @@ msgstr "Sähköpostiosoite"
 msgid "Website"
 msgstr "Verkkosivu"
 
-#: default-templates/components/service_location_service_channel/default-all.php:24
-msgid "Accessibility information"
-msgstr "Esteettömyystiedot"
-
 #: gutenberg/blocks/blocks.php:42 gutenberg/blocks/blocks.php:65
 #: gutenberg/blocks/blocks.php:84 gutenberg/blocks/blocks.php:111
 #: gutenberg/blocks/blocks.php:130
@@ -97,15 +99,15 @@ msgstr "Oletusasettelu"
 
 #: gutenberg/blocks/blocks.php:46 gutenberg/blocks/blocks.php:69
 #: gutenberg/blocks/blocks.php:88 gutenberg/blocks/blocks.php:115
-#: gutenberg/blocks/blocks.php:134 gutenberg/blocks/blocks.php:169
-#: gutenberg/blocks/blocks.php:224
+#: gutenberg/blocks/blocks.php:134 gutenberg/blocks/blocks.php:173
+#: gutenberg/blocks/blocks.php:228
 msgid "Name"
 msgstr "Nimi"
 
 #: gutenberg/blocks/blocks.php:50 gutenberg/blocks/blocks.php:73
 #: gutenberg/blocks/blocks.php:92 gutenberg/blocks/blocks.php:119
-#: gutenberg/blocks/blocks.php:138 gutenberg/blocks/blocks.php:177
-#: gutenberg/blocks/blocks.php:228
+#: gutenberg/blocks/blocks.php:138 gutenberg/blocks/blocks.php:181
+#: gutenberg/blocks/blocks.php:232
 msgid "Description"
 msgstr "Kuvaus"
 
@@ -143,57 +145,57 @@ msgstr "Sijainti"
 msgid "Service Hours"
 msgstr "Palveluajat"
 
-#: gutenberg/blocks/blocks.php:165
+#: gutenberg/blocks/blocks.php:169
 msgid "Default (no service channels)"
 msgstr "Oletus (ei palvelukanavia)"
 
-#: gutenberg/blocks/blocks.php:173
+#: gutenberg/blocks/blocks.php:177
 msgid "Summary"
 msgstr "Tiivistelmä"
 
-#: gutenberg/blocks/blocks.php:181
+#: gutenberg/blocks/blocks.php:185
 msgid "User instruction"
 msgstr "Toimintaohjeet"
 
-#: gutenberg/blocks/blocks.php:185
+#: gutenberg/blocks/blocks.php:189
 msgid "Requirements"
 msgstr "Ehdot ja kriteerit"
 
-#: gutenberg/blocks/blocks.php:189
+#: gutenberg/blocks/blocks.php:193
 msgid "Service channels"
 msgstr "Liitetyt asiointikanavat"
 
-#: gutenberg/blocks/blocks.php:193
+#: gutenberg/blocks/blocks.php:197
 msgid "Electronic service list"
 msgstr "Verkkoasiointi"
 
-#: gutenberg/blocks/blocks.php:197
+#: gutenberg/blocks/blocks.php:201
 msgid "Service location list"
 msgstr "Toimipisteet"
 
-#: gutenberg/blocks/blocks.php:201
+#: gutenberg/blocks/blocks.php:205
 msgid "Phone service list"
 msgstr "Puhelinasiointi"
 
-#: gutenberg/blocks/blocks.php:205
+#: gutenberg/blocks/blocks.php:209
 msgid "Webpage service list"
 msgstr "Linkit"
 
-#: gutenberg/blocks/blocks.php:209
+#: gutenberg/blocks/blocks.php:213
 msgid "Printable form list"
 msgstr "Lomakkeet"
 
-#: gutenberg/blocks/blocks.php:213
+#: gutenberg/blocks/blocks.php:217
 msgid "Languages"
 msgstr "Kielet"
 
-#: gutenberg/blocks/blocks.php:220
+#: gutenberg/blocks/blocks.php:224
 #, fuzzy
 #| msgid "Default template"
 msgid "Default"
 msgstr "Oletusasettelu"
 
-#: gutenberg/blocks/blocks.php:636
+#: gutenberg/blocks/blocks.php:640
 msgid "Finnish Service Catalogue"
 msgstr "Palvelutietovaranto"
 
@@ -461,7 +463,7 @@ msgstr ""
 msgid "SPTV Settings"
 msgstr "SPTV asetukset"
 
-#: settings/settings-ui.php:21 settings/settings-ui.php:124
+#: settings/settings-ui.php:21 settings/settings-ui.php:152
 msgid "SPTV"
 msgstr "SPTV"
 
@@ -481,10 +483,6 @@ msgstr "Käyttäjänimi"
 msgid "Password"
 msgstr "Salasana"
 
-#: settings/settings-ui.php:59
-msgid "PTV-versio"
-msgstr ""
-
 #: settings/settings-ui.php:60
 msgid "PTV Settings"
 msgstr "PTV asetukset"
@@ -493,7 +491,23 @@ msgstr "PTV asetukset"
 msgid "Organization Id"
 msgstr "Organisaatio ID"
 
-#: settings/settings-ui.php:120
+#: settings/settings-ui.php:70
+msgid "Service template"
+msgstr "Uuden palvelun sivumalli"
+
+#: settings/settings-ui.php:71
+msgid "Service location template"
+msgstr "Uuden palvelupaikan sivumalli"
+
+#: settings/settings-ui.php:82
+msgid "PTV-versio"
+msgstr ""
+
+#: settings/settings-ui.php:99
+msgid "No template"
+msgstr "Ei sivumallia"
+
+#: settings/settings-ui.php:148
 msgid "You do not have sufficient permissions to access this page."
 msgstr "Sinulla ei ole riittäviä oikeuksia tähän sivuun."
 

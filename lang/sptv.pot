@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: SPTV 1.0.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/wordpress-sptv\n"
-"POT-Creation-Date: 2022-04-19 07:48+0300\n"
+"POT-Creation-Date: 2022-04-25 13:09+0300\n"
 "PO-Revision-Date: 2019-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -66,6 +66,12 @@ msgstr ""
 msgid "AvailableLanguages"
 msgstr ""
 
+#: default-templates/components/service_location_service_channel/accessibility.php:13
+#: default-templates/components/service_location_service_channel/default-all.php:24
+#: gutenberg/blocks/blocks.php:162
+msgid "Accessibility information"
+msgstr ""
+
 #: default-templates/components/service_location_service_channel/default-all.php:5
 msgid "Visiting information"
 msgstr ""
@@ -84,10 +90,6 @@ msgstr ""
 msgid "Website"
 msgstr ""
 
-#: default-templates/components/service_location_service_channel/default-all.php:24
-msgid "Accessibility information"
-msgstr ""
-
 #: gutenberg/blocks/blocks.php:42 gutenberg/blocks/blocks.php:65
 #: gutenberg/blocks/blocks.php:84 gutenberg/blocks/blocks.php:111
 #: gutenberg/blocks/blocks.php:130
@@ -96,15 +98,15 @@ msgstr ""
 
 #: gutenberg/blocks/blocks.php:46 gutenberg/blocks/blocks.php:69
 #: gutenberg/blocks/blocks.php:88 gutenberg/blocks/blocks.php:115
-#: gutenberg/blocks/blocks.php:134 gutenberg/blocks/blocks.php:169
-#: gutenberg/blocks/blocks.php:224
+#: gutenberg/blocks/blocks.php:134 gutenberg/blocks/blocks.php:173
+#: gutenberg/blocks/blocks.php:228
 msgid "Name"
 msgstr ""
 
 #: gutenberg/blocks/blocks.php:50 gutenberg/blocks/blocks.php:73
 #: gutenberg/blocks/blocks.php:92 gutenberg/blocks/blocks.php:119
-#: gutenberg/blocks/blocks.php:138 gutenberg/blocks/blocks.php:177
-#: gutenberg/blocks/blocks.php:228
+#: gutenberg/blocks/blocks.php:138 gutenberg/blocks/blocks.php:181
+#: gutenberg/blocks/blocks.php:232
 msgid "Description"
 msgstr ""
 
@@ -140,55 +142,55 @@ msgstr ""
 msgid "Service Hours"
 msgstr ""
 
-#: gutenberg/blocks/blocks.php:165
+#: gutenberg/blocks/blocks.php:169
 msgid "Default (no service channels)"
 msgstr ""
 
-#: gutenberg/blocks/blocks.php:173
+#: gutenberg/blocks/blocks.php:177
 msgid "Summary"
 msgstr ""
 
-#: gutenberg/blocks/blocks.php:181
+#: gutenberg/blocks/blocks.php:185
 msgid "User instruction"
 msgstr ""
 
-#: gutenberg/blocks/blocks.php:185
+#: gutenberg/blocks/blocks.php:189
 msgid "Requirements"
 msgstr ""
 
-#: gutenberg/blocks/blocks.php:189
+#: gutenberg/blocks/blocks.php:193
 msgid "Service channels"
 msgstr ""
 
-#: gutenberg/blocks/blocks.php:193
+#: gutenberg/blocks/blocks.php:197
 msgid "Electronic service list"
 msgstr ""
 
-#: gutenberg/blocks/blocks.php:197
+#: gutenberg/blocks/blocks.php:201
 msgid "Service location list"
 msgstr ""
 
-#: gutenberg/blocks/blocks.php:201
+#: gutenberg/blocks/blocks.php:205
 msgid "Phone service list"
 msgstr ""
 
-#: gutenberg/blocks/blocks.php:205
+#: gutenberg/blocks/blocks.php:209
 msgid "Webpage service list"
 msgstr ""
 
-#: gutenberg/blocks/blocks.php:209
+#: gutenberg/blocks/blocks.php:213
 msgid "Printable form list"
 msgstr ""
 
-#: gutenberg/blocks/blocks.php:213
+#: gutenberg/blocks/blocks.php:217
 msgid "Languages"
 msgstr ""
 
-#: gutenberg/blocks/blocks.php:220
+#: gutenberg/blocks/blocks.php:224
 msgid "Default"
 msgstr ""
 
-#: gutenberg/blocks/blocks.php:636
+#: gutenberg/blocks/blocks.php:640
 msgid "Finnish Service Catalogue"
 msgstr ""
 
@@ -450,7 +452,7 @@ msgstr ""
 msgid "SPTV Settings"
 msgstr ""
 
-#: settings/settings-ui.php:21 settings/settings-ui.php:124
+#: settings/settings-ui.php:21 settings/settings-ui.php:152
 msgid "SPTV"
 msgstr ""
 
@@ -470,10 +472,6 @@ msgstr ""
 msgid "Password"
 msgstr ""
 
-#: settings/settings-ui.php:59
-msgid "PTV-versio"
-msgstr ""
-
 #: settings/settings-ui.php:60
 msgid "PTV Settings"
 msgstr ""
@@ -482,6 +480,22 @@ msgstr ""
 msgid "Organization Id"
 msgstr ""
 
-#: settings/settings-ui.php:120
+#: settings/settings-ui.php:70
+msgid "Service template"
+msgstr ""
+
+#: settings/settings-ui.php:71
+msgid "Service location template"
+msgstr ""
+
+#: settings/settings-ui.php:82
+msgid "PTV-versio"
+msgstr ""
+
+#: settings/settings-ui.php:99
+msgid "No template"
+msgstr ""
+
+#: settings/settings-ui.php:148
 msgid "You do not have sufficient permissions to access this page."
 msgstr ""
