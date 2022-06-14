@@ -19,7 +19,7 @@
        * PTV accessibility information
        */
       if ($address['entrances']) {
-        echo "<div class='accessibility-sentences'>"
+        echo "<div class='accessibility-sentences'>";
         echo "<h2>$blockHeader</h2>";
         foreach ($address['entrances'] as $entrance) {
           foreach ($entrance['accessibilitySentences'] as $accessibilitySentence) {
