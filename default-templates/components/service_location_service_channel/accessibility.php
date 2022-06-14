@@ -28,11 +28,13 @@
             echo "<div class='accessibility-sentence'>"
             echo "<button type='button' class='button-text closed'>" . $sentenceGroups[$key]['value'] . "</button>";
             echo "<div class='accessibility-content'>";
+
             foreach ($accessibilitySentence['sentences'] as $sentences) {
               $sentence = $sentences['sentence'];
               $key = array_search('fi', array_column($sentence, 'language'));
               echo "<p>" . $sentence[$key]['value'] . "</p>";
             }
+            
             echo "</div>";
             echo "</div>";
           }
