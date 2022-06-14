@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: SPTV 1.0.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/wordpress-sptv\n"
-"POT-Creation-Date: 2022-04-25 13:11+0300\n"
-"PO-Revision-Date: 2022-04-25 13:12+0300\n"
+"POT-Creation-Date: 2022-06-14 15:41+0300\n"
+"PO-Revision-Date: 2022-06-14 15:41+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: fi\n"
@@ -13,7 +13,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.0.1\n"
+"X-Generator: Poedit 3.1\n"
 "X-Poedit-KeywordsList: __;_e\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-SearchPath-0: .\n"
@@ -54,9 +54,13 @@ msgstr "Suomi"
 msgid "En"
 msgstr "Englanti"
 
-#: default-templates/components/common.php:155
+#: default-templates/components/common.php:156
 msgid "Open 24 hours."
 msgstr "Avoinna ympäri vuorokauden."
+
+#: default-templates/components/common.php:158
+msgid "Closed"
+msgstr "Suljettu"
 
 #: default-templates/components/phone_service_channel/phone-numbers.php:20
 #: default-templates/components/service_location_service_channel/phone-numbers.php:20
@@ -199,271 +203,11 @@ msgstr "Oletusasettelu"
 msgid "Finnish Service Catalogue"
 msgstr "Palvelutietovaranto"
 
-#: gutenberg/blocks/ts/node_modules/moment/min/locales.min.js:1
-msgid "s"
-msgstr ""
-
-#: gutenberg/blocks/ts/node_modules/moment/min/locales.min.js:1
-msgid "m"
-msgstr ""
-
-#: gutenberg/blocks/ts/node_modules/moment/min/locales.min.js:1
-msgid "h"
-msgstr ""
-
-#: gutenberg/blocks/ts/node_modules/moment/min/locales.min.js:1
-msgid "d"
-msgstr ""
-
-#: gutenberg/blocks/ts/node_modules/moment/min/locales.min.js:1
-msgid "M"
-msgstr ""
-
-#: gutenberg/blocks/ts/node_modules/moment/min/locales.min.js:1
-msgid "y"
-msgstr ""
-
-#: gutenberg/blocks/ts/node_modules/moment/min/moment.min.js:1
-msgid ": "
-msgstr ""
-
-#: gutenberg/blocks/ts/node_modules/terser/dist/bundle.min.js:1
-msgid "num"
-msgstr ""
-
-#: gutenberg/blocks/ts/node_modules/terser/dist/bundle.min.js:1
-#: gutenberg/blocks/ts/node_modules/yargs/lib/usage.js:290
-#: gutenberg/blocks/ts/node_modules/yargs/lib/usage.js:291
-#: node_modules/yargs/lib/usage.js:290 node_modules/yargs/lib/usage.js:291
-msgid "string"
-msgstr ""
-
-#: gutenberg/blocks/ts/node_modules/terser/dist/bundle.min.js:1
-msgid "template_head"
-msgstr ""
-
-#: gutenberg/blocks/ts/node_modules/terser/dist/bundle.min.js:1
-msgid "comment2"
-msgstr ""
-
-#: gutenberg/blocks/ts/node_modules/terser/dist/bundle.min.js:1
-msgid "regexp"
-msgstr ""
-
-#: gutenberg/blocks/ts/node_modules/terser/dist/bundle.min.js:1
-msgid "operator"
-msgstr ""
-
-#: gutenberg/blocks/ts/node_modules/terser/dist/bundle.min.js:1
-msgid "eof"
-msgstr ""
-
-#: gutenberg/blocks/ts/node_modules/terser/dist/bundle.min.js:1
-msgid "expand"
-msgstr ""
-
-#: gutenberg/blocks/ts/node_modules/terser/dist/bundle.min.js:1
-msgid "punc"
-msgstr ""
-
-#: gutenberg/blocks/ts/node_modules/terser/dist/bundle.min.js:1
-msgid "arrow"
-msgstr ""
-
-#: gutenberg/blocks/ts/node_modules/terser/dist/bundle.min.js:1
-#, fuzzy
-#| msgid "Username"
-msgid "name"
-msgstr "Käyttäjänimi"
-
-#: gutenberg/blocks/ts/node_modules/terser/dist/bundle.min.js:1
-msgid "atom"
-msgstr ""
-
-#: gutenberg/blocks/ts/node_modules/terser/dist/bundle.min.js:1
-msgid "keyword"
-msgstr ""
-
-#: gutenberg/blocks/ts/node_modules/terser/dist/bundle.min.js:1
-msgid "("
-msgstr ""
-
-#: gutenberg/blocks/ts/node_modules/terser/dist/bundle.min.js:1
-msgid ")"
-msgstr ""
-
-#: gutenberg/blocks/ts/node_modules/terser/dist/bundle.min.js:1
-msgid ":"
-msgstr ""
-
-#: gutenberg/blocks/ts/node_modules/terser/dist/bundle.min.js:1
-msgid ";"
-msgstr ""
-
-#: gutenberg/blocks/ts/node_modules/terser/dist/bundle.min.js:1
-msgid ","
-msgstr ""
-
-#: gutenberg/blocks/ts/node_modules/terser/dist/bundle.min.js:1
-msgid "]"
-msgstr ""
-
-#: gutenberg/blocks/ts/node_modules/terser/dist/bundle.min.js:1
-msgid "}"
-msgstr ""
-
-#: gutenberg/blocks/ts/node_modules/terser/dist/bundle.min.js:1
-msgid "{"
-msgstr ""
-
-#: gutenberg/blocks/ts/node_modules/terser/dist/bundle.min.js:1
-msgid "["
-msgstr ""
-
-#: gutenberg/blocks/ts/node_modules/terser/dist/bundle.min.js:1
-msgid "Program"
-msgstr ""
-
-#: gutenberg/blocks/ts/node_modules/terser/dist/bundle.min.js:1
-msgid "BlockStatement"
-msgstr ""
-
-#: gutenberg/blocks/ts/node_modules/yargs-parser/index.js:367
-#: node_modules/yargs-parser/index.js:367
-#, javascript-format
-msgid "Not enough arguments following: %s"
-msgstr ""
-
-#: gutenberg/blocks/ts/node_modules/yargs-parser/index.js:541
-#: node_modules/yargs-parser/index.js:541
-#, javascript-format
-msgid "Invalid JSON config file: %s"
-msgstr ""
-
-#: gutenberg/blocks/ts/node_modules/yargs/lib/usage.js:92
-#: node_modules/yargs/lib/usage.js:92
-msgid "Positionals:"
-msgstr ""
-
-#: gutenberg/blocks/ts/node_modules/yargs/lib/usage.js:192
-#: gutenberg/blocks/ts/node_modules/yargs/lib/usage.js:194
-#: node_modules/yargs/lib/usage.js:192 node_modules/yargs/lib/usage.js:194
-msgid "command"
-msgstr ""
-
-#: gutenberg/blocks/ts/node_modules/yargs/lib/usage.js:203
-#: node_modules/yargs/lib/usage.js:203
-msgid "Commands:"
-msgstr ""
-
-#: gutenberg/blocks/ts/node_modules/yargs/lib/usage.js:223
-#: gutenberg/blocks/ts/node_modules/yargs/lib/usage.js:458
-#: node_modules/yargs/lib/usage.js:223 node_modules/yargs/lib/usage.js:458
-msgid "default:"
-msgstr ""
-
-#: gutenberg/blocks/ts/node_modules/yargs/lib/usage.js:225
-#: node_modules/yargs/lib/usage.js:225
-msgid "aliases:"
-msgstr ""
-
-#: gutenberg/blocks/ts/node_modules/yargs/lib/usage.js:288
-#: node_modules/yargs/lib/usage.js:288
-msgid "boolean"
-msgstr ""
-
-#: gutenberg/blocks/ts/node_modules/yargs/lib/usage.js:289
-#: node_modules/yargs/lib/usage.js:289
-msgid "count"
-msgstr ""
-
-#: gutenberg/blocks/ts/node_modules/yargs/lib/usage.js:292
-#: node_modules/yargs/lib/usage.js:292
-msgid "array"
-msgstr ""
-
-#: gutenberg/blocks/ts/node_modules/yargs/lib/usage.js:293
-#: node_modules/yargs/lib/usage.js:293
-#, fuzzy
-#| msgid "Phone numbers"
-msgid "number"
-msgstr "Puhelinnumerot"
-
-#: gutenberg/blocks/ts/node_modules/yargs/lib/usage.js:297
-#: node_modules/yargs/lib/usage.js:297
-#, fuzzy
-#| msgid "Requirements"
-msgid "required"
-msgstr "Ehdot ja kriteerit"
-
-#: gutenberg/blocks/ts/node_modules/yargs/lib/usage.js:298
-#: node_modules/yargs/lib/usage.js:298
-msgid "choices:"
-msgstr ""
-
-#: gutenberg/blocks/ts/node_modules/yargs/lib/usage.js:317
-#: node_modules/yargs/lib/usage.js:317
-msgid "Examples:"
-msgstr ""
-
-#: gutenberg/blocks/ts/node_modules/yargs/lib/usage.js:436
-#: node_modules/yargs/lib/usage.js:436
-msgid "generated-value"
-msgstr ""
-
-#: gutenberg/blocks/ts/node_modules/yargs/lib/validation.js:29
-#: gutenberg/blocks/ts/node_modules/yargs/lib/validation.js:52
-#: node_modules/yargs/lib/validation.js:29
-#: node_modules/yargs/lib/validation.js:52
-#, javascript-format
-msgid "Not enough non-option arguments: got %s, need at least %s"
-msgstr ""
-
-#: gutenberg/blocks/ts/node_modules/yargs/lib/validation.js:40
-#: node_modules/yargs/lib/validation.js:40
-#, javascript-format
-msgid "Too many non-option arguments: got %s, maximum of %s"
-msgstr ""
-
-#: gutenberg/blocks/ts/node_modules/yargs/lib/validation.js:147
-#: node_modules/yargs/lib/validation.js:147
-msgid "Invalid values:"
-msgstr ""
-
-#: gutenberg/blocks/ts/node_modules/yargs/lib/validation.js:150
-#: node_modules/yargs/lib/validation.js:150
-#, javascript-format
-msgid "Argument: %s, Given: %s, Choices: %s"
-msgstr ""
-
-#: gutenberg/blocks/ts/node_modules/yargs/lib/validation.js:180
-#: node_modules/yargs/lib/validation.js:180
-#, javascript-format
-msgid "Argument check failed: %s"
-msgstr ""
-
-#: gutenberg/blocks/ts/node_modules/yargs/lib/validation.js:256
-#: node_modules/yargs/lib/validation.js:256
-msgid "Implications failed:"
-msgstr ""
-
-#: gutenberg/blocks/ts/node_modules/yargs/lib/validation.js:295
-#: node_modules/yargs/lib/validation.js:295
-#, javascript-format
-msgid "Arguments %s and %s are mutually exclusive"
-msgstr ""
-
-#: gutenberg/blocks/ts/node_modules/yargs/lib/validation.js:316
-#: node_modules/yargs/lib/validation.js:316
-#, javascript-format
-msgid "Did you mean %s?"
-msgstr ""
-
 #: settings/settings-ui.php:21
 msgid "SPTV Settings"
 msgstr "SPTV asetukset"
 
-#: settings/settings-ui.php:21 settings/settings-ui.php:152
+#: settings/settings-ui.php:21 settings/settings-ui.php:170
 msgid "SPTV"
 msgstr "SPTV"
 
@@ -499,17 +243,32 @@ msgstr "Uuden palvelun sivumalli"
 msgid "Service location template"
 msgstr "Uuden palvelupaikan sivumalli"
 
-#: settings/settings-ui.php:82
+#: settings/settings-ui.php:85
 msgid "PTV-versio"
 msgstr ""
 
-#: settings/settings-ui.php:99
+#: settings/settings-ui.php:103
 msgid "No template"
 msgstr "Ei sivumallia"
 
-#: settings/settings-ui.php:148
+#: settings/settings-ui.php:166
 msgid "You do not have sufficient permissions to access this page."
 msgstr "Sinulla ei ole riittäviä oikeuksia tähän sivuun."
+
+#, fuzzy
+#~| msgid "Username"
+#~ msgid "name"
+#~ msgstr "Käyttäjänimi"
+
+#, fuzzy
+#~| msgid "Phone numbers"
+#~ msgid "number"
+#~ msgstr "Puhelinnumerot"
+
+#, fuzzy
+#~| msgid "Requirements"
+#~ msgid "required"
+#~ msgstr "Ehdot ja kriteerit"
 
 #~ msgid "fi"
 #~ msgstr "Suomi"
