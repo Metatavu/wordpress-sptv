@@ -2,12 +2,12 @@
   include "name.php";
   include "description.php";
   
-  echo "<h2>" . __("Visiting information", "sptv") . "</h2>";
+  echo "<h3>" . __("Visiting information", "sptv") . "</h3>";
 
   include "addresses.php";
   include "service-hours.php";
 
-  echo "<h2>" . __("Other contact details", "sptv") . "</h2>";
+  echo "<h3>" . __("Other contact details", "sptv") . "</h3>";
 
   if (getLocalizedValue($serviceChannel ["emails"], $data->language)) {
     echo "<b>" . __("Email", "sptv") . "</b>";
@@ -21,7 +21,7 @@
     include "webpage.php";
   }
 
-  echo "<h2>" . __("Accessibility information", "sptv") . "</h2>";
+  echo "<h3>" . __("Accessibility information", "sptv") . "</h3>";
 
   include "accessibility.php";
 ?>

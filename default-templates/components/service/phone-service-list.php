@@ -5,7 +5,7 @@
   $serviceChannels = $data->serviceChannels;
 
   if ($serviceChannels) {
-    echo "<h2>Yhteystiedot</h2>";
+    echo "<h3>Yhteystiedot</h3>";
 
     foreach ($serviceChannels as $serviceChannel) {
       $email = count($serviceChannel["supportEmails"]) > 0 ? $serviceChannel["supportEmails"][0]["value"] : "";

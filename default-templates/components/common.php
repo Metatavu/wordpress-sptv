@@ -148,7 +148,7 @@
         if ($serviceHour["serviceHourType"] == "DaysOfTheWeek") {
           $additionalInformation = getLocalizedValue($serviceHour["additionalInformation"], $data->language);
           $openingHours = $serviceHour["openingHour"];
-          $result .= "<h2>$additionalInformation</h2>";
+          $result .= "<h3>$additionalInformation</h3>";
           
           $result .= "<p>";
           if (!$serviceHour["isClosed"] && count($openingHours) == 0) {

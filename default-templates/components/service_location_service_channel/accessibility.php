@@ -20,7 +20,7 @@
        */
       if ($address['entrances']) {
         echo "<div class='accessibility-sentences'>";
-        echo "<h2>$blockHeader</h2>";
+        echo "<h3>$blockHeader</h3>";
         foreach ($address['entrances'] as $entrance) {
           foreach ($entrance['accessibilitySentences'] as $accessibilitySentence) {
             $sentenceGroups = $accessibilitySentence['sentenceGroup'];
