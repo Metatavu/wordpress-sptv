@@ -27,7 +27,7 @@
             $key = array_search('fi', array_column($sentenceGroups, 'language'));
             echo "<div class='accessibility-sentence'>";
             echo "<button type='button' class='button-text closed'>" . $sentenceGroups[$key]['value'] . "</button>";
-            echo "<div class='accessibility-content'>";
+            echo "<div class='content'>";
 
             foreach ($accessibilitySentence['sentences'] as $sentences) {
               $sentence = $sentences['sentence'];
