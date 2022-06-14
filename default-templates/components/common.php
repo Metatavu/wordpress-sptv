@@ -148,13 +148,17 @@
         if ($serviceHour["serviceHourType"] == "DaysOfTheWeek") {
           $additionalInformation = getLocalizedValue($serviceHour["additionalInformation"], $data->language);
           $openingHours = $serviceHour["openingHour"];
-          $result .= "<p>$additionalInformation</p>";
+          $result .= "<h2>$additionalInformation</h2>";
           
           $result .= "<p>";
           if (!$serviceHour["isClosed"] && count($openingHours) == 0) {
             $result .= __("Open 24 hours.", "sptv");
           } else {
-            $result .= formatOpeningHours($openingHours);
+            $formattedHours = formatOpeningHours($openingHours);
+            foreach($formattedHours as $formattedHour) {
+              $result .= $formattedHour;
+              $result .= "</br>";
+            }
           }
           $result .= "</p>";
 
@@ -176,7 +180,7 @@
     $from = "";
     $to = "";
     
-    if (isset($openingHour['dayTo'])) {
+    if (!empty($openingHour['dayTo'])) {
       $days .= ' - ' . getLocalizedDayName($openingHour['dayTo']);
     }
     
@@ -202,9 +206,9 @@
    * @return string formatted string
    */
   function formatOpeningHours($openingHours) {
-    return implode(", ", array_map(function ($openingHour) {
+    return array_map(function ($openingHour) {
       return formatOpeningHour($openingHour);
-    }, $openingHours));
+    }, $openingHours);
   }
 
 ?>
