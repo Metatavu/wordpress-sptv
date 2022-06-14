@@ -3,7 +3,7 @@
  * Created on Jul 19, 2019
  * Plugin Name: SPTV
  * Description: Wordpress plugin to searchable PTV service
- * Version: 1.0.8.2
+ * Version: 1.0.8.3
  * Author: Metatavu Oy
  */
 
