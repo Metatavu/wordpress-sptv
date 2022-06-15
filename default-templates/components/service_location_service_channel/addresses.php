@@ -20,7 +20,8 @@
       $routeUrl = $latitude && $longitude ? "https://www.suomi.fi/kartta/reitit?to.lat=$latitude&to.lon=$longitude" : null;
 
       echo "<div>";
-      echo "<h3>" . __("Visit address", "sptv") . "</h3>";
+      echo "<strong>" . __("Visit address", "sptv") . "</strong>";
+      echo "<br/>";
       echo getLocalizedValue($streetAddress["street"], $data->language) . " " . $streetAddress["streetNumber"];
       echo "<br/>";
       echo $streetAddress["postalCode"] . " " . getLocalizedValue($streetAddress["postOffice"], $data->language);
