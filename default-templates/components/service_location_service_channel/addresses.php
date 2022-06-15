@@ -19,6 +19,9 @@
       $mapUrl = $serviceId ? "https://www.suomi.fi/kartta/palvelupaikat/$serviceId?sl=$serviceChannelId" : null;
       $routeUrl = $latitude && $longitude ? "https://www.suomi.fi/kartta/reitit?to.lat=$latitude&to.lon=$longitude" : null;
 
+      echo "<div>";
+      echo "<strong>" . __("Visit address", "sptv") . "</strong>";
+      echo "<br/>";
       echo getLocalizedValue($streetAddress["street"], $data->language) . " " . $streetAddress["streetNumber"];
       echo "<br/>";
       echo $streetAddress["postalCode"] . " " . getLocalizedValue($streetAddress["postOffice"], $data->language);
@@ -30,6 +33,9 @@
       if ($routeUrl) {
         echo "<br/><a target=\"_blank\" href=\"$routeUrl\">Näytä reitti tänne</a>";
       }
+
+      echo "</div>";
+      echo "<br/>";
     }
   }
 
