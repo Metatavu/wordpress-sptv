@@ -144,27 +144,58 @@
   function formatServiceHours($serviceHours) {
     $result = '';
     if (is_array($serviceHours)) {
-      foreach ($serviceHours as $serviceHour) {
-        $additionalInformation = getLocalizedValue($serviceHour["additionalInformation"], $data->language);
-        $openingHours = $serviceHour["openingHour"];
-        $result .= "<h3>$additionalInformation</h3>";
-          
-        $result .= "<p>";
-        if (!$serviceHour["isClosed"] && count($openingHours) == 0) {
-          $result .= __("Open 24 hours.", "sptv");
-        } else if ($serviceHour["isClosed"]) {
-          $result .= __("Closed", "sptv");
-        }  else {
-          $formattedHours = formatOpeningHours($openingHours);
-          foreach($formattedHours as $formattedHour) {
-            $result .= $formattedHour;
-            $result .= "</br>";
-          }
-        }
-        $result .= "</p>";
+      $normalServiceHours = array_filter($serviceHours, function ($serviceHour) {
+        return $serviceHour["serviceHourType"] == "DaysOfTheWeek";
+      });
 
+      $exceptionalServiceHours = array_filter($serviceHours, function ($serviceHour) {
+        return $serviceHour["serviceHourType"] == "Exceptional";
+      });
+
+
+      $result .= buildServiceHoursHtml($normalServiceHours);
+      $result .= buildServiceHoursHtml($exceptionalServiceHours);
+    }
+
+    return $result;
+  }
+
+  /**
+   * Builds service hours html
+   * @param object[] $serviceHours service hours
+   * @return string service hours html
+   */
+  function buildServiceHoursHtml($serviceHours) {
+    $result = '';
+
+    foreach ($serviceHours as $serviceHour) {
+      $additionalInformation = getLocalizedValue($serviceHour["additionalInformation"], $data->language);
+      $openingHours = $serviceHour["openingHour"];
+      $result .= "<strong>$additionalInformation</strong>";
+        
+      $result .= "<p>";
+
+      if ($serviceHour["serviceHourType"] == "Exceptional") {
+        $splitDate = explode("-",$serviceHour["validFrom"]);
+        $year = $splitDate[0];
+        $month = $splitDate[1];
+        $day = explode("T", $splitDate[2])[0];
+        $result .= $day . "." . $month . "." . $year;
+        $result .= "</br>";
       }
-      
+
+      if (!$serviceHour["isClosed"] && count($openingHours) == 0) {
+        $result .= __("Open 24 hours.", "sptv");
+      } else if ($serviceHour["isClosed"]) {
+        $result .= __("Closed", "sptv");
+      } else {
+        $formattedHours = formatOpeningHours($openingHours);
+        foreach($formattedHours as $formattedHour) {
+          $result .= $formattedHour;
+          $result .= "</br>";
+        }
+      }
+      $result .= "</p>";
     }
 
     return $result;
@@ -204,7 +235,7 @@
    * Formats list of opening hours
    * 
    * @param object[] $openingHours openingHours
-   * @return string formatted string
+   * @return string[] formatted hours
    */
   function formatOpeningHours($openingHours) {
     return array_map(function ($openingHour) {
