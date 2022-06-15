@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: SPTV 1.0.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/wordpress-sptv\n"
-"POT-Creation-Date: 2022-06-14 15:40+0300\n"
+"POT-Creation-Date: 2022-06-15 09:44+0300\n"
 "PO-Revision-Date: 2019-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -53,11 +53,11 @@ msgstr ""
 msgid "En"
 msgstr ""
 
-#: default-templates/components/common.php:156
+#: default-templates/components/common.php:188
 msgid "Open 24 hours."
 msgstr ""
 
-#: default-templates/components/common.php:158
+#: default-templates/components/common.php:190
 msgid "Closed"
 msgstr ""
 
@@ -74,6 +74,10 @@ msgstr ""
 #: default-templates/components/service_location_service_channel/default-all.php:24
 #: gutenberg/blocks/blocks.php:162
 msgid "Accessibility information"
+msgstr ""
+
+#: default-templates/components/service_location_service_channel/addresses.php:23
+msgid "Visit address"
 msgstr ""
 
 #: default-templates/components/service_location_service_channel/default-all.php:5
