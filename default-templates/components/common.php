@@ -208,12 +208,12 @@
    * @return string formatted object
    */
   function formatOpeningHour($openingHour) {
-    $days = isset($openingHour['dayFrom']) ? getLocalizedDayName($openingHour['dayFrom']) : '';
+    $days = isset($openingHour['dayFrom']) ? formatDayName(getLocalizedDayName($openingHour['dayFrom'])) : '';
     $from = "";
     $to = "";
     
     if (!empty($openingHour['dayTo'])) {
-      $days .= ' - ' . getLocalizedDayName($openingHour['dayTo']);
+      $days .= ' - ' . formatDayName(getLocalizedDayName($openingHour['dayTo']));
     }
     
     if (isset($openingHour['from'])) {
@@ -229,6 +229,19 @@
     } else {
       return "${days} ${from}";
     }
+  }
+
+  /**
+   * Formats a day name
+   * Example: Maanantai -> ma
+   * 
+   * @param string $dayName day name to format
+   * @return string formatted day name
+   */
+  function formatDayName($dayName) {
+    $shortened = substr($dayName, 0, 2);
+    $lowerCase = strtolower($shortened);
+    return $lowerCase;
   }
 
   /**
