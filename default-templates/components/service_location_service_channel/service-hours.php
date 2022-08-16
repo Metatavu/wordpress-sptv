@@ -2,6 +2,6 @@
   require_once(__DIR__ . '/../common.php');
 
   $serviceChannel = $data->serviceChannel;
-  echo formatServiceHours($serviceChannel["serviceHours"]);
+  echo formatServiceHours($serviceChannel["serviceHours"], $data->language);
 
 ?>
