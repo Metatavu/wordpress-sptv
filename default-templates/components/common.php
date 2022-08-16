@@ -170,7 +170,7 @@
       "days" => $combination[0]["days"] . "-" . end($combination)["days"],
       "from" => $combination[0]["from"],
       "to" => $combination[0]["to"]
-    ]
+    ];
 
     return formatOpeningHours($openingHours);
   }
@@ -184,10 +184,7 @@
   function buildServiceHoursHtml($serviceHours, $language) {
     $result = '';
 
-    $combination = array();
-    $formattedHours = array();
-    foreach ($i = 0; $i < count($serviceHours); $i++) {
-      $serviceHour = $serviceHours[array_keys($serviceHours)[$i]];
+    foreach ($serviceHours as $serviceHour) {
       $additionalInformation = getLocalizedValue($serviceHour["additionalInformation"], $language);
       $openingHours = $serviceHour["openingHour"];
       $filtered = array_values(array_filter($serviceHour["additionalInformation"], function ($info) use($language) {
@@ -217,26 +214,31 @@
       } else if ($serviceHour["isClosed"]) {
         $result .= __("Closed", "sptv");
       } else {
-        $translatedHours = translateOpeningHours($openingHours);
+        $combination = array();
+        $formattedHours = array();
 
-        if (empty($openingHour['dayTo'])) {
-          if (count($combination) == 0) {
-            array_push($combination, $translatedHours);
-          } else if (end($combination)["from"] == $translatedHours["from"] && end($combination)["to"] == $translatedHours["to"]) {
-            array_push($combination, $translatedHours);
+        for ($i = 0; $i < count($openingHours); $i++) {
+          $openingHour = $openingHours[array_keys($openingHours)[$i]];
+          $translatedHours = translateOpeningHours($openingHour);
+          if (empty($openingHour['dayTo'])) {
+            if (count($combination) == 0) {
+              array_push($combination, $translatedHours);
+            } else if (end($combination)["from"] == $translatedHours["from"] && end($combination)["to"] == $translatedHours["to"]) {
+              array_push($combination, $translatedHours);
+            } else {
+              array_push($formattedHours, buildCombinedServiceHours($combination));
+              $combination = array($translatedHours);
+            }
           } else {
             array_push($formattedHours, buildCombinedServiceHours($combination));
-            $combination = array($translatedHours);
+            $combination = array();
+            array_push($formattedHours, formatOpeningHours($translatedHours));
           }
-        } else {
-          array_push($formattedHours, buildCombinedServiceHours($combination));
-          $combination = array();
-          array_push($formattedHours, formatOpeningHours($translatedHours))
-        }
-
-        if ($i == count($serviceHours) - 1 && count($combination) > 0) {
-          array_push($formattedHours, buildCombinedServiceHours($combination));
-          $combination = array();
+  
+          if ($i == count($openingHours) - 1 && count($combination) > 0) {
+            array_push($formattedHours, buildCombinedServiceHours($combination));
+            $combination = array();
+          }
         }
       }
 
@@ -257,7 +259,7 @@
   function formatOpeningHours($translatedOpeningHour) {
     $from = $translatedOpeningHour["from"];
     $to = $translatedOpeningHour["to"];
-    $day = $translatedOpeningHour["days"];
+    $days = $translatedOpeningHour["days"];
 
     if (!empty($from) || !empty($to)) {
       return "${days} ${from} - ${to}";
@@ -293,7 +295,7 @@
       "days" => $days,
       "from" => $from,
       "to" => $to
-    ]
+    ];
   }
 
   /**
@@ -309,16 +311,16 @@
     return $lowerCase;
   }
 
-  /**
-   * Formats list of opening hours
-   * 
-   * @param object[] $openingHours openingHours
-   * @return string[] formatted hours
-   */
-  function formatOpeningHours($openingHours) {
-    return array_map(function ($openingHour) {
-      return formatOpeningHour($openingHour);
-    }, $openingHours);
-  }
+  // /**
+  //  * Formats list of opening hours
+  //  * 
+  //  * @param object[] $openingHours openingHours
+  //  * @return string[] formatted hours
+  //  */
+  // function formatOpeningHours($openingHours) {
+  //   return array_map(function ($openingHour) {
+  //     return formatOpeningHour($openingHour);
+  //   }, $openingHours);
+  // }
 
 ?>
