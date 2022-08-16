@@ -254,7 +254,10 @@
   }
 
   /**
+   * Format opening hours
    * 
+   * @param object $translatedOpeningHour translated opening hour
+   * @return string formatted opening hour
    */
   function formatOpeningHours($translatedOpeningHour) {
     $from = $translatedOpeningHour["from"];
@@ -310,17 +313,4 @@
     $lowerCase = strtolower($shortened);
     return $lowerCase;
   }
-
-  // /**
-  //  * Formats list of opening hours
-  //  * 
-  //  * @param object[] $openingHours openingHours
-  //  * @return string[] formatted hours
-  //  */
-  // function formatOpeningHours($openingHours) {
-  //   return array_map(function ($openingHour) {
-  //     return formatOpeningHour($openingHour);
-  //   }, $openingHours);
-  // }
-
 ?>
