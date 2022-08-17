@@ -266,7 +266,7 @@
     $days = $translatedOpeningHour["days"];
 
     if (!empty($from) || !empty($to)) {
-      return "${days} ${from} - ${to}";
+      return "${days} ${from}-${to}";
     } else {
       return "${days} ${from}";
     }
@@ -284,7 +284,7 @@
     $to = "";
     
     if (!empty($openingHour['dayTo'])) {
-      $days .= ' - ' . formatDayName(getLocalizedDayName($openingHour['dayTo']));
+      $days .= '-' . formatDayName(getLocalizedDayName($openingHour['dayTo']));
     }
     
     if (isset($openingHour['from'])) {
