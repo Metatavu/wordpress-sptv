@@ -139,9 +139,10 @@
    * Formats service hours
    * 
    * @param object $serviceHours service hours
+   * @param string $language language
    * @return string formatted service hours
    */
-  function formatServiceHours($serviceHours) {
+  function formatServiceHours($serviceHours, $language) {
     $result = '';
     if (is_array($serviceHours)) {
       $normalServiceHours = array_filter($serviceHours, function ($serviceHour) {
@@ -153,25 +154,50 @@
       });
 
 
-      $result .= buildServiceHoursHtml($normalServiceHours);
-      $result .= buildServiceHoursHtml($exceptionalServiceHours);
+      $result .= buildServiceHoursHtml($normalServiceHours, $language);
+      $result .= buildServiceHoursHtml($exceptionalServiceHours, $language);
     }
 
     return $result;
   }
 
+  function buildCombinedServiceHours($combination) {
+    if (count($combination) == 1) {
+      return formatOpeningHours($combination[0]);
+    }
+
+    $openingHours = [
+      "days" => $combination[0]["days"] . "-" . end($combination)["days"],
+      "from" => $combination[0]["from"],
+      "to" => $combination[0]["to"]
+    ];
+
+    return formatOpeningHours($openingHours);
+  }
+
   /**
    * Builds service hours html
    * @param object[] $serviceHours service hours
+   * @param string $language language
    * @return string service hours html
    */
-  function buildServiceHoursHtml($serviceHours) {
+  function buildServiceHoursHtml($serviceHours, $language) {
     $result = '';
 
     foreach ($serviceHours as $serviceHour) {
-      $additionalInformation = getLocalizedValue($serviceHour["additionalInformation"], $data->language);
+      $additionalInformation = getLocalizedValue($serviceHour["additionalInformation"], $language);
       $openingHours = $serviceHour["openingHour"];
-      $result .= "<strong>$additionalInformation</strong>";
+      $filtered = array_values(array_filter($serviceHour["additionalInformation"], function ($info) use($language) {
+        return $info["language"] == $language; 
+      }));
+      if (count($filtered) == 0) {
+        $firstValue = array_values($serviceHour["additionalInformation"])[0]["value"];
+        $result .= "<strong>$firstValue</strong>";
+      } else {
+        $additionalInfoValue = $filtered[0]["value"];
+        $result .= "<strong>$additionalInfoValue</strong>";
+      }
+      
         
       $result .= "<p>";
 
@@ -189,12 +215,39 @@
       } else if ($serviceHour["isClosed"]) {
         $result .= __("Closed", "sptv");
       } else {
-        $formattedHours = formatOpeningHours($openingHours);
-        foreach($formattedHours as $formattedHour) {
-          $result .= $formattedHour;
-          $result .= "</br>";
+        $combination = array();
+        $formattedHours = array();
+
+        for ($i = 0; $i < count($openingHours); $i++) {
+          $openingHour = $openingHours[array_keys($openingHours)[$i]];
+          $translatedHours = translateOpeningHours($openingHour);
+          if (empty($openingHour['dayTo'])) {
+            if (count($combination) == 0) {
+              array_push($combination, $translatedHours);
+            } else if (end($combination)["from"] == $translatedHours["from"] && end($combination)["to"] == $translatedHours["to"]) {
+              array_push($combination, $translatedHours);
+            } else {
+              array_push($formattedHours, buildCombinedServiceHours($combination));
+              $combination = array($translatedHours);
+            }
+          } else {
+            array_push($formattedHours, buildCombinedServiceHours($combination));
+            $combination = array();
+            array_push($formattedHours, formatOpeningHours($translatedHours));
+          }
+  
+          if ($i == count($openingHours) - 1 && count($combination) > 0) {
+            array_push($formattedHours, buildCombinedServiceHours($combination));
+            $combination = array();
+          }
         }
       }
+
+      foreach($formattedHours as $formattedHour) {
+        $result .= $formattedHour;
+        $result .= "</br>";
+      }
+
       $result .= "</p>";
     }
 
@@ -202,12 +255,30 @@
   }
 
   /**
-   * Formats opening hour object.
+   * Format opening hours
+   * 
+   * @param object $translatedOpeningHour translated opening hour
+   * @return string formatted opening hour
+   */
+  function formatOpeningHours($translatedOpeningHour) {
+    $from = $translatedOpeningHour["from"];
+    $to = $translatedOpeningHour["to"];
+    $days = $translatedOpeningHour["days"];
+
+    if (!empty($from) || !empty($to)) {
+      return "${days} ${from} - ${to}";
+    } else {
+      return "${days} ${from}";
+    }
+  }
+
+  /**
+   * Translates opening hour object.
    * 
    * @param object $openingHour openingHour
    * @return string formatted object
    */
-  function formatOpeningHour($openingHour) {
+  function translateOpeningHours($openingHour) {
     $days = isset($openingHour['dayFrom']) ? formatDayName(getLocalizedDayName($openingHour['dayFrom'])) : '';
     $from = "";
     $to = "";
@@ -223,12 +294,12 @@
     if (isset($openingHour['to'])) {
       $to = implode('.', array_slice(explode(':', $openingHour['to']), 0, 2));
     }
-    
-    if (!empty($from) || !empty($to)) {
-      return "${days} ${from} - ${to}";
-    } else {
-      return "${days} ${from}";
-    }
+
+    return [
+      "days" => $days,
+      "from" => $from,
+      "to" => $to
+    ];
   }
 
   /**
@@ -243,17 +314,4 @@
     $lowerCase = strtolower($shortened);
     return $lowerCase;
   }
-
-  /**
-   * Formats list of opening hours
-   * 
-   * @param object[] $openingHours openingHours
-   * @return string[] formatted hours
-   */
-  function formatOpeningHours($openingHours) {
-    return array_map(function ($openingHour) {
-      return formatOpeningHour($openingHour);
-    }, $openingHours);
-  }
-
 ?>
