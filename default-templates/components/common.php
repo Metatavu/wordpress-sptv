@@ -192,7 +192,7 @@
       }));
       if (count($filtered) == 0) {
         $firstValue = array_values($serviceHour["additionalInformation"])[0];
-        $result .= "<strong>$first</strong>";
+        $result .= "<strong>$firstValue</strong>";
       } else {
         $additionalInfoValue = $filtered[0]["value"];
         $result .= "<strong>$additionalInfoValue</strong>";
