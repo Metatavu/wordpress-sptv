@@ -191,7 +191,8 @@
         return $info["language"] == $language; 
       }));
       if (count($filtered) == 0) {
-        $result .= "<strong>No translation</strong>";
+        $firstValue = array_values($serviceHour["additionalInformation"])[0];
+        $result .= "<strong>$first</strong>";
       } else {
         $additionalInfoValue = $filtered[0]["value"];
         $result .= "<strong>$additionalInfoValue</strong>";
