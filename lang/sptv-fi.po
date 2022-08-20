@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: SPTV 1.0.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/wordpress-sptv\n"
-"POT-Creation-Date: 2022-06-15 09:44+0300\n"
-"PO-Revision-Date: 2022-06-15 09:44+0300\n"
+"POT-Creation-Date: 2022-08-20 07:22+0300\n"
+"PO-Revision-Date: 2022-08-20 07:24+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: fi\n"
@@ -13,7 +13,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.1\n"
+"X-Generator: Poedit 3.1.1\n"
 "X-Poedit-KeywordsList: __;_e\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-SearchPath-0: .\n"
@@ -54,11 +54,11 @@ msgstr "Suomi"
 msgid "En"
 msgstr "Englanti"
 
-#: default-templates/components/common.php:188
+#: default-templates/components/common.php:214
 msgid "Open 24 hours."
 msgstr "Avoinna ympäri vuorokauden."
 
-#: default-templates/components/common.php:190
+#: default-templates/components/common.php:216
 msgid "Closed"
 msgstr "Suljettu"
 
@@ -80,6 +80,10 @@ msgstr "Esteettömyystiedot"
 #: default-templates/components/service_location_service_channel/addresses.php:23
 msgid "Visit address"
 msgstr "Käyntiosoite"
+
+#: default-templates/components/service_location_service_channel/addresses.php:42
+msgid "Postal address"
+msgstr "Postiosoite"
 
 #: default-templates/components/service_location_service_channel/default-all.php:5
 msgid "Visiting information"
