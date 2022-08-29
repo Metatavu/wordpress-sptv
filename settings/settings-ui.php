@@ -4,9 +4,6 @@
   if (!defined('ABSPATH')) { 
     exit;
   }
-  define("SPTV_SETTINGS_OPTION", 'sptv');
-  define("SPTV_SETTINGS_GROUP", 'sptv');
-  define("SPTV_SETTINGS_PAGE", 'sptv');
   
   if (!class_exists( 'Metatavu\SPTV\Wordpress\SettingsUI' ) ) {
 
