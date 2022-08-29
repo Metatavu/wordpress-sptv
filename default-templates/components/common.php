@@ -18,6 +18,10 @@
     });
 
     usort($filtered, function ($a, $b) {
+      if (!isset($a["language"])) {
+        return $a["language"] == $language ? -1 : 1;
+      }
+      
       return $a["language"] == $language ? -1 : 1;
     });
 

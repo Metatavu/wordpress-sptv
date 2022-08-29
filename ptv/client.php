@@ -25,7 +25,7 @@
        * @returns found service or null if not found
        */
       public function findServiceChannel($id) {
-        if (!$this->serviceChannelCache[$id]) {
+        if (!isset($this->serviceChannelCache[$id])) {
           $this->serviceChannelCache[$id] = json_decode($this->doGetRequest("https://api.palvelutietovaranto.suomi.fi/api/v10/ServiceChannel/$id"), true);
         }
 
@@ -39,7 +39,7 @@
        * @returns found service or null if not found
        */
       public function findService($id) {
-        if (!$this->serviceCache[$id]) {
+        if (!isset($this->serviceCache[$id])) {
           $this->serviceCache[$id] = json_decode($this->doGetRequest("https://api.palvelutietovaranto.suomi.fi/api/v10/Service/$id"), true);
         }
 
