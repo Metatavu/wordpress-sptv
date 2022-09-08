@@ -394,7 +394,7 @@ if (!class_exists( 'Metatavu\SPTV\Wordpress\Gutenberg\Blocks\Blocks' ) ) {
       $templateData = [
         "serviceChannel" => $serviceChannel,
         "language" => $language,
-        'templateLoader' => $templateLoader
+        "paths" => $this->getPaths("components/service_location_service_channel")
       ];
 
       ob_start();
@@ -429,7 +429,7 @@ if (!class_exists( 'Metatavu\SPTV\Wordpress\Gutenberg\Blocks\Blocks' ) ) {
       $templateData = [
         "serviceChannel" => $serviceChannel,
         "language" => $language,
-        'templateLoader' => $templateLoader
+        "paths" => $this->getPaths("components/electronic_service_channel")
       ];
 
       ob_start();
@@ -464,7 +464,7 @@ if (!class_exists( 'Metatavu\SPTV\Wordpress\Gutenberg\Blocks\Blocks' ) ) {
       $templateData = [
         "serviceChannel" => $serviceChannel,
         "language" => $language,
-        'templateLoader' => $templateLoader
+        "paths" => $this->getPaths("components/webpage_service_channel")
       ];
 
       ob_start();
@@ -499,7 +499,7 @@ if (!class_exists( 'Metatavu\SPTV\Wordpress\Gutenberg\Blocks\Blocks' ) ) {
       $templateData = [
         "serviceChannel" => $serviceChannel,
         "language" => $language,
-        'templateLoader' => $templateLoader
+        "paths" => $this->getPaths("components/printable_form_service_channel")
       ];
 
       ob_start();
@@ -534,7 +534,7 @@ if (!class_exists( 'Metatavu\SPTV\Wordpress\Gutenberg\Blocks\Blocks' ) ) {
       $templateData = [
         "serviceChannel" => $this->processPhoneServiceChannel($serviceChannel),
         "language" => $language,
-        'templateLoader' => $templateLoader
+        "paths" => $this->getPaths("components/phone_service_channel")
       ];
 
       ob_start();
@@ -590,7 +590,7 @@ if (!class_exists( 'Metatavu\SPTV\Wordpress\Gutenberg\Blocks\Blocks' ) ) {
         "service" => $service,
         "language" => $language,
         "serviceChannels" => $serviceChannels,
-        'templateLoader' => $templateLoader
+        "paths" => $this->getPaths("components/service")
       ];
 
       ob_start();
@@ -624,7 +624,7 @@ if (!class_exists( 'Metatavu\SPTV\Wordpress\Gutenberg\Blocks\Blocks' ) ) {
       $templateData = [
         "organization" => $organization,
         "language" => $language,
-        'templateLoader' => $templateLoader
+        "paths" => $this->getPaths("components/organization")
       ];
 
       ob_start();
@@ -708,6 +708,21 @@ if (!class_exists( 'Metatavu\SPTV\Wordpress\Gutenberg\Blocks\Blocks' ) ) {
       }
       
       return $phoneNumber;
+    }
+
+    /**
+     * Returns paths array for given template folder
+     * 
+     * @param string $templatesFolder templates folder
+     * @return string path to default templates 
+     */
+    private function getPaths($templatesFolder) {
+      $defaultsTemplates = realpath(plugin_dir_path(__DIR__) . "../default-templates");
+
+      return [
+        "common" => $defaultsTemplates . "/components/common.php",
+        "defaultTemplates" => $defaultsTemplates . "/$templatesFolder"
+      ];
     }
 
   }
