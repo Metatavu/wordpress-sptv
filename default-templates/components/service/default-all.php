@@ -1,7 +1,7 @@
 <?php
-  include "name.php";
-  include "summary.php";
-  include "description.php";
-  include "user-instruction.php";
-  include "requirements.php";
+  $data->templateLoader->get_template_part("components/service/name");
+  $data->templateLoader->get_template_part("components/service/summary");
+  $data->templateLoader->get_template_part("components/service/description");
+  $data->templateLoader->get_template_part("components/service/user-instruction");
+  $data->templateLoader->get_template_part("components/service/requirements");
 ?>
