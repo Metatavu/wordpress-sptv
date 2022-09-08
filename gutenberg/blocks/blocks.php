@@ -8,7 +8,6 @@ require_once(__DIR__ . '/../../templates/template-loader.php');
 require_once(__DIR__ . '/../../ptv/ptv.php');
 require_once(__DIR__ . '/../../settings/settings.php');
 
-
 defined ( 'ABSPATH' ) || die ( 'No script kiddies please!' );
 
 if (!class_exists( 'Metatavu\SPTV\Wordpress\Gutenberg\Blocks\Blocks' ) ) {
@@ -390,14 +389,15 @@ if (!class_exists( 'Metatavu\SPTV\Wordpress\Gutenberg\Blocks\Blocks' ) ) {
       $language = $attributes["language"];
 
       $serviceChannel = $this->ptv->findServiceChannel($id);
+      $templateLoader = new \Metatavu\SPTV\TemplateLoader();
 
       $templateData = [
         "serviceChannel" => $serviceChannel,
-        "language" => $language
+        "language" => $language,
+        "paths" => $this->getPaths("components/service_location_service_channel")
       ];
 
       ob_start();
-      $templateLoader = new \Metatavu\SPTV\TemplateLoader();
       $templateLoader->set_template_data($templateData)->get_template_part("components/service_location_service_channel/$component");
       $result = ob_get_contents();
       ob_end_clean();
@@ -424,14 +424,15 @@ if (!class_exists( 'Metatavu\SPTV\Wordpress\Gutenberg\Blocks\Blocks' ) ) {
       $language = $attributes["language"];
 
       $serviceChannel = $this->ptv->findServiceChannel($id);
+      $templateLoader = new \Metatavu\SPTV\TemplateLoader();
 
       $templateData = [
         "serviceChannel" => $serviceChannel,
-        "language" => $language
+        "language" => $language,
+        "paths" => $this->getPaths("components/electronic_service_channel")
       ];
 
       ob_start();
-      $templateLoader = new \Metatavu\SPTV\TemplateLoader();
       $templateLoader->set_template_data($templateData)->get_template_part("components/electronic_service_channel/$component");
       $result = ob_get_contents();
       ob_end_clean();
@@ -458,14 +459,15 @@ if (!class_exists( 'Metatavu\SPTV\Wordpress\Gutenberg\Blocks\Blocks' ) ) {
       $language = $attributes["language"];
 
       $serviceChannel = $this->ptv->findServiceChannel($id);
+      $templateLoader = new \Metatavu\SPTV\TemplateLoader();
 
       $templateData = [
         "serviceChannel" => $serviceChannel,
-        "language" => $language
+        "language" => $language,
+        "paths" => $this->getPaths("components/webpage_service_channel")
       ];
 
       ob_start();
-      $templateLoader = new \Metatavu\SPTV\TemplateLoader();
       $templateLoader->set_template_data($templateData)->get_template_part("components/webpage_service_channel/$component");
       $result = ob_get_contents();
       ob_end_clean();
@@ -492,14 +494,15 @@ if (!class_exists( 'Metatavu\SPTV\Wordpress\Gutenberg\Blocks\Blocks' ) ) {
       $language = $attributes["language"];
 
       $serviceChannel = $this->ptv->findServiceChannel($id);
+      $templateLoader = new \Metatavu\SPTV\TemplateLoader();
 
       $templateData = [
         "serviceChannel" => $serviceChannel,
-        "language" => $language
+        "language" => $language,
+        "paths" => $this->getPaths("components/printable_form_service_channel")
       ];
 
       ob_start();
-      $templateLoader = new \Metatavu\SPTV\TemplateLoader();
       $templateLoader->set_template_data($templateData)->get_template_part("components/printable_form_service_channel/$component");
       $result = ob_get_contents();
       ob_end_clean();
@@ -526,14 +529,15 @@ if (!class_exists( 'Metatavu\SPTV\Wordpress\Gutenberg\Blocks\Blocks' ) ) {
       $language = $attributes["language"];
 
       $serviceChannel = $this->ptv->findServiceChannel($id);
+      $templateLoader = new \Metatavu\SPTV\TemplateLoader();
 
       $templateData = [
-        "serviceChannel" => $serviceChannel,
-        "language" => $language
+        "serviceChannel" => $this->processPhoneServiceChannel($serviceChannel),
+        "language" => $language,
+        "paths" => $this->getPaths("components/phone_service_channel")
       ];
 
       ob_start();
-      $templateLoader = new \Metatavu\SPTV\TemplateLoader();
       $templateLoader->set_template_data($templateData)->get_template_part("components/phone_service_channel/$component");
       $result = ob_get_contents();
       ob_end_clean();
@@ -580,14 +584,16 @@ if (!class_exists( 'Metatavu\SPTV\Wordpress\Gutenberg\Blocks\Blocks' ) ) {
         default:
       }
 
+      $templateLoader = new \Metatavu\SPTV\TemplateLoader();
+
       $templateData = [
         "service" => $service,
         "language" => $language,
-        "serviceChannels" => $serviceChannels
+        "serviceChannels" => $serviceChannels,
+        "paths" => $this->getPaths("components/service")
       ];
 
       ob_start();
-      $templateLoader = new \Metatavu\SPTV\TemplateLoader();
       $templateLoader->set_template_data($templateData)->get_template_part("components/service/$component");
       $result = ob_get_contents();
       ob_end_clean();
@@ -613,14 +619,15 @@ if (!class_exists( 'Metatavu\SPTV\Wordpress\Gutenberg\Blocks\Blocks' ) ) {
       $component = $attributes["component"];
       $language = $attributes["language"];
       $organization = $this->ptv->findOrganization($id);
-    
+      $templateLoader = new \Metatavu\SPTV\TemplateLoader();
+
       $templateData = [
         "organization" => $organization,
         "language" => $language,
+        "paths" => $this->getPaths("components/organization")
       ];
 
       ob_start();
-      $templateLoader = new \Metatavu\SPTV\TemplateLoader();
       $templateLoader->set_template_data($templateData)->get_template_part("components/organization/$component");
       $result = ob_get_contents();
       ob_end_clean();
@@ -672,6 +679,50 @@ if (!class_exists( 'Metatavu\SPTV\Wordpress\Gutenberg\Blocks\Blocks' ) ) {
       );
 
       return $serviceChannels;
+    }
+
+    /**
+     * Processes a phone service channel
+     * 
+     * @param array $phoneNumber phone number to be processed
+     * @return array processed phone number 
+     */
+    private function processPhoneServiceChannel($serviceChannel) {
+      if (isset($serviceChannel["phoneNumbers"]) && is_array($serviceChannel["phoneNumbers"])) {
+        $serviceChannel["phoneNumbers"] = array_map([$this, "processPhoneNumber"], $serviceChannel["phoneNumbers"]);
+      }
+
+      return $serviceChannel;
+    }
+
+    /**
+     * Processes a phone number
+     * 
+     * @param array $phoneNumber phone number to be processed
+     * @return array processed phone number 
+     */
+    private function processPhoneNumber($phoneNumber) {
+      if (isset($phoneNumber["number"]) && empty($phoneNumber["prefixNumber"]) && str_starts_with($phoneNumber["number"], "+358")) {
+        $phoneNumber["number"] = substr($phoneNumber["number"], 4);
+        $phoneNumber["prefixNumber"] = "+358";
+      }
+      
+      return $phoneNumber;
+    }
+
+    /**
+     * Returns paths array for given template folder
+     * 
+     * @param string $templatesFolder templates folder
+     * @return string path to default templates 
+     */
+    private function getPaths($templatesFolder) {
+      $defaultsTemplates = realpath(plugin_dir_path(__DIR__) . "../default-templates");
+
+      return [
+        "common" => $defaultsTemplates . "/components/common.php",
+        "defaultTemplates" => $defaultsTemplates . "/$templatesFolder"
+      ];
     }
 
   }

@@ -247,9 +247,11 @@
         }
       }
 
-      foreach($formattedHours as $formattedHour) {
-        $result .= $formattedHour;
-        $result .= "</br>";
+      if (isset($formattedHours)) {
+        foreach ($formattedHours as $formattedHour) {
+          $result .= $formattedHour;
+          $result .= "</br>";
+        }
       }
 
       $result .= "</p>";
@@ -318,4 +320,5 @@
     $lowerCase = strtolower($shortened);
     return $lowerCase;
   }
+
 ?>
