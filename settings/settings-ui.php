@@ -5,8 +5,7 @@
     exit;
   }
   
-  if (!class_exists( 'Metatavu\SPTV\Wordpress\SettingsUI' ) ) {
-
+  if (!class_exists( 'Metatavu\SPTV\Wordpress\Settings\SettingsUI' ) ) {
     class SettingsUI {
       
       public function __construct() {
