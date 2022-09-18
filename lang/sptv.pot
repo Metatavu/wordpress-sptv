@@ -80,6 +80,10 @@ msgstr ""
 msgid "Visit address"
 msgstr ""
 
+#: default-templates/components/service_location_service_channel/addresses.php:48
+msgid "Mailing address"
+msgstr ""
+
 #: default-templates/components/service_location_service_channel/default-all.php:5
 msgid "Visiting information"
 msgstr ""

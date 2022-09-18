@@ -36,6 +36,19 @@
 
       echo "</div>";
       echo "<br/>";
+    } else if ($address["type"] == "Postal") {
+      if (isset($address["postOfficeBoxAddress"])) {
+        $postOfficeBoxAddress = $address["postOfficeBoxAddress"];
+        $postOfficeBox = $postOfficeBoxAddress["postOfficeBox"];
+        $postalCode = $postOfficeBoxAddress["postalCode"];
+        $postOffice = $postOfficeBoxAddress["postOffice"];
+
+        echo "<div>";
+        echo "<strong>" . __("Mailing address", "sptv") . "</strong>";
+        echo "<br/>";
+        
+        echo getLocalizedValue($postOfficeBox, $data->language) . ', ' . $postalCode . " " . getLocalizedValue($postOffice, $data->language);
+      }
     }
   }
 
