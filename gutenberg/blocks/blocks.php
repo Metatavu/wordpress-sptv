@@ -665,6 +665,10 @@ if (!class_exists( 'Metatavu\SPTV\Wordpress\Gutenberg\Blocks\Blocks' ) ) {
      * @param string $type service channel type
      */
     private function getAttachedServiceChannels($service, $type) {
+      if (!isset($service["serviceChannels"])) {
+        return [];
+      }
+      
       $serviceChannels = array_map(function ($serviceChannel) {
         $channelId = $serviceChannel["serviceChannel"]["id"];
         $channel = $this->ptv->findServiceChannel($channelId);
