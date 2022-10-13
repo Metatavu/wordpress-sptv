@@ -17,9 +17,9 @@
       return !empty($value["value"]) && (!$type || ($value["type"] == $type));
     });
 
-    usort($filtered, function ($a, $b) {
+    usort($filtered, function ($a, $b) use ($language) {
       if (!isset($a["language"])) {
-        return $a["language"] == $language ? -1 : 1;
+        return 0;
       }
       
       return $a["language"] == $language ? -1 : 1;
