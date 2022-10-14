@@ -8,10 +8,13 @@
     echo "<h3>Toimipisteet</h3>";
 
     foreach ($serviceChannels as $serviceChannel) {
-      $name = count($serviceChannel["serviceChannelNames"]) > 0 ? $serviceChannel["serviceChannelNames"][0]["value"] : "";
-      $link = count($serviceChannel["webPages"]) > 0 ? $serviceChannel["webPages"][0]["url"] : "";
-
-      echo "<a href='$link'><p>$name</p></a>";
+      $serviceChannelId = $serviceChannel["id"];
+      
+      if (isset($data->relatedServiceChannelLinks[$serviceChannelId])) {
+        $name = getLocalizedValue($serviceChannel["serviceChannelNames"], $data->language);
+        $link = $data->relatedServiceChannelLinks[$serviceChannelId];
+        echo "<a href='$link'><p>$name</p></a>";
+      }
     }
   }
 ?>

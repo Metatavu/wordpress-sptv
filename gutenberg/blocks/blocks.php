@@ -3,6 +3,7 @@ namespace Metatavu\SPTV\Wordpress\Gutenberg\Blocks;
 
 use Metatavu\SPTV\Wordpress\Settings\Settings;
 use GuzzleHttp\Client;
+use \WP_Query;
 
 require_once(__DIR__ . '/../../templates/template-loader.php');
 require_once(__DIR__ . '/../../ptv/ptv.php');
@@ -564,6 +565,7 @@ if (!class_exists( 'Metatavu\SPTV\Wordpress\Gutenberg\Blocks\Blocks' ) ) {
       $language = $attributes["language"];
       $service = $this->ptv->findService($id);
       $serviceChannels = [];
+      $relatedServiceChannelLinks = [];
     
       switch ($component) {
         case "electronic-service-list":
@@ -571,6 +573,7 @@ if (!class_exists( 'Metatavu\SPTV\Wordpress\Gutenberg\Blocks\Blocks' ) ) {
         break;
         case "service-location-list":
           $serviceChannels = $this->getAttachedServiceChannels($service, "ServiceLocation");
+          $relatedServiceChannelLinks = $this->getRelatedServiceChannelLinks($serviceChannels, "service_location");
         break;
         case "phone-service-list":
           $serviceChannels = $this->getAttachedServiceChannels($service, "Phone");
@@ -590,6 +593,7 @@ if (!class_exists( 'Metatavu\SPTV\Wordpress\Gutenberg\Blocks\Blocks' ) ) {
         "service" => $service,
         "language" => $language,
         "serviceChannels" => $serviceChannels,
+        "relatedServiceChannelLinks" => $relatedServiceChannelLinks,
         "paths" => $this->getPaths("components/service")
       ];
 
@@ -656,6 +660,50 @@ if (!class_exists( 'Metatavu\SPTV\Wordpress\Gutenberg\Blocks\Blocks' ) ) {
     private function getCurrentLanguage() {
       $locale = get_locale();
       return substr($locale, 0, 2);
+    }
+
+    /**
+     * Returns assisiative array of channel ids and links to related pages
+     * 
+     * @param array $service channels
+     * @param string $type 
+     * @return array assisiative array of channel ids and links to related pages
+     */
+    private function getRelatedServiceChannelLinks($serviceChannels, $type) {
+      if (count($serviceChannels) == 0) {
+        return [];
+      }
+
+      $channelIds = array_map(function ($serviceChannel) {
+        return $serviceChannel["id"];
+      }, $serviceChannels);
+
+      $query = new WP_Query([
+        'post_type' => 'page',
+        'meta_query' => [
+          [
+            'key' => 'ptv_type',
+            'value' => $type,
+            'compare' => '=',
+          ],
+          [
+            'key' => 'ptv_id',
+            'value' => $channelIds,
+            'compare' => 'IN',
+          ]
+        ]
+      ]);
+
+      $result = [];
+
+      if ($query->have_posts()) {
+        foreach ($query->get_posts() as $post) {
+          $ptvId = get_post_meta($post->ID, 'ptv_id', true);
+          $result[$ptvId] = get_permalink($post);
+        }
+      }
+      
+      return $result;
     }
 
     /**
