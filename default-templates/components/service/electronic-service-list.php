@@ -6,12 +6,17 @@
 
   if ($serviceChannels) {
     echo "<h3>Verkkoasiointi</h3>";
-
     foreach ($serviceChannels as $serviceChannel) {
-      if (count($serviceChannel["serviceChannelNames"]) > 0) {
+      if (count($serviceChannel["serviceChannelNames"]) > 0 && $serviceChannel["webPages"] > 0) {
         $name = getLocalizedValue($serviceChannel["serviceChannelNames"], $data->language);
-        $link = getLocalizedValue($serviceChannel["webPages"], $data->language);
-        echo "<a href='$link'>$name</a>";
+        $webPage = getLocalizedItem($serviceChannel["webPages"], $data->language);
+
+        if (isset($webPage)) {
+          $url = $webPage["url"];
+          if (isset($url)) {
+            echo "<a href='$url'>$name</a>";
+          }
+        }
       }
 
       if (count($serviceChannel["serviceChannelDescriptions"]) > 0) {

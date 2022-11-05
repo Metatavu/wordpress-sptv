@@ -14,7 +14,7 @@
     }
     
     $filtered = array_filter($values, function($value) use($type) {
-      return !empty($value["value"]) && (!$type || ($value["type"] == $type));
+      return (!empty($value["value"]) || !empty($value["url"])) && (!$type || ($value["type"] == $type));
     });
 
     usort($filtered, function ($a, $b) use ($language) {
