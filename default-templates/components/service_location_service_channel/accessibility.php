@@ -19,21 +19,28 @@
        * PTV accessibility information
        */
       if ($address['entrances']) {
-        echo "<h2>$blockHeader</h2>";
+        echo "<div class='accessibility-sentences'>";
+        echo "<h3>$blockHeader</h3>";
         foreach ($address['entrances'] as $entrance) {
           foreach ($entrance['accessibilitySentences'] as $accessibilitySentence) {
             $sentenceGroups = $accessibilitySentence['sentenceGroup'];
             $key = array_search('fi', array_column($sentenceGroups, 'language'));
-            echo "<h4>" . $sentenceGroups[$key]['value'] . "</h4>";
-            
+            echo "<div class='accessibility-sentence'>";
+            echo "<button type='button' class='button-text closed'>" . $sentenceGroups[$key]['value'] . "</button>";
+            echo "<div class='content'>";
+
+            echo "<ul>";
             foreach ($accessibilitySentence['sentences'] as $sentences) {
               $sentence = $sentences['sentence'];
               $key = array_search('fi', array_column($sentence, 'language'));
-              echo "<p>" . $sentence[$key]['value'] . "</p>";
+              echo "<li><p>" . $sentence[$key]['value'] . "</p></li>";
             }
+            echo "</ul>";
+            echo "</div>";
+            echo "</div>";
           }
         }
-        echo "<br/>";
+        echo "</div>";
       }
     }
     

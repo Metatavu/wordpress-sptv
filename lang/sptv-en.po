@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: SPTV 1.0.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/wordpress-sptv\n"
-"POT-Creation-Date: 2020-11-12 10:31+0200\n"
-"PO-Revision-Date: 2022-04-19 07:53+0300\n"
+"POT-Creation-Date: 2022-06-15 09:44+0300\n"
+"PO-Revision-Date: 2022-06-15 09:45+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en_US\n"
@@ -13,7 +13,10 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.0.1\n"
+"X-Generator: Poedit 3.1\n"
+"X-Poedit-KeywordsList: _e;__\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-SearchPath-0: .\n"
 
 #: default-templates/components/common.php:72
 msgid "Monday"
@@ -51,9 +54,13 @@ msgstr "Finnish"
 msgid "En"
 msgstr "English"
 
-#: default-templates/components/common.php:123
+#: default-templates/components/common.php:188
 msgid "Open 24 hours."
 msgstr "Open 24 hours."
+
+#: default-templates/components/common.php:190
+msgid "Closed"
+msgstr "Closed"
 
 #: default-templates/components/phone_service_channel/phone-numbers.php:20
 #: default-templates/components/service_location_service_channel/phone-numbers.php:20
@@ -64,6 +71,16 @@ msgstr "Local/mobile network fee"
 msgid "AvailableLanguages"
 msgstr "Available service languages"
 
+#: default-templates/components/service_location_service_channel/accessibility.php:13
+#: default-templates/components/service_location_service_channel/default-all.php:24
+#: gutenberg/blocks/blocks.php:162
+msgid "Accessibility information"
+msgstr "Accessibility information"
+
+#: default-templates/components/service_location_service_channel/addresses.php:23
+msgid "Visit address"
+msgstr "Address"
+
 #: default-templates/components/service_location_service_channel/default-all.php:5
 msgid "Visiting information"
 msgstr "Visiting information"
@@ -73,125 +90,188 @@ msgid "Other contact details"
 msgstr "Other contact details"
 
 #: default-templates/components/service_location_service_channel/default-all.php:13
-#: gutenberg/blocks/blocks.php:135
+#: gutenberg/blocks/blocks.php:146
 msgid "Email"
 msgstr "Email"
 
 #: default-templates/components/service_location_service_channel/default-all.php:20
-#: gutenberg/blocks/blocks.php:139
+#: gutenberg/blocks/blocks.php:150
 msgid "Website"
 msgstr "Website"
 
-#: default-templates/components/service_location_service_channel/default-all.php:24
-msgid "Accessibility information"
-msgstr "Accessibility information"
-
-#: gutenberg/blocks/blocks.php:39 gutenberg/blocks/blocks.php:58
-#: gutenberg/blocks/blocks.php:77 gutenberg/blocks/blocks.php:100
-#: gutenberg/blocks/blocks.php:119
+#: gutenberg/blocks/blocks.php:42 gutenberg/blocks/blocks.php:65
+#: gutenberg/blocks/blocks.php:84 gutenberg/blocks/blocks.php:111
+#: gutenberg/blocks/blocks.php:130
 msgid "Default template"
 msgstr "Default template"
 
-#: gutenberg/blocks/blocks.php:43 gutenberg/blocks/blocks.php:62
-#: gutenberg/blocks/blocks.php:81 gutenberg/blocks/blocks.php:104
-#: gutenberg/blocks/blocks.php:123 gutenberg/blocks/blocks.php:158
+#: gutenberg/blocks/blocks.php:46 gutenberg/blocks/blocks.php:69
+#: gutenberg/blocks/blocks.php:88 gutenberg/blocks/blocks.php:115
+#: gutenberg/blocks/blocks.php:134 gutenberg/blocks/blocks.php:173
+#: gutenberg/blocks/blocks.php:228
 msgid "Name"
 msgstr "Name"
 
-#: gutenberg/blocks/blocks.php:47 gutenberg/blocks/blocks.php:66
-#: gutenberg/blocks/blocks.php:85 gutenberg/blocks/blocks.php:108
-#: gutenberg/blocks/blocks.php:127 gutenberg/blocks/blocks.php:166
+#: gutenberg/blocks/blocks.php:50 gutenberg/blocks/blocks.php:73
+#: gutenberg/blocks/blocks.php:92 gutenberg/blocks/blocks.php:119
+#: gutenberg/blocks/blocks.php:138 gutenberg/blocks/blocks.php:181
+#: gutenberg/blocks/blocks.php:232
 msgid "Description"
 msgstr "Description"
 
-#: gutenberg/blocks/blocks.php:51
+#: gutenberg/blocks/blocks.php:54
 msgid "Url"
 msgstr "Url"
 
-#: gutenberg/blocks/blocks.php:70
+#: gutenberg/blocks/blocks.php:58 gutenberg/blocks/blocks.php:104
+#, fuzzy
+#| msgid "Description"
+msgid "Description and url"
+msgstr "Description"
+
+#: gutenberg/blocks/blocks.php:77
 msgid "Web pages"
 msgstr "Web pages"
 
-#: gutenberg/blocks/blocks.php:89
+#: gutenberg/blocks/blocks.php:96
 msgid "Channel urls"
 msgstr "Channel urls"
 
-#: gutenberg/blocks/blocks.php:93
+#: gutenberg/blocks/blocks.php:100
 msgid "Attachment urls"
 msgstr "Attachment urls"
 
-#: gutenberg/blocks/blocks.php:112 gutenberg/blocks/blocks.php:143
+#: gutenberg/blocks/blocks.php:123 gutenberg/blocks/blocks.php:154
 msgid "Phone numbers"
 msgstr "Phone numbers"
 
-#: gutenberg/blocks/blocks.php:131
+#: gutenberg/blocks/blocks.php:142
 msgid "Addresses"
 msgstr "Addresses"
 
-#: gutenberg/blocks/blocks.php:147
+#: gutenberg/blocks/blocks.php:158
 msgid "Service Hours"
 msgstr "Service Hours"
 
-#: gutenberg/blocks/blocks.php:154
+#: gutenberg/blocks/blocks.php:169
 msgid "Default (no service channels)"
 msgstr "Default (no service channels)"
 
-#: gutenberg/blocks/blocks.php:162
+#: gutenberg/blocks/blocks.php:177
 msgid "Summary"
 msgstr "Summary"
 
-#: gutenberg/blocks/blocks.php:170
+#: gutenberg/blocks/blocks.php:185
 msgid "User instruction"
 msgstr "User instruction"
 
-#: gutenberg/blocks/blocks.php:174
+#: gutenberg/blocks/blocks.php:189
 msgid "Requirements"
 msgstr "Requirements"
 
-#: gutenberg/blocks/blocks.php:178
+#: gutenberg/blocks/blocks.php:193
 msgid "Service channels"
 msgstr "Service channels"
 
+#: gutenberg/blocks/blocks.php:197
+msgid "Electronic service list"
+msgstr ""
+
+#: gutenberg/blocks/blocks.php:201
+#, fuzzy
+#| msgid "Service channels"
+msgid "Service location list"
+msgstr "Service channels"
+
+#: gutenberg/blocks/blocks.php:205
+msgid "Phone service list"
+msgstr ""
+
+#: gutenberg/blocks/blocks.php:209
+msgid "Webpage service list"
+msgstr ""
+
 #: gutenberg/blocks/blocks.php:213
+msgid "Printable form list"
+msgstr ""
+
+#: gutenberg/blocks/blocks.php:217
 msgid "Languages"
 msgstr "Languages"
 
-#: gutenberg/blocks/blocks.php:513
+#: gutenberg/blocks/blocks.php:224
+#, fuzzy
+#| msgid "Default template"
+msgid "Default"
+msgstr "Default template"
+
+#: gutenberg/blocks/blocks.php:640
 msgid "Finnish Service Catalogue"
 msgstr "Finnish Service Catalogue"
 
-#: settings/settings-ui.php:22
+#: settings/settings-ui.php:21
 msgid "SPTV Settings"
 msgstr "SPTV Settings"
 
-#: settings/settings-ui.php:22 settings/settings-ui.php:55
+#: settings/settings-ui.php:21 settings/settings-ui.php:170
 msgid "SPTV"
 msgstr "SPTV"
 
-#: settings/settings-ui.php:27
+#: settings/settings-ui.php:55
 msgid "Elasticsearch Settings"
 msgstr "Elasticsearch Settings"
 
-#: settings/settings-ui.php:28
+#: settings/settings-ui.php:56
 msgid "URL"
 msgstr "URL"
 
-#: settings/settings-ui.php:29
+#: settings/settings-ui.php:57
 msgid "Username"
 msgstr "Username"
 
-#: settings/settings-ui.php:30
+#: settings/settings-ui.php:58
 msgid "Password"
 msgstr "Password"
 
-#: settings/settings-ui.php:31
+#: settings/settings-ui.php:60
 msgid "PTV Settings"
 msgstr "PTV Settings"
 
-#: settings/settings-ui.php:32
+#: settings/settings-ui.php:62
 msgid "Organization Id"
 msgstr "Organization Id"
 
-#: settings/settings-ui.php:51
+#: settings/settings-ui.php:70
+msgid "Service template"
+msgstr "New service template"
+
+#: settings/settings-ui.php:71
+msgid "Service location template"
+msgstr "New service location template"
+
+#: settings/settings-ui.php:85
+msgid "PTV-versio"
+msgstr ""
+
+#: settings/settings-ui.php:103
+msgid "No template"
+msgstr "No template"
+
+#: settings/settings-ui.php:166
 msgid "You do not have sufficient permissions to access this page."
 msgstr "You do not have sufficient permissions to access this page."
+
+#, fuzzy
+#~| msgid "Username"
+#~ msgid "name"
+#~ msgstr "Username"
+
+#, fuzzy
+#~| msgid "Phone numbers"
+#~ msgid "number"
+#~ msgstr "Phone numbers"
+
+#, fuzzy
+#~| msgid "Requirements"
+#~ msgid "required"
+#~ msgstr "Requirements"

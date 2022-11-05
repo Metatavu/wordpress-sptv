@@ -6,14 +6,24 @@
 
   if ($serviceChannels) {
     echo "<h3>Verkkoasiointi</h3>";
-
     foreach ($serviceChannels as $serviceChannel) {
-      $name = count($serviceChannel["serviceChannelNames"]) > 0 ? $serviceChannel["serviceChannelNames"][0]["value"] : "";
-      $link = count($serviceChannel["webPages"]) > 0 ? $serviceChannel["webPages"][0]["url"] : "";
-      $summary = count($serviceChannel["serviceChannelDescriptions"]) > 0 ? $serviceChannel["serviceChannelDescriptions"][0]["value"] : "";
+      if (count($serviceChannel["serviceChannelNames"]) > 0 && $serviceChannel["webPages"] > 0) {
+        $name = getLocalizedValue($serviceChannel["serviceChannelNames"], $data->language);
+        $webPage = getLocalizedItem($serviceChannel["webPages"], $data->language);
 
-      echo "<a href='$link'>$name</a>";
-      echo "<p>$summary</p>";
+        if (isset($webPage)) {
+          $url = $webPage["url"];
+          if (isset($url)) {
+            echo "<a href='$url'>$name</a>";
+          }
+        }
+      }
+
+      if (count($serviceChannel["serviceChannelDescriptions"]) > 0) {
+        echo "<p>";
+        echo getLocalizedValue($serviceChannel["serviceChannelDescriptions"], $data->language, "Summary");
+        echo "</p>";
+      }
     }
   }
 ?>

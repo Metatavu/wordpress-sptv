@@ -7,8 +7,6 @@
   
   require_once('settings-ui.php');  
   
-  define("SPTV_SETTINGS_OPTION", 'sptv');
-  
   if (!class_exists( '\Metatavu\SPTV\Wordpress\Settings\Settings' ) ) {
 
     class Settings {
