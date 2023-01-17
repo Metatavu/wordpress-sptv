@@ -56,7 +56,7 @@
 
         if (empty($template)) {
           wp_clear_scheduled_hook($hook);
-        } else if (!$draftHookScheduled) {
+        } else if (!$hookScheduled) {
           wp_schedule_event(time(), 'template_interval', $hook);
         }
       }
