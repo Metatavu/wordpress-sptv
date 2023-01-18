@@ -219,31 +219,24 @@
       } else if ($serviceHour["isClosed"]) {
         $result .= __("Closed", "sptv");
       } else {
-        $combination = array();
-        $formattedHours = array();
+        $formattedHours = [];
+        $openingHourIndex = 0;
+        $openingHourCount = count($openingHours);
 
-        for ($i = 0; $i < count($openingHours); $i++) {
-          $openingHour = $openingHours[array_keys($openingHours)[$i]];
-          $translatedHours = translateOpeningHours($openingHour);
-          if (empty($openingHour['dayTo'])) {
-            if (count($combination) == 0) {
-              array_push($combination, $translatedHours);
-            } else if (end($combination)["from"] == $translatedHours["from"] && end($combination)["to"] == $translatedHours["to"]) {
-              array_push($combination, $translatedHours);
-            } else {
-              array_push($formattedHours, buildCombinedServiceHours($combination));
-              $combination = array($translatedHours);
-            }
-          } else {
-            array_push($formattedHours, buildCombinedServiceHours($combination));
-            $combination = array();
-            array_push($formattedHours, formatOpeningHours($translatedHours));
+        while ($openingHourIndex < $openingHourCount) {
+          $openingHour = $openingHours[$openingHourIndex];
+          $subsequentOpeningHours = [ $openingHour ];
+
+          while ($openingHourIndex + 1 < $openingHourCount && isSubsequentAndEqualOpeningHour($openingHour, $openingHours[$openingHourIndex + 1])) {
+            $openingHourIndex++;
+            $openingHour = $openingHours[$openingHourIndex];
+            array_push($subsequentOpeningHours, $openingHour);
           }
-  
-          if ($i == count($openingHours) - 1 && count($combination) > 0) {
-            array_push($formattedHours, buildCombinedServiceHours($combination));
-            $combination = array();
-          }
+
+          $translatedOpeningHours = array_map("translateOpeningHours", $subsequentOpeningHours);
+          array_push($formattedHours, mikkeliBuildCombinedServiceHours($translatedOpeningHours));
+
+          $openingHourIndex++;
         }
       }
 
@@ -319,6 +312,36 @@
     $shortened = substr($dayName, 0, 2);
     $lowerCase = strtolower($shortened);
     return $lowerCase;
+  }
+
+  /**
+   * Returns whether opening hours have same times and are from subsequent days.
+   * 
+   * @param object $openingHour1 openingHour1
+   * @param object $openingHour2 openingHour2
+   * @return boolean whether opening hours have same times and are from subsequent days.
+   */
+  function isSubsequentAndEqualOpeningHour($openingHour1, $openingHour2) {
+    if (empty($openingHour1["dayFrom"]) || empty($openingHour2["dayFrom"])) {
+      return false;
+    }
+
+    $dayIndices = [ 
+      "Monday" => 0, 
+      "Tuesday" => 1, 
+      "Wednesday" => 2, 
+      "Thursday" => 3, 
+      "Friday" => 4, 
+      "Saturday" => 5, 
+      "Sunday"  => 6 
+    ];
+
+    $dayIndex1 = $dayIndices[$openingHour1["dayFrom"]];
+    $dayIndex2 = $dayIndices[$openingHour2["dayFrom"]];
+    $subsequentDays = $dayIndex1 + 1 == $dayIndex2;
+    $sameTimes = $openingHour1["from"] == $openingHour2["from"] && $openingHour1["to"] == $openingHour2["to"];
+
+    return $subsequentDays && $sameTimes;
   }
 
 ?>
