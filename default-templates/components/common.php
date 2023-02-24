@@ -234,7 +234,7 @@
           }
 
           $translatedOpeningHours = array_map("translateOpeningHours", $subsequentOpeningHours);
-          array_push($formattedHours, mikkeliBuildCombinedServiceHours($translatedOpeningHours));
+          array_push($formattedHours, buildCombinedServiceHours($translatedOpeningHours));
 
           $openingHourIndex++;
         }
