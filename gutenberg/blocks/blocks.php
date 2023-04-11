@@ -393,7 +393,7 @@ if (!class_exists( 'Metatavu\SPTV\Wordpress\Gutenberg\Blocks\Blocks' ) ) {
       $templateLoader = new \Metatavu\SPTV\TemplateLoader();
 
       $templateData = [
-        "serviceChannel" => $serviceChannel,
+        "serviceChannel" => $this->processServiceLocationServiceChannel($serviceChannel),
         "language" => $language,
         "paths" => $this->getPaths("components/service_location_service_channel")
       ];
@@ -745,6 +745,39 @@ if (!class_exists( 'Metatavu\SPTV\Wordpress\Gutenberg\Blocks\Blocks' ) ) {
       }
 
       return $serviceChannel;
+    }
+
+    /**
+     * Processes a service location service channel
+     * 
+     * @param array $serviceChannel service channel to be processed
+     * @return array processed service channel 
+     */
+    private function processServiceLocationServiceChannel($serviceChannel) {
+      if (isset($serviceChannel["serviceHours"]) && is_array($serviceChannel["serviceHours"])) {
+        $serviceChannel["serviceHours"] = array_map([$this, "processServiceHour"], $serviceChannel["serviceHours"]);
+      }
+      
+      return $serviceChannel;
+    }
+
+    /**
+     * Processes a service hour
+     * 
+     * @param array $serviceHour service hour to be processed
+     * @return array processed service hour 
+     */
+    private function processServiceHour($serviceHour) {
+      $singleDay = !empty($serviceHour["validFrom"]) && empty($serviceHour["validTo"]);
+      $exceptional = $serviceHour["serviceHourType"] == "Exceptional";
+ 
+      // If service hour is exceptional and has only one opening hour and no dayTo, then dayFrom needs to be cleared out
+      // because PTV seems to add dayFrom as "Monday" in this case
+      if ($singleDay && $exceptional && count($serviceHour["openingHour"]) == 1 && empty($serviceHour["openingHour"][0]["dayTo"])) {
+        $serviceHour["openingHour"][0]["dayFrom"] = "";
+      }
+
+      return $serviceHour;
     }
 
     /**
