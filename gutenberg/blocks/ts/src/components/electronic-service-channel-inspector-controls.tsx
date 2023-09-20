@@ -62,7 +62,7 @@ class ElectronicServiceChannelInspectorControls extends React.Component<Props, S
    * Component render method
    */
   public render() {
-    const { InspectorControls } = wp.editor;
+    const { InspectorControls } = wp.blockEditor;
 
     return (
       <InspectorControls>
@@ -80,7 +80,11 @@ class ElectronicServiceChannelInspectorControls extends React.Component<Props, S
   private renderChangeButton() {
     return (
       <div>
-        <wp.components.Button isPrimary onClick={ this.onChangeButtonClick }>{__( 'Change electronic service', 'sptv' )}</wp.components.Button>
+        <wp.components.Button 
+          variant="primary"
+          onClick={ this.onChangeButtonClick }>
+            {__( 'Change electronic service', 'sptv' )}
+        </wp.components.Button>
       </div> 
     );
   }
@@ -191,8 +195,8 @@ class ElectronicServiceChannelInspectorControls extends React.Component<Props, S
    * @param type return value with given type
    * @returns value
    */
-  private getLocalizedValue(values: Array<VmOpenApiLocalizedListItem>, language: string, type: string): string | null {
-    if (!values || !values.length) {
+  private getLocalizedValue(values: Array<VmOpenApiLocalizedListItem>, language: string, type: string): string | null {
+    if (!values || !values.length) {
       return null;
     }
 
@@ -202,7 +206,7 @@ class ElectronicServiceChannelInspectorControls extends React.Component<Props, S
       return a.language === language ? -1 : 1;
     });
     
-    return filtered[0] ? filtered[0].value : null;
+    return filtered[0] ? filtered[0].value : null;
   }
 
   /**

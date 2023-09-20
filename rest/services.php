@@ -42,7 +42,7 @@
        * REST endpoint for /sptv/search-service-channels
        * 
        * @param \WP_REST_Request $data
-       * @return WP_REST_Response | string[] response  
+       * @return WP_REST_Response | string[] response  
        */
       public function searchServiceChannels($data) {
         $ptvVersion = Settings::getValue("version");
@@ -103,7 +103,7 @@
        * REST endpoint for /sptv/search-services
        * 
        * @param \WP_REST_Request $data
-       * @return WP_REST_Response | string[] response  
+       * @return WP_REST_Response | string[] response  
        */
       public function searchServices($data) {
         $ptvVersion = Settings::getValue("version");
@@ -160,7 +160,7 @@
        * Returns ids from search result
        * 
        * @param object $searchResult search result
-       * @return string[] result ids
+       * @return string[] result ids
        */
       private function getResultIds($searchResult) {
         $hits = [];
