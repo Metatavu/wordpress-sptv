@@ -1,5 +1,5 @@
 import React from 'react';
-import { wp } from 'wp';
+import { wp } from 'wp';
 import { SearchInput } from './search-input';
 
 const { __ } = wp.i18n;
@@ -51,7 +51,7 @@ export class SearchModal extends React.Component<Props, State> {
 
     return (
       <wp.components.Modal style={{ minWidth: "60%" }} title={ this.props.modalTitle } onRequestClose={ () => this.props.onClose() }>
-        <SearchInput doSearch={ this.props.doSearch } inputLabel = { this.props.inputLabel } inputHelp = { this.props.inputHelp } getDisplayName={ this.props.getDisplayName } onSelect={ (data) => this.onSelect(data) } style={{ width: "100%" }}></SearchInput>
+        <SearchInput doSearch={ this.props.doSearch } inputLabel = { this.props.inputLabel } inputHelp = { this.props.inputHelp } getDisplayName={ this.props.getDisplayName } onSelect={ (data) => this.onSelect(data) } style={{ width: "100%" }}></SearchInput>
       </wp.components.Modal>
     );
   }

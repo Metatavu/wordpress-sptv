@@ -2,7 +2,7 @@ import { V10VmOpenApiElectronicChannel, V10VmOpenApiServiceLocationChannel, V10V
 import { wp } from "wp";
 
 declare var wp: wp;
-type ServiceChannel = V10VmOpenApiElectronicChannel | V10VmOpenApiPhoneChannel | V10VmOpenApiPrintableFormChannel | V10VmOpenApiServiceLocationChannel | V10VmOpenApiWebPageChannel;
+type ServiceChannel = V10VmOpenApiElectronicChannel | V10VmOpenApiPhoneChannel | V10VmOpenApiPrintableFormChannel | V10VmOpenApiServiceLocationChannel | V10VmOpenApiWebPageChannel;
 type Service = V10VmOpenApiService;
 type Organization = V10VmOpenApiService;
 const PTV_URL = "https://api.palvelutietovaranto.suomi.fi/api";
@@ -29,9 +29,9 @@ export default class PTV {
    * @param id service channel id
    * @returns found service or null if not found
    */
-  public findServiceChannel = async (id: string): Promise<ServiceChannel | null> => {
+  public findServiceChannel = async (id: string): Promise<ServiceChannel | null> => {
     const channels = await this.findServiceChannels([id]);
-    return channels[0] || null;
+    return channels[0] || null;
   }
 
   /**
@@ -40,9 +40,9 @@ export default class PTV {
    * @param id service id
    * @returns found service or null if not found
    */
-  public findService = async (id: string): Promise<Service | null> => {
+  public findService = async (id: string): Promise<Service | null> => {
     const services = await this.findServices([id]);
-    return services[0] || null;
+    return services[0] || null;
   }
 
   /**
@@ -52,7 +52,7 @@ export default class PTV {
    * @returns found service or null if not found
    */
   public findServiceChannels = async (ids: string[]): Promise<ServiceChannel[]> => {
-    if (!ids || ids.length == 0) {
+    if (!ids || ids.length == 0) {
       return [];
     }
 
@@ -81,7 +81,7 @@ export default class PTV {
    * @returns found service or null if not found
    */
   public findServices = async (ids: string[]): Promise<Service[]> => {
-    if (!ids || ids.length == 0) {
+    if (!ids || ids.length == 0) {
       return [];
     }
 
@@ -107,7 +107,7 @@ export default class PTV {
    * @returns found organization or null if not found
    */
   public findOrganizations = async (ids: string[]): Promise<Organization[]> => {
-    if (!ids || ids.length == 0) {
+    if (!ids || ids.length == 0) {
       return [];
     }
 

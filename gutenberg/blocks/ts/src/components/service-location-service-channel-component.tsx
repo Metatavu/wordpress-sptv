@@ -1,5 +1,5 @@
-import React from 'react';
-import { wp } from 'wp';
+import React from 'react';
+import { wp } from 'wp';
 import ServiceLocationServiceChannelInspectorControls from './service-location-service-channel-inspector-controls';
 
 declare var wp: wp;
@@ -73,7 +73,7 @@ class ServiceLocationServiceChannelComponent extends React.Component<Props, Stat
   private renderPreview = () => {
     return (
       <div>
-        <wp.components.ServerSideRender 
+        <wp.serverSideRender 
           block="sptv/service-location-service-channel-block" 
           attributes={{
             id: this.props.channelId, 

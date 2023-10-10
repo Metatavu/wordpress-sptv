@@ -1,5 +1,5 @@
-import React from 'react';
-import { wp } from 'wp';
+import React from 'react';
+import { wp } from 'wp';
 import ElectronicServiceChannelInspectorControls from './electronic-service-channel-inspector-controls';
 
 declare var wp: wp;
@@ -73,7 +73,7 @@ class ElectronicServiceChannelComponent extends React.Component<Props, State> {
   private renderPreview = () => {
     return (
       <div>
-        <wp.components.ServerSideRender 
+        <wp.serverSideRender 
           block="sptv/electronic-service-channel-block" 
           attributes={{
             id: this.props.channelId, 

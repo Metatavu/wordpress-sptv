@@ -3,7 +3,7 @@
   /** 
    * Returns localized item from an array
    * 
-   * @param object[] $values array of localized values
+   * @param object[] $values array of localized values
    * @param string $language preferred language
    * @param string $type filter results by type. optional
    * @return object localized object or null
@@ -32,7 +32,7 @@
   /** 
    * Returns localized value from an array
    * 
-   * @param object[] $values array of localized values
+   * @param object[] $values array of localized values
    * @param string $language preferred language
    * @param string $type filter results by type. optional
    */
@@ -44,7 +44,7 @@
   /** 
    * Returns localized URL from an array
    * 
-   * @param object[] $values array of localized values
+   * @param object[] $values array of localized values
    * @param string $language preferred language
    * @param string $type filter results by type. optional
    */
