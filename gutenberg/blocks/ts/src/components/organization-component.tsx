@@ -1,5 +1,5 @@
-import React from 'react';
-import { wp } from 'wp';
+import React from 'react';
+import { wp } from 'wp';
 import OrganizationInspectorControls from './organization-inspector-controls';
 
 declare var wp: wp;
@@ -73,7 +73,7 @@ class OrganizationComponent extends React.Component<Props, State> {
   private renderPreview = () => {
     return (
       <div>
-        <wp.components.ServerSideRender 
+        <wp.serverSideRender 
           block="sptv/organization-block" 
           attributes={{
             id: this.props.organizationId, 

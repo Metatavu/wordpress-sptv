@@ -41,7 +41,7 @@ registerBlockType('sptv/printable-form-service-channel-block', {
     }
 
     const setAttribute = (attribute: string, value: string) => {
-      const attributes: { [key: string]: string } = { }; 
+      const attributes: { [key: string]: string } = { }; 
       attributes[attribute] = value; 
       params.setAttributes(attributes);
     }
@@ -55,7 +55,7 @@ registerBlockType('sptv/printable-form-service-channel-block', {
     }
 
     return <PrintableFormServiceChannelComponent 
-      editing={ isSelected } 
+      editing={ isSelected } 
       channelId={ getAttribute("id") } 
       component={ getAttribute("component") } 
       language={ getAttribute("language") }

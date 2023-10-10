@@ -1,5 +1,5 @@
 import React from 'react';
-import { wp } from 'wp';
+import { wp } from 'wp';
 
 declare var wp: wp;
 
@@ -22,7 +22,7 @@ interface State {
   entities: any[], 
   searching: boolean,
   hoverIndex: number,
-  pendingSearch: string | null
+  pendingSearch: string | null
 }
 
 /**
@@ -52,16 +52,17 @@ export class SearchInput extends React.Component<Props, State> {
   public render() {
     return (
       <div style={ this.props.style }>
-        <wp.components.BaseControl style={{ width: "100%" }} id="search" label={ this.props.inputLabel } help={ this.props.inputHelp }>
-          <input id="search" style={{ width: "100%" }} onChange={ this.onInputChange }/>
+        <wp.components.BaseControl id='search' label={ this.props.inputLabel } help={ this.props.inputHelp }>
+          <input id="search" style={{ width: "100%" }} onChange={ this.onInputChange }/>
         </wp.components.BaseControl>
+
         <div style={{ height: "300px", overflowY: "auto" }}>
         { 
           this.state.searching ? (<wp.components.Placeholder style={{ height: "300px" }}><wp.components.Spinner /></wp.components.Placeholder> ) : this.state.entities.map((entity, index) => {
             return <div 
               onMouseOver={ () => this.setState({ hoverIndex: index }) } 
               onClick = { () => this.props.onSelect(entity) }
-              style={{ fontWeight: this.state.hoverIndex == index ? "bold": "normal", cursor: "pointer", paddingTop: "5px", paddingBottom: "5px" }} 
+              style={{ fontWeight: this.state.hoverIndex == index ? "bold": "normal", cursor: "pointer", paddingTop: "5px", paddingBottom: "5px" }} 
               key={entity.id}>{this.props.getDisplayName(entity)}</div>
           })
         }
@@ -80,7 +81,7 @@ export class SearchInput extends React.Component<Props, State> {
 
     let result = await this.props.doSearch(value);
 
-    if (this.state.pendingSearch) {
+    if (this.state.pendingSearch) {
       const pendingSearch = this.state.pendingSearch;
       this.setState({ 
         pendingSearch: null

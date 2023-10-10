@@ -1,5 +1,5 @@
-import React from 'react';
-import { wp } from 'wp';
+import React from 'react';
+import { wp } from 'wp';
 import PrintableFormServiceChannelInspectorControls from './printable-form-service-channel-inspector-controls';
 
 declare var wp: wp;
@@ -73,7 +73,7 @@ class PrintableFormServiceChannelComponent extends React.Component<Props, State>
   private renderPreview = () => {
     return (
       <div>
-        <wp.components.ServerSideRender 
+        <wp.serverSideRender 
           block="sptv/printable-form-service-channel-block" 
           attributes={{
             id: this.props.channelId, 

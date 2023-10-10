@@ -1,5 +1,5 @@
 import React from 'react';
-import { wp } from 'wp';
+import { wp } from 'wp';
 import { SearchInput } from './search-input';
 
 const { __ } = wp.i18n;
@@ -71,7 +71,7 @@ export class OrganizationModal extends React.Component<Props, State> {
             return <div 
               onMouseOver={ () => this.setState({ hoverIndex: index }) } 
               onClick = { () => this.onSelect(entity) }
-              style={{ fontWeight: this.state.hoverIndex == index ? "bold": "normal", cursor: "pointer", paddingTop: "5px", paddingBottom: "5px" }} 
+              style={{ fontWeight: this.state.hoverIndex == index ? "bold": "normal", cursor: "pointer", paddingTop: "5px", paddingBottom: "5px" }} 
               key={entity.id}>{this.props.getDisplayName(entity)}</div>
           })
         }
