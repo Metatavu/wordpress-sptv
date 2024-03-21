@@ -525,6 +525,10 @@ if (!class_exists( 'Metatavu\SPTV\Wordpress\Gutenberg\Blocks\Blocks' ) ) {
     public function renderPhoneServiceChannelBlock($attributes) {
       $result = ''; 
 
+      if (!isset($attributes["id"])) {
+        return $result;
+      }
+
       $id = $attributes["id"];
       $component = $attributes["component"];
       $language = $attributes["language"];
@@ -559,6 +563,10 @@ if (!class_exists( 'Metatavu\SPTV\Wordpress\Gutenberg\Blocks\Blocks' ) ) {
      */
     public function renderServiceBlock($attributes) {
       $result = '';
+
+      if (!isset($attributes["id"])) {
+        return $result;
+      }
 
       $id = $attributes["id"];
       $component = $attributes["component"];
