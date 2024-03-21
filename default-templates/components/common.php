@@ -195,13 +195,17 @@
         return $info["language"] == $language; 
       }));
       if (count($filtered) == 0) {
-        $firstValue = array_values($serviceHour["additionalInformation"])[0]["value"];
-        $result .= "<strong>$firstValue</strong>";
+        $values = array_values($serviceHour["additionalInformation"]);
+        if (count($values) > 0) {
+          $firstValue = $values[0]["value"];
+          $result .= "<strong>$firstValue</strong>";
+        }
       } else {
-        $additionalInfoValue = $filtered[0]["value"];
-        $result .= "<strong>$additionalInfoValue</strong>";
+        if (count($filtered) > 1) {
+          $additionalInfoValue = $filtered[0]["value"];
+          $result .= "<strong>$additionalInfoValue</strong>";
+        }
       }
-      
         
       $result .= "<p>";
 
