@@ -13,29 +13,49 @@
 
   foreach ($addresses as $address) {
     if ($address["type"] == "Location") {
-      $streetAddress = $address["streetAddress"];
-      $latitude = $streetAddress["latitude"];
-      $longitude = $streetAddress["longitude"];
-      $mapUrl = $serviceId ? "https://www.suomi.fi/kartta/palvelupaikat/$serviceId?sl=$serviceChannelId" : null;
-      $routeUrl = $latitude && $longitude ? "https://www.suomi.fi/kartta/reitit?to.lat=$latitude&to.lon=$longitude" : null;
+      if ($address["subType"] == "Other") {
+        if (!isset($address["otherAddress"])) {
+          continue;
+        }
 
-      echo "<div>";
-      echo "<strong>" . __("Visit address", "sptv") . "</strong>";
-      echo "<br/>";
-      echo getLocalizedValue($streetAddress["street"], $data->language) . " " . $streetAddress["streetNumber"];
-      echo "<br/>";
-      echo $streetAddress["postalCode"] . " " . getLocalizedValue($streetAddress["postOffice"], $data->language);
+        $otherAddress = $address["otherAddress"];
+        if (!isset($otherAddress["additionalInformation"])) {
+          continue;
+        }
+        
+        $additionalInformation = $otherAddress["additionalInformation"];
+       
+        echo "<div>";
+        echo "<strong>" . __("Visit address", "sptv") . "</strong>";
+        echo "<br/>";
+        echo getLocalizedValue($additionalInformation, $data->language);
+        echo "</div>";
+        echo "<br/>";
+      } else {
+        $streetAddress = $address["streetAddress"];
+        $latitude = $streetAddress["latitude"];
+        $longitude = $streetAddress["longitude"];
+        $mapUrl = $serviceId ? "https://www.suomi.fi/kartta/palvelupaikat/$serviceId?sl=$serviceChannelId" : null;
+        $routeUrl = $latitude && $longitude ? "https://www.suomi.fi/kartta/reitit?to.lat=$latitude&to.lon=$longitude" : null;
 
-      if ($mapUrl) {
-        echo "<br/><a target=\"_blank\" href=\"$mapUrl\">Palvelupaikka kartalla</a>";
-      }
+        echo "<div>";
+        echo "<strong>" . __("Visit address", "sptv") . "</strong>";
+        echo "<br/>";
+        echo getLocalizedValue($streetAddress["street"], $data->language) . " " . $streetAddress["streetNumber"];
+        echo "<br/>";
+        echo $streetAddress["postalCode"] . " " . getLocalizedValue($streetAddress["postOffice"], $data->language);
 
-      if ($routeUrl) {
-        echo "<br/><a target=\"_blank\" href=\"$routeUrl\">Näytä reitti tänne</a>";
-      }
+        if ($mapUrl) {
+          echo "<br/><a target=\"_blank\" href=\"$mapUrl\">Palvelupaikka kartalla</a>";
+        }
 
-      echo "</div>";
-      echo "<br/>";
+        if ($routeUrl) {
+          echo "<br/><a target=\"_blank\" href=\"$routeUrl\">Näytä reitti tänne</a>";
+        }
+
+        echo "</div>";
+        echo "<br/>";
+      }      
     } else if ($address["type"] == "Postal") {
       if (isset($address["postOfficeBoxAddress"])) {
         $postOfficeBoxAddress = $address["postOfficeBoxAddress"];
