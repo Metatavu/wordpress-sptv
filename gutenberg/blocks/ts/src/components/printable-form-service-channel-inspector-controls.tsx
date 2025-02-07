@@ -165,9 +165,8 @@ class PrintableFormServiceChannelInspectorControls extends React.Component<Props
   private doSearch = async (text: string): Promise<V10VmOpenApiPrintableFormChannel[]> => {
     const lang = "fi";
     const type = "printableform";
-    const ptv = "v10";
     const apiFetch = wp.apiFetch;
-    const responseIds = await apiFetch( { path: `/sptv/search-service-channels?q=${text}&type=${type}&lang=${lang}&ptv=${ptv}` });
+    const responseIds = await apiFetch( { path: `/sptv/search-service-channels?q=${text}&type=${type}&lang=${lang}` });
     const serviceChannels = await this.ptv.findServiceChannels(responseIds);
     const foundChannels = serviceChannels.filter(channel => channel !== undefined);
     return foundChannels;

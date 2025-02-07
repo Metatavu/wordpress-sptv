@@ -125,7 +125,6 @@
         $value = Settings::getValue($name);
         echo "<select id='$name' name='" . SPTV_SETTINGS_PAGE . "[$name]' type='$type' value='$value' >";
         echo '<option value="v11" '.(($value=='v11')?'selected="selected"':"").'>v11</option>';
-        echo '<option value="v10" '.(($value=='v10')?'selected="selected"':"").'>v10</option>';
         echo "</select >";
       }
 
