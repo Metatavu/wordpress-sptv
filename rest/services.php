@@ -36,6 +36,13 @@
             'callback' => array($this, 'searchServices')
           ]
         ]);
+
+        register_rest_route('sptv', '/version', [
+          [
+            'methods'  => \WP_REST_Server::READABLE,
+            'callback' => array($this, 'getPtvVersion')
+          ]
+        ]);
       }
       
       /**
@@ -57,10 +64,6 @@
 
         if (empty($lang)) {
           return new \WP_REST_Response("Missing lang", 400);
-        }
-
-        if (empty($ptvVersion)) {
-          return new \WP_REST_Response("Missing PTV version", 400);
         }
 
         if (!in_array($type, self::$ALLOWED_TYPES)) {
@@ -100,6 +103,16 @@
       }
 
       /**
+       * REST endpoint for /sptv/version
+       * 
+       * @param \WP_REST_Request $data
+       * @return WP_REST_Response | string response  
+       */
+      public function getPtvVersion($data) {
+        return Settings::getValue("version");
+      }
+
+      /**
        * REST endpoint for /sptv/search-services
        * 
        * @param \WP_REST_Request $data
@@ -117,10 +130,6 @@
 
         if (empty($lang)) {
           return new \WP_REST_Response("Missing lang", 400);
-        }
-
-        if (empty($ptvVersion)) {
-          return new \WP_REST_Response("Missing PTV version", 400);
         }
 
         $nameQuery = [ 'match' => [ "serviceNames_$lang" => [ "query" => $query ] ] ];

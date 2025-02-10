@@ -164,9 +164,8 @@ class ServiceInspectorControls extends React.Component<Props, State> {
    */
   private doSearch = async (text: string): Promise<V10VmOpenApiService[]> => {
     const lang = "fi";
-    const ptv = "v10";
     const apiFetch = wp.apiFetch;
-    const responseIds = await apiFetch( { path: `/sptv/search-services?q=${text}&lang=${lang}&ptv=${ptv}` });
+    const responseIds = await apiFetch( { path: `/sptv/search-services?q=${text}&lang=${lang}` });
     const services = await this.ptv.findServices(responseIds);
     const foundServices = services.filter(service => service !== undefined);
     return foundServices;
