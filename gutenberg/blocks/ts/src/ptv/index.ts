@@ -6,7 +6,6 @@ type ServiceChannel = V10VmOpenApiElectronicChannel | V10VmOpenApiPhoneChannel |
 type Service = V10VmOpenApiService;
 type Organization = V10VmOpenApiService;
 const PTV_URL = "https://api.palvelutietovaranto.suomi.fi/api";
-const PTV_VERSION = "v10";
 
 /**
  * PTV client
@@ -58,7 +57,9 @@ export default class PTV {
 
     const cacheMissIds = ids.filter(id => !this.channelCache.has(id));
     if (cacheMissIds.length > 0) {
-      const result = await fetch(`${PTV_URL}/${PTV_VERSION}/ServiceChannel/list?guids=${cacheMissIds.join(",")}`, {
+      const apiFetch = wp.apiFetch;
+      const ptvVersion = await apiFetch({ path: "/sptv/version" });
+      const result = await fetch(`${PTV_URL}/${ptvVersion}/ServiceChannel/list?guids=${cacheMissIds.join(",")}`, {
         credentials: "omit"
       });
 
@@ -88,7 +89,9 @@ export default class PTV {
     const cacheMissIds = ids.filter(id => !this.serviceCache.has(id));
     const filterOutIds = ids.filter(id => !(cacheMissIds.indexOf(id) > -1));
     if (cacheMissIds.length > 0 && filterOutIds.length == 0) {
-      const result = await fetch(`${PTV_URL}/${PTV_VERSION}/Service/list?guids=${cacheMissIds.join(",")}`, {
+      const apiFetch = wp.apiFetch;
+      const ptvVersion = await apiFetch({ path: "/sptv/version" });
+      const result = await fetch(`${PTV_URL}/${ptvVersion}/Service/list?guids=${cacheMissIds.join(",")}`, {
         credentials: "omit"
       });
 
@@ -114,7 +117,9 @@ export default class PTV {
     const cacheMissIds = ids.filter(id => !this.organizationCache.has(id));
     const filterOutIds = ids.filter(id => !(cacheMissIds.indexOf(id) > -1));
     if (cacheMissIds.length > 0 && filterOutIds.length == 0) {
-      const result = await fetch(`${PTV_URL}/${PTV_VERSION}/Organization/list?guids=${cacheMissIds.join(",")}`, {
+      const apiFetch = wp.apiFetch;
+      const ptvVersion = await apiFetch({ path: "/sptv/version" });
+      const result = await fetch(`${PTV_URL}/${ptvVersion}/Organization/list?guids=${cacheMissIds.join(",")}`, {
         credentials: "omit"
       });
 
